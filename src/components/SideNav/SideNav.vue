@@ -36,5 +36,9 @@ export default {
 </script>
 
 <style>
-
+#SideNav{
+    height: 100vh;
+    background: black;
+    width: 250px;
+}
 </style>
