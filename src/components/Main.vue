@@ -16,6 +16,6 @@ export default {
 <style>
 #Main{
   flex-grow: 1;
-  background: orange;
+  background: var(--secundair-color);
 }
 </style>

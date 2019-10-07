@@ -48,6 +48,10 @@ export default {
   padding: 0;
 }
 #app{
+  --contrast-color: #F6E64C;
+  --main-color:#272627;
+  --secundair-color:#141414;
+  --font-color: white;
   display: flex;
 }
 </style>

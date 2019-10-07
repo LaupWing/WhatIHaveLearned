@@ -38,7 +38,7 @@ export default {
 <style>
 #SideNav{
     height: 100vh;
-    background: black;
+    background: var(--main-color);
     width: 250px;
 }
 </style>
