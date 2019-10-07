@@ -7,11 +7,23 @@
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-
+import firebase from 'firebase'
+import db from '@/firebase/init' // This has to be started in order to start the app intial
 export default {
   name: 'app',
   components: {
     HelloWorld
+  },
+  created(){
+    // db.collection('users').get().then(doc=>{
+    //   console.log(doc)
+    // })
+
+    firebase.auth().onAuthStateChanged(user=>{
+      if(user){
+        this.getDataOfUser()
+      }
+    })
   }
 }
 </script>
