@@ -25,10 +25,6 @@ export default {
     }
   },
   created(){
-    // db.collection('users').get().then(doc=>{
-    //   console.log(doc)
-    // })
-
     firebase.auth().onAuthStateChanged(user=>{
       if(user){
         console.log(this.user)
@@ -52,6 +48,7 @@ export default {
   --main-color:#272627;
   --secundair-color:#141414;
   --font-color: white;
+  --secundair-font: 'Comfortaa', cursive;
   display: flex;
 }
 </style>
