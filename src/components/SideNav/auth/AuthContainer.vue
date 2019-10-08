@@ -100,6 +100,22 @@ export default {
     margin-top: 20px;
 }
 
+.auth-container .feedback{
+    max-height: 0;
+    overflow: hidden;
+    padding: 10px 0;
+    color: red;
+    animation: heightAnim 2s forwards;
+    text-align: center;
+    font-size: .7em;
+}
+
+@keyframes heightAnim {
+    to{
+        max-height: 100px;   
+    }
+}
+
 .Login-enter-active {
   animation: slideToRight .5s;
 }

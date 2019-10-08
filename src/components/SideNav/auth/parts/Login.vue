@@ -4,8 +4,7 @@
             <label for="">Email</label>
             <input
                 @focus="focusEl('email')"
-                @blur="focusEl(null)" 
-                required 
+                @blur="focusEl(null)"  
                 type="email" 
                 placeholder="test@hotmail.com"
                 v-model="email"
@@ -15,25 +14,28 @@
             <label for="">Password</label>
             <input
                 @focus="focusEl('password')"
-                @blur="focusEl(null)" 
-                required 
+                @blur="focusEl(null)"  
                 type="password" 
                 placeholder="password123"
                 v-model="password"
             >
         </div>
+        <p class="feedback" v-if="feedback">{{feedback}}</p>
         <button>Login</button>
     </form>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
     name: 'Login',
     data(){
         return{
             password: null,
             focusField: null,
-            email: null
+            email: null,
+            feedback: null
         }
     },
     methods:{
@@ -41,7 +43,18 @@ export default {
             this.focusField = field
         },
         submit(){
-            console.log(this.email, this.password)
+            if(this.password && this.email){
+                firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+                    .then(cred=>{
+                        const user = cred.user
+                        console.log(user)
+                    })
+                    .catch(err=>{
+                        this.feedback = err.message
+                    })
+            }else{
+                this.feedback = 'Please fill in both fields'
+            }
         }
     }
 }

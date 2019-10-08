@@ -51,6 +51,7 @@ export default {
   --main-font: 'Be Vietnam', sans-serif;
   --secundair-font: 'Comfortaa', cursive;
   display: flex;
+  font-family: var(--main-font);
 }
 input,
 button{
