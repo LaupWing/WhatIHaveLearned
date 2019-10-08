@@ -1,17 +1,8 @@
 <template>
     <div id="SideNav">
-        <AuthContainer/>
-        <!-- <div class="auth-container" v-if="!user">
-            <nav>
-                <li :class="{'active': authId === 'Login'}" @click="authId = 'Login'">Login</li>
-                <li :class="{'active': authId === 'Signup'}" @click="authId = 'Signup'">Signup</li>
-            </nav>
-            <div class="auth">
-                <transition :name="authId" mode="out-in">
-                    <component :is="authId"></component>
-                </transition>
-            </div>
-        </div> -->
+        <AuthContainer 
+            v-if="!user"
+        />
     </div>
 </template>
 

@@ -4,7 +4,10 @@
     <SideNav
       :user="user"
     />
-    <Main ms  g="Welcome to Your Vue.js App"/>
+    <Main 
+      msg="Welcome to Your Vue.js App"
+      :user="user"
+    />
   </div>
 </template>
 

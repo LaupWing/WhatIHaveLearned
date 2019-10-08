@@ -47,7 +47,6 @@ export default {
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password)
                     .then(cred=>{
                         const user = cred.user
-                        console.log(user)
                     })
                     .catch(err=>{
                         this.feedback = err.message

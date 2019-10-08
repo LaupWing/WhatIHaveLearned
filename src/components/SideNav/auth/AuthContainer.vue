@@ -37,6 +37,7 @@ export default {
     height: 500px;
     width: 85%;
     overflow: hidden;
+    animation: slideToRight 1s forwards;
 }
 .auth-container nav{
     display: flex;

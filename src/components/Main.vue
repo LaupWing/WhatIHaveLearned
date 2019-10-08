@@ -1,14 +1,23 @@
 <template>
   <main id="Main">
-    
+    <div
+      v-if="user" 
+      class="user"
+    >
+      <button @click="signout">Signout</button>
+    </div>
   </main>
 </template>
 
 <script>
+import firebase from 'firebase'
 export default {
   name: 'Main',
-  props: {
-    msg: String
+  props: ['user', 'msg'],
+  methods:{
+    signout(){
+      firebase.auth().signOut()
+    }
   }
 }
 </script>
@@ -17,5 +26,6 @@ export default {
 #Main{
   flex-grow: 1;
   background: var(--secundair-color);
+  position: relative;
 }
 </style>

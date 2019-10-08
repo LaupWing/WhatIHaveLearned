@@ -30,12 +30,15 @@
                 v-model="confirmPassword"
             >
         </div>
-        <p v-if="feedback">{{feedback}}</p>
+        <p class="feedback" v-if="feedback">{{feedback}}</p>
         <button>Signup</button>
     </form>
 </template>
 
 <script>
+import db from '@/firebase/init'
+import firebase from 'firebase'
+
 export default {
     name: 'Signup',
     data(){
@@ -53,8 +56,27 @@ export default {
         },
         submit(){
             if(this.password && this.confirmPassword && this.email){
+                const ref = db.collection('users').doc(this.email)
                 if(this.password === this.confirmPassword){
+                    ref
+                        .get()
+                        .then(doc=>{
+                            if(doc.exists){
+                                this.feedback = 'Email is already in use!'
+                            }
+                            else{
+                                firebase
+                                    .auth()
+                                    .createUserWithEmailAndPassword(this.email,this.password)
+                                    .then(cred=>{
+                                        const user = cred.user
+                                        ref.set({
+                                            user_id: user.uid
+                                        })
+                                    })
 
+                            }
+                        })
                 }else{
                     this.feedback = 'The password has to match!'
                 }
