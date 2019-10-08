@@ -52,7 +52,8 @@ export default {
   --secundair-font: 'Comfortaa', cursive;
   display: flex;
 }
-input{
+input,
+button{
   outline: none;
 }
 </style>

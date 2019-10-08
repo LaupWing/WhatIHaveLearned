@@ -1,5 +1,5 @@
 <template>
-    <form id="Login">
+    <form id="Login" @submit.prevent="submit">
         <div class="field" :class="{'active':email || focusField==='email'}">
             <label for="">Email</label>
             <input
@@ -33,13 +33,15 @@ export default {
         return{
             password: null,
             focusField: null,
-            email: null,
-            fiields
+            email: null
         }
     },
     methods:{
         focusEl(field){
             this.focusField = field
+        },
+        submit(){
+            console.log(this.email, this.password)
         }
     }
 }
