@@ -48,7 +48,11 @@ export default {
   --main-color:#272627;
   --secundair-color:#141414;
   --font-color: white;
+  --main-font: 'Be Vietnam', sans-serif;
   --secundair-font: 'Comfortaa', cursive;
   display: flex;
+}
+input{
+  outline: none;
 }
 </style>

@@ -3,8 +3,8 @@
     
         <div class="auth-container" v-if="!user">
             <nav>
-                <li @click="authId = 'Login'">Login</li>
-                <li @click="authId = 'Signup'">Signup</li>
+                <li :class="{'active': authId === 'Login'}" @click="authId = 'Login'">Login</li>
+                <li :class="{'active': authId === 'Signup'}" @click="authId = 'Signup'">Signup</li>
             </nav>
             <div class="auth">
                 <component :is="authId"></component>
@@ -45,9 +45,16 @@ export default {
     flex-direction: column;
     align-items: center;
 }
+#SideNav .auth-container{
+    height: 500px;
+    width: 80%;
+}
 #SideNav nav{
     display: flex;
+    width: 100%;
+    justify-content: space-around;
 }
+
 #SideNav nav li{
     list-style: none;
     color: var(--font-color);
@@ -55,6 +62,49 @@ export default {
     font-family: var(--secundair-font);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin: 0 15px;
+    cursor: pointer;
+}
+#SideNav nav li.active{
+    border-bottom: 3px solid var(--contrast-color);
+}
+#SideNav .field{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 20px 0;
+    opacity: .3;
+    font-family: var(--main-font);
+}
+#SideNav .field label{
+    color: white;
+}
+#SideNav .field input{
+    color: black;
+    border: none;
+    border-bottom: 1px solid var(--font-color);
+    color: var(--font-color);
+    background: transparent;
+    padding: 3px 5px;
+    outline: none;
+    font-size: 1em;
+}
+#SideNav .field input::placeholder{
+    opacity: .3;
+}
+#SideNav .field.active{
+    opacity: 1;
+}
+#SideNav button{
+    padding: 7px 20px;
+    border: none;
+    text-transform: uppercase;
+    color: white;
+    background: transparent;
+    border:2px solid var(--contrast-color);
+    font-family: var(--secundair-font);
+    border-radius: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    margin-top: 20px;
 }
 </style>
