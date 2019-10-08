@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Login from './Login'
-import Signup from './Signup'
+import Login from './parts/Login'
+import Signup from './parts/Signup'
 export default {
     name: 'AuthContainer',
     components:{
