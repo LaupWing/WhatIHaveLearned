@@ -1,11 +1,10 @@
 <template>
-    <form id="Signup">
+    <form id="Signup" @submit.prevent="submit">
         <div class="field" :class="{'active':email || focusField==='email'}">
             <label for="">Email</label>
             <input
                 @focus="focusEl('email')"
-                @blur="focusEl(null)" 
-                required 
+                @blur="focusEl(null)"  
                 type="email" 
                 placeholder="test@hotmail.com"
                 v-model="email"
@@ -15,8 +14,7 @@
             <label for="">Password</label>
             <input
                 @focus="focusEl('password')"
-                @blur="focusEl(null)" 
-                required 
+                @blur="focusEl(null)"  
                 type="password" 
                 placeholder="password123"
                 v-model="password"
@@ -26,13 +24,13 @@
             <label for="">Confirm Password</label>
             <input
                 @focus="focusEl('confirmPassword')"
-                @blur="focusEl(null)" 
-                required 
+                @blur="focusEl(null)"  
                 type="password" 
                 placeholder="password123"
                 v-model="confirmPassword"
             >
         </div>
+        <p v-if="feedback">{{feedback}}</p>
         <button>Signup</button>
     </form>
 </template>
@@ -45,12 +43,24 @@ export default {
             password: null,
             confirmPassword: null,
             focusField: null,
-            email: null
+            email: null,
+            feedback: null
         }
     },
     methods:{
         focusEl(field){
             this.focusField = field
+        },
+        submit(){
+            if(this.password && this.confirmPassword && this.email){
+                if(this.password === this.confirmPassword){
+
+                }else{
+                    this.feedback = 'The password has to match!'
+                }
+            }else{
+                this.feedback = 'All fields has to be filled in!'
+            }
         }
     }
 }
