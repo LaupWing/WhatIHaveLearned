@@ -7,7 +7,9 @@
                 <li :class="{'active': authId === 'Signup'}" @click="authId = 'Signup'">Signup</li>
             </nav>
             <div class="auth">
-                <component :is="authId"></component>
+                <transition :name="authId" mode="out-in">
+                    <component :is="authId"></component>
+                </transition>
             </div>
         </div>
     </div>
@@ -25,13 +27,14 @@ export default {
     props:['user'],
     data(){
         return{
-            authId: 'Login'
+            authId: 'Login',
         }
     },
     methods: {
-        
     },
-    created(){}
+    created(){
+        console.log(this.authId)
+    }
 }
 </script>
 
@@ -47,7 +50,8 @@ export default {
 }
 #SideNav .auth-container{
     height: 500px;
-    width: 80%;
+    width: 85%;
+    overflow: hidden;
 }
 #SideNav nav{
     display: flex;
@@ -71,9 +75,11 @@ export default {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    margin: 20px 0;
+    margin: 10px 0;
     opacity: .3;
     font-family: var(--main-font);
+    transition: .25s;
+    width: 90%;
 }
 #SideNav .field label{
     color: white;
@@ -84,9 +90,10 @@ export default {
     border-bottom: 1px solid var(--font-color);
     color: var(--font-color);
     background: transparent;
-    padding: 3px 5px;
+    padding: 10px 5px;
     outline: none;
-    font-size: 1em;
+    font-size: .8em;
+    width: 100%;
 }
 #SideNav .field input::placeholder{
     opacity: .3;
@@ -106,5 +113,32 @@ export default {
     letter-spacing: 1px;
     cursor: pointer;
     margin-top: 20px;
+}
+
+.Login-enter-active {
+  animation: slideToRight .5s;
+}
+.Login-leave-active {
+  animation: slideToLeft .5s;
+}
+.Signup-enter-active {
+  animation: slideToLeft .5s reverse;
+}
+.Signup-leave-active {
+  animation: slideToRight .5s reverse;
+}
+@keyframes slideToLeft {
+    from{
+        transform: translate(0,0);
+    }to{
+        transform: translate(100%,0);
+    }
+}
+@keyframes slideToRight {
+    from{
+        transform: translate(-100%,0);
+    }to{
+        transform: translate(0,0);
+    }
 }
 </style>

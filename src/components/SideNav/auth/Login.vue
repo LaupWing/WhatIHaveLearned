@@ -33,7 +33,8 @@ export default {
         return{
             password: null,
             focusField: null,
-            email: null
+            email: null,
+            fiields
         }
     },
     methods:{
