@@ -1,5 +1,5 @@
 <template>
-    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <svg version="1.1" id="Plus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 52 52" style="enable-background:new 0 0 52 52;" xml:space="preserve">
         <g>
             <path d="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M26,50C12.767,50,2,39.233,2,26
@@ -14,11 +14,14 @@
 export default {
     name: 'Plus',
     methods:{
-        
+
     }
 }
 </script>
 
 <style>
-
+svg#Plus path{
+    fill: white;
+    stroke: white;
+}
 </style>

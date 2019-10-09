@@ -60,19 +60,25 @@ export default {
 *{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 #app{
   --contrast-color: #F6E64C;
   --main-color:#272627;
+  --lighter-white: rgba(255,255,255,.2);
   --secundair-color:#141414;
   --font-color: white;
   --main-font: 'Be Vietnam', sans-serif;
   --secundair-font: 'Comfortaa', cursive;
   display: flex;
   font-family: var(--main-font);
+  color: var(--font-color);
 }
 input,
 button{
   outline: none;
+}
+li{
+  list-style: none;
 }
 </style>

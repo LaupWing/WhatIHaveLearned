@@ -3,15 +3,20 @@
         <AuthContainer 
             v-if="!user"
         />
+        <ListContainer
+            v-else
+        />
     </div>
 </template>
 
 <script>
 import AuthContainer from './auth/AuthContainer'
+import ListContainer from './list/ListContainer'
 export default {
     name: 'SideNav',
     components:{
-        AuthContainer
+        AuthContainer,
+        ListContainer
     },
     props:['user', 'userNotes'],
     data(){
