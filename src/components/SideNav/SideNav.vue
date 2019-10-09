@@ -13,7 +13,7 @@ export default {
     components:{
         AuthContainer
     },
-    props:['user'],
+    props:['user', 'userNotes'],
     data(){
         return{
             authId: 'Login',

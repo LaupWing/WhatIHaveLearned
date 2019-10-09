@@ -99,6 +99,12 @@ export default {
     letter-spacing: 1px;
     cursor: pointer;
     margin-top: 20px;
+    transition: .25s;
+}
+
+.auth-container button:hover{
+    background: var(--contrast-color);
+    color: var(--secundair-color);
 }
 
 .auth-container .feedback{

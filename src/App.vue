@@ -7,6 +7,7 @@
     <Main 
       msg="Welcome to Your Vue.js App"
       :user="user"
+      :userNotes="userNotes"
     />
   </div>
 </template>
@@ -24,16 +25,30 @@ export default {
   },
   data(){
     return{
-      user: null
+      user: null,
+      userNotes: null
+    }
+  },
+  methods:{
+    getNotes(){
+      db
+        .collection('user-notes')
+        .doc(this.user.email)
+        .get()
+        .then(doc=>{
+          if(doc.exits){
+            this.userNotes = doc
+          }else{
+            this.userNotes = null
+          }
+        })
     }
   },
   created(){
     firebase.auth().onAuthStateChanged(user=>{
       if(user){
-        console.log(this.user)
         this.user = user
       }else{
-        console.log(this.user)
         this.user = null
       }
     })
