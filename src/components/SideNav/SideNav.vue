@@ -3,13 +3,14 @@
         id="SideNav"
     >
         <img src="../../assets/logo.png" alt="">
-        <transition :name="setTransition" mode="out-in">
-            <AuthContainer 
+        <transition :name="setComponentId" mode="out-in">
+            <!-- <AuthContainer 
                 v-if="!user"
             />
             <ListContainer
                 v-else
-            />
+            /> -->
+            <component :is="setComponentId"></component>
         </transition>
     </div>
 </template>
@@ -20,8 +21,8 @@ import ListContainer from './list/ListContainer'
 export default {
     name: 'SideNav',
     components:{
-        AuthContainer,
-        ListContainer
+        'AuthContainer': AuthContainer,
+        'ListContainer': ListContainer
     },
     props:['user', 'userNotes'],
     data(){
@@ -30,14 +31,15 @@ export default {
         }
     },
     methods: {
+        
     },
     created(){
         
     },
     computed:{
-        setTransition(){
-            if(this.user)    return 'Login'
-            return 'Login'
+        setComponentId(){
+            if(this.user)    return 'ListContainer'
+            return 'AuthContainer'
         }
     }
 }
@@ -57,11 +59,17 @@ export default {
 #SideNav img{
     margin: 20px 0;
 }
-.Login-enter-active {
+.AuthContainer-enter-active {
   animation: slideToRight .5s;
 }
-.Login-leave-active {
+.AuthContainer-leave-active {
   animation: slideToLeft .5s;
+}
+.ListContainer-enter-active {
+  animation: slideToLeft .5s reverse;
+}
+.ListContainer-leave-active {
+  animation: slideToRight .5s reverse;
 }
 @keyframes slideToLeft {
     from{
