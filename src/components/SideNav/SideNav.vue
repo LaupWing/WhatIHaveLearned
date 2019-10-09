@@ -38,8 +38,9 @@ export default {
     },
     computed:{
         setComponentId(){
-            if(this.user)    return 'ListContainer'
-            return 'AuthContainer'
+            return this.user ? 'ListContainer' : 'AuthContainer'
+            // if(this.user)    return 'ListContainer'
+            // return 'AuthContainer'
         }
     }
 }
