@@ -54,7 +54,7 @@ export default {
             }else{
                 this.feedback = 'Please fill in both fields'
             }
-        }
+        },
     }
 }
 </script>
@@ -67,6 +67,8 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: absolute;
+    width: 100%;
 }
 
 </style>

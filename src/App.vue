@@ -81,4 +81,12 @@ button{
 li{
   list-style: none;
 }
+
+
+
+@keyframes heightAnim {
+    to{
+        max-height: 100px;   
+    }
+}
 </style>

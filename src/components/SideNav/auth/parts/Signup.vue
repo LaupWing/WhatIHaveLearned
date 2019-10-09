@@ -96,5 +96,7 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: absolute;
+    width: 100%;
 }
 </style>

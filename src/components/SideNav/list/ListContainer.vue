@@ -1,7 +1,7 @@
 <template>
     <ul id="List-Container">
         <p class="no-collection" v-if="!userNotes">
-            You dont have a collection yet begin your everlasting knowledge journey by adding your first collection!
+            Begin your everlasting knowledge journey by adding your first collection!
         </p>
         <li>
             <p>Add a new collection</p><Plus/>
@@ -35,6 +35,7 @@ ul#List-Container{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    /* animation: slideToLeft 1s reverse; */
 }
 ul#List-Container li{
     display: flex;
@@ -64,6 +65,7 @@ ul#List-Container p.no-collection{
     width: 90%;
     text-align: center;
     margin: 20px 0;
+    margin-top: 0;
     font-size: .9em;
     color: var(--contrast-color);
 }

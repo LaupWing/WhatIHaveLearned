@@ -5,7 +5,7 @@
             <li :class="{'active': authId === 'Signup'}" @click="authId = 'Signup'">Signup</li>
         </nav>
         <div class="auth">
-            <transition :name="authId" mode="out-in">
+            <transition :name="authId">
                 <component :is="authId"></component>
             </transition>
         </div>
@@ -35,9 +35,13 @@ export default {
 <style>
 .auth-container{
     height: 500px;
-    width: 85%;
+    width: 90%;
     overflow: hidden;
-    animation: slideToRight 1s forwards;
+    position: relative;
+    /* animation: slideToRight 1s forwards; */
+}
+.auth-container .auth{
+    width: 100%;
 }
 .auth-container nav{
     display: flex;
@@ -117,12 +121,6 @@ export default {
     font-size: .7em;
 }
 
-@keyframes heightAnim {
-    to{
-        max-height: 100px;   
-    }
-}
-
 .Login-enter-active {
   animation: slideToRight .5s;
 }
@@ -134,19 +132,5 @@ export default {
 }
 .Signup-leave-active {
   animation: slideToRight .5s reverse;
-}
-@keyframes slideToLeft {
-    from{
-        transform: translate(0,0);
-    }to{
-        transform: translate(100%,0);
-    }
-}
-@keyframes slideToRight {
-    from{
-        transform: translate(-100%,0);
-    }to{
-        transform: translate(0,0);
-    }
 }
 </style>
