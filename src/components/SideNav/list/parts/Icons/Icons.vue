@@ -12,9 +12,12 @@
             >
             <Search/>
         </div>
+        <div class="search-container">
+            
+        </div>
         <div class="buttons">
-            <button>Cancel</button>
-            <button>Confirm</button>
+            <button type="button">Cancel</button>
+            <button type="button">Confirm</button>
         </div>        
     </form>
 </template>
@@ -60,15 +63,13 @@ export default {
     border: solid 3px var(--contrast-color);
     position: relative;
     border-radius: 5px;
+    padding: 10px;
     /* filter: drop-shadow(0px 2px 2px rgba(130,130,130,1)); */
 }
 #Icons .input-container{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* background: orange; */
-    width: 95%;
-    margin: 10px auto;
     border: solid 1px var(--font-color);
     border-radius: 5px;
 }
@@ -82,7 +83,14 @@ export default {
     padding: 10px 15px;
     display: block;
     width: auto;
-    /* border-bottom: 3px solid var(--contrast-color); */
+}
+#Icons .search-container{
+    background: orange;
+    width: 100%;
+    margin-top: 10px;
+    display: block;
+    max-height: 80%;
+    overflow-y: auto;
 }
 #Icons::before{
     content: '';
@@ -103,6 +111,5 @@ export default {
     margin-bottom: 15px;
     left: 0;
     right: 0;
-
 }
 </style>
