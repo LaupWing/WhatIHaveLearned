@@ -12,7 +12,7 @@
         >
         <button 
             class="find-icon"
-            :class="{'active' : popupSettings}" 
+            :class="{'active' : popupSettings, 'disable': !collection}" 
             @click="setPopup"
         >
             Search Icon<Search/>
@@ -46,6 +46,7 @@ export default {
     },
     methods:{
         setPopup(){
+            if(!this.collection)    return
             const button = this.$el.querySelector('button.find-icon')
             this.popupSettings = {
                 coords:{
@@ -84,10 +85,26 @@ export default {
     align-items: center;
     font-size: .5em;
     padding: 5px 10px;
+    flex-direction: column;
+    border-radius: 10px;
+    color: var(--lighter-white);
+    transition: .5s;
+}
+#Add-Collection button.find-icon.disable{
+    border-color: lightgray;
+    opacity: .2;
+    cursor: default;
+}
+#Add-Collection button.find-icon.disable:hover{
+    background: transparent;
+    color: var(--lighter-white);
+}
+#Add-Collection button.find-icon:hover{
+    color: var(--font-color);
 }
 #Add-Collection button.find-icon svg{
-    width: 12px;
-    margin-left: 10px;
+    width: 50px;
+    margin: 10px auto;
 }
 #Add-Collection button svg path{
     fill: white;
