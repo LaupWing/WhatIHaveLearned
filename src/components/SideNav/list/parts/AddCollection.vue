@@ -10,23 +10,45 @@
             placeholder="For Example: Programming"
             v-model="collection"
         >
+        <button class="find-icon" @click="setPopup">Search Icon<Search/></button>
         <div class="buttons">
             <button>Cancel</button>
             <button>Create</button>
         </div>
+        <Popup 
+            :settings="popupSettings"
+            :componentId="'Icons'"
+            v-if="popupSettings"
+        />
     </div>
 </template>
 
 <script>
+import Search from '@/components/Icons/Search'
+import Popup from '@/components/Popup/Popup'
 export default {
     name: 'AddCollection',
+    components:{
+        Search,
+        Popup
+    },
     data(){
         return{
-            collection: null
+            collection: null,
+            popupSettings: null
         }
     },
     methods:{
-
+        setPopup(){
+            const button = this.$el.querySelector('button.find-icon')
+            this.popupSettings = {
+                coords:{
+                    top: button.offsetTop,
+                    left: button.offsetLeft + button.offsetWidth,
+                    height: button.offsetHeight
+                }
+            }
+        }
     }
 }
 </script>
@@ -47,6 +69,21 @@ export default {
 #Add-Collection input[type="text"],
 #Add-Collection .buttons{
     width: 100%;
+
+}
+#Add-Collection button.find-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .5em;
+    padding: 5px 10px;
+}
+#Add-Collection button.find-icon svg{
+    width: 12px;
+    margin-left: 10px;
+}
+#Add-Collection button svg path{
+    fill: white;
 }
 #Add-Collection input[type="text"]{
     padding: 5px 10px;
