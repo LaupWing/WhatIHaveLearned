@@ -83,25 +83,28 @@ li{
   list-style: none;
 }
 button{
-    padding: 7px 20px;
-    border: none;
-    text-transform: uppercase;
-    color: white;
-    background: transparent;
-    border:2px solid var(--contrast-color);
-    font-family: var(--secundair-font);
-    border-radius: 20px;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: .25s;
+  padding: 7px 20px;
+  border: none;
+  text-transform: uppercase;
+  color: white;
+  background: transparent;
+  border:2px solid var(--contrast-color);
+  font-family: var(--secundair-font);
+  border-radius: 20px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: .25s;
 }
 
-button:hover{
+button:hover,
+button.active{
     background: var(--contrast-color);
     color: var(--secundair-color);
 }
 
-
+svg{
+  transition: .25s;
+}
 @keyframes heightAnim {
     to{
         max-height: 100px;   

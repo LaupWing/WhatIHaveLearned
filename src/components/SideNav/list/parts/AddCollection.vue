@@ -10,7 +10,13 @@
             placeholder="For Example: Programming"
             v-model="collection"
         >
-        <button class="find-icon" @click="setPopup">Search Icon<Search/></button>
+        <button 
+            class="find-icon"
+            :class="{'active' : popupSettings}" 
+            @click="setPopup"
+        >
+            Search Icon<Search/>
+        </button>
         <div class="buttons">
             <button>Cancel</button>
             <button>Create</button>
@@ -46,7 +52,8 @@ export default {
                     top: button.offsetTop,
                     left: button.offsetLeft + button.offsetWidth,
                     height: button.offsetHeight
-                }
+                },
+                searchTerm: this.collection
             }
         }
     }
