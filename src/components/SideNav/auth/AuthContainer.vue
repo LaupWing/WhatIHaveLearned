@@ -92,24 +92,9 @@ export default {
     opacity: 1;
 }
 .auth-container button{
-    padding: 7px 20px;
-    border: none;
-    text-transform: uppercase;
-    color: white;
-    background: transparent;
-    border:2px solid var(--contrast-color);
-    font-family: var(--secundair-font);
-    border-radius: 20px;
-    letter-spacing: 1px;
-    cursor: pointer;
     margin-top: 20px;
-    transition: .25s;
 }
 
-.auth-container button:hover{
-    background: var(--contrast-color);
-    color: var(--secundair-color);
-}
 
 .auth-container .feedback{
     max-height: 0;
