@@ -1,10 +1,22 @@
 <template>
-    <div id="Icons" :style="setStyling">
+    <form id="Icons" :style="setStyling">
         <div class="input-container">
-            <input class="icon" type="text" v-model="settings.searchTerm">
+            <input 
+                class="icon" 
+                type="text"
+                autocomplete="off" 
+                autocorrect="off" 
+                autocapitalize="off" 
+                spellcheck="false"  
+                v-model="settings.searchTerm"
+            >
             <Search/>
         </div>
-    </div>
+        <div class="buttons">
+            <button>Cancel</button>
+            <button>Confirm</button>
+        </div>        
+    </form>
 </template>
 
 <script>
@@ -17,7 +29,9 @@ export default {
     },
     data(){
         return{
+            searchIcon(){
 
+            }
         }
     },
     methods:{
@@ -46,6 +60,7 @@ export default {
     border: solid 3px var(--contrast-color);
     position: relative;
     border-radius: 5px;
+    /* filter: drop-shadow(0px 2px 2px rgba(130,130,130,1)); */
 }
 #Icons .input-container{
     display: flex;
@@ -79,5 +94,15 @@ export default {
     top: 2.5px;
     z-index: -1;
     transform: rotate(45deg);
+}
+#Icons .buttons{
+    position: absolute;
+    bottom: 0;
+    width: 80% !important;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    left: 0;
+    right: 0;
+
 }
 </style>
