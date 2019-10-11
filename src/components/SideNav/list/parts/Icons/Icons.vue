@@ -13,7 +13,10 @@
             <Search/>
         </div>
         <div class="search-container">
-            
+            <div class="loading" v-if="loading">
+                <p>Waiting for the source {{loading}}</p>
+                <p>It is worth it!</p>
+            </div>
         </div>
         <div class="buttons">
             <button type="button">Cancel</button>
@@ -32,12 +35,78 @@ export default {
     },
     data(){
         return{
-            searchIcon(){
-
-            }
+            feedback: null,
+            searchTerm: this.settings.searchTerm,
+            loading: null,
+            undraw: null,
+            noun: null,
+            flatIcon: null,
+            allIcons: []
         }
     },
     methods:{
+         async getIcon(source){
+            try{
+                const config = {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({search:this.searchTerm}),
+                    mode: 'cors'
+                }
+                const response = await fetch(`https://iconapi.herokuapp.com/${source}`, config)
+                const data     = await response.json()
+                return data
+            }
+            catch(err){
+                this.feedback = err.message
+            }
+        },
+        async loadingAllIcons(){
+            try{
+                this.loading = 'Undraw 1/3'
+                const undraw = await this.getIcon('undraw')   
+                this.undraw = undraw
+                    .map(svg=>{
+                        return{
+                            type: 'svg',
+                            src: svg
+                        }
+                    })
+            }catch(err){
+                console.log(err)
+            }
+            try{
+                this.loading = 'NounProject 2/3'
+                const noun = await this.getIcon('noun')   
+                this.noun = noun    
+                    .map(img=>{
+                        return{
+                            type: 'img',
+                            src: img
+                        }
+                    }) 
+            }catch(err){
+                console.log(err)
+            }
+            try{
+                this.loading = 'FlatIcon 3/3'
+                const flatIcon = await this.getIcon('flatIcon')
+                this.flatIcon = flatIcon 
+                    .map(img=>{
+                        return{
+                            type: 'img',
+                            src: img
+                        }
+                    })    
+                this.loading = null     
+                this.allIcons = this.allIcons.concat(this.undraw, this.noun, this.flatIcon)
+                console.log(this.allIcons)
+            }catch(err){
+                console.log(err)
+            }
+        },
     },
     computed:{
         setStyling(){
@@ -49,7 +118,7 @@ export default {
 
     },
     created(){
-        console.log(this.settings)
+        this.loadingAllIcons()
     }
 }
 </script>

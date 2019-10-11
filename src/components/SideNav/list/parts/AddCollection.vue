@@ -102,7 +102,7 @@ export default {
 }
 #Add-Collection p.info-icon{
     font-size: .7em;
-    opacity: .2;
+    opacity: .3;
 }
 #Add-Collection button.find-icon:hover{
     color: var(--font-color);
