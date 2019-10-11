@@ -17,6 +17,7 @@
         >
             Search Icon<Search/>
         </button>
+        <p class="info-icon">Icons is not a must!</p>
         <div class="buttons">
             <button>Cancel</button>
             <button>Create</button>
@@ -98,6 +99,10 @@ export default {
 #Add-Collection button.find-icon.disable:hover{
     background: transparent;
     color: var(--lighter-white);
+}
+#Add-Collection p.info-icon{
+    font-size: .7em;
+    opacity: .2;
 }
 #Add-Collection button.find-icon:hover{
     color: var(--font-color);
