@@ -26,6 +26,7 @@
             :settings="popupSettings"
             :componentId="'Icons'"
             v-if="popupSettings"
+            v-on:submitIcon="submitIcon"
         />
     </div>
 </template>
@@ -57,6 +58,9 @@ export default {
                 },
                 searchTerm: this.collection
             }
+        },
+        submitIcon(data){
+            console.log(data)
         }
     }
 }

@@ -3,6 +3,7 @@
         <component 
             :is="componentId"
             :settings="settings"
+            v-on:emitToParent="emitToParent"
         >
         </component>
     </div>
@@ -20,7 +21,12 @@ export default {
         return{
 
         }
-    }
+    },
+    methods: {
+        emitToParent(data, functionName){
+            this.$emit(functionName, data)
+        }
+    },
 }
 </script>
 

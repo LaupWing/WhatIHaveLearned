@@ -122,7 +122,7 @@ export default {
         },
         submitIcon(){
             if(this.chosen){
-                this.$emit('chosenIcon', this.chosen)
+                this.$emit('emitToParent', this.chosen, 'submitIcon')
             }
         }
     },
