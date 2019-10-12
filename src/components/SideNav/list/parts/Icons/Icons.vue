@@ -115,7 +115,11 @@ export default {
                     })    
                 this.loading = null     
                 this.allIcons = this.allIcons.concat(this.undraw, this.noun, this.flatIcon)
-                console.log(this.allIcons)
+                localStorage.setItem('icons', JSON.stringify({
+                        searchTerm: this.searchTerm,
+                        items:this.allIcons
+                    }
+                    ))
             }catch(err){
                 console.log(err)
             }
@@ -136,7 +140,13 @@ export default {
 
     },
     created(){
-        console.log(this.allIcons)
+        if(localStorage.getItem('icons')){
+            const localItems = JSON.parse(localStorage.getItem('icons'))
+            if(this.searchTerm === localItems.searchTerm){
+                this.allIcons = localItems.items
+                return
+            }
+        }
         this.loadingAllIcons()
     }
 }
