@@ -24,7 +24,6 @@ export default {
     },
     methods: {
         emitToParent(data, functionName){
-            console.log(functionName)
             this.$emit(functionName, data)
         }
     },

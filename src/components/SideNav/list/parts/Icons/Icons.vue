@@ -136,6 +136,7 @@ export default {
 
     },
     created(){
+        console.log(this.allIcons)
         this.loadingAllIcons()
     }
 }

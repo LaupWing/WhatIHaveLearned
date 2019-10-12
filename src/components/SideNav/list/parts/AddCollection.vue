@@ -10,22 +10,28 @@
             placeholder="For Example: Programming"
             v-model="collection"
         >
-        <button 
-            class="find-icon"
-            :class="{'active' : popupSettings, 'disable': !collection}" 
-            @click="setPopup"
-            v-if="!icon"
-        >
-            Search Icon<Search/>
-        </button>
-        <button 
-            class="chosen-icon"
-            :class="{'active' : popupSettings, 'disable': !collection}" 
-            @click="setPopup"
-            v-else
-        >
-            Change Icon <img :src="icon.src" alt="">
-        </button>
+        <transition name="flip" mode="out-in">
+            <button 
+                class="find-icon"
+                :class="{'active' : popupSettings, 'disable': !collection}" 
+                @click="setPopup"
+                v-if="!icon"
+                key="1"
+            >
+                Search Icon<Search class="search"/>
+            </button>
+            <button 
+                key="2"
+                class="chosen-icon"
+                :class="{'active' : popupSettings, 'disable': !collection}" 
+                @click="setPopup"
+                v-else
+            >
+                Change Icon 
+                    <img v-if="icon.type==='img'" :src="icon.src" alt="">
+                    <div v-else class="svg-wrapper" v-html="icon.src"></div>
+            </button>
+        </transition>
         <p class="info-icon">Icons is not a must!</p>
         <div class="buttons">
             <button>Cancel</button>
@@ -59,7 +65,7 @@ export default {
     methods:{
         setPopup(){
             if(!this.collection)    return
-            const button = this.$el.querySelector('button.find-icon')
+            const button = this.$el.querySelector('button.find-icon') || this.$el.querySelector('button.chosen-icon')
             this.popupSettings = {
                 coords:{
                     top: button.offsetTop,
@@ -99,9 +105,9 @@ export default {
 #Add-Collection button.find-icon{
     width: 100px;
     height: 100px;
-    padding: 0;
+    padding: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     font-size: .5em;
     flex-direction: column;
@@ -109,8 +115,12 @@ export default {
     color: var(--lighter-white);
     transition: .5s;
 }
-#Add-Collection button.chosen-icon img{
-    width: 80%;
+#Add-Collection button.chosen-icon img,
+#Add-Collection button.chosen-icon svg{
+    width: 85%;
+}
+#Add-Collection button.chosen-icon svg{
+    height: 100%;
 }
 #Add-Collection button.find-icon.disable{
     border-color: lightgray;
@@ -132,7 +142,7 @@ export default {
     width: 50px;
     margin: 10px auto;
 }
-#Add-Collection button svg path{
+#Add-Collection button svg.search path{
     fill: white;
 }
 #Add-Collection input[type="text"]{
@@ -150,5 +160,11 @@ export default {
 #Add-Collection button{
     font-size: .6em;
     margin-top: 20px;
+}
+.flip-enter-active {
+  animation: flipAnim .5s;
+}
+.flip-leave-active {
+  animation: flipAnim .5s reverse;
 }
 </style>

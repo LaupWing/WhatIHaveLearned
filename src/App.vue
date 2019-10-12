@@ -110,12 +110,12 @@ svg{
         max-height: 100px;   
     }
 }
-@keyframes flip {
+@keyframes flipAnim {
   from{
-    transform: scaleY(0);
+    transform: scaleX(0);
   }
   to{
-    transform: scaleY(1);   
+    transform: scaleX(1);   
   }
 }
 </style>
