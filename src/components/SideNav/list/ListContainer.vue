@@ -54,7 +54,7 @@ export default {
         }
     },
     created(){
-        console.log(this.userNotes, this.user)
+        
     }
 }
 </script>
@@ -80,6 +80,7 @@ ul#List-Container .add{
 }
 ul#List-Container li.collection{
     border-bottom: solid 1px var(--lighter-white);
+    text-transform: capitalize;
 }
 ul#List-Container li{
     display: flex;

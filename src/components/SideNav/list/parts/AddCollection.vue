@@ -61,26 +61,31 @@ export default {
         return{
             collection: null,
             popupSettings: null,
-            icon: null
+            icon: null,
+            copiedNotes: JSON.parse(JSON.stringify(this.userNotes))
         }
     },
     methods:{
         create(){
-            this.userNotes.push({
+            this.copiedNotes.push({
                 collection: this.collection,
                 icon: this.icon,
                 sections:[]
             })
-            this.$emit('cancel')
+            console.log(this.copiedNotes, this.userNotes)
+            // this.userNotes.push({
+            //     collection: this.collection,
+            //     icon: this.icon,
+            //     sections:[]
+            // })
+            // this.$emit('cancel')
             db
                 .collection('userNotes')
                 .doc(this.user.uid)
                 .update({
                     collections: this.userNotes
                 })
-                .then(()=>{
-
-                })
+                .then(()=>this.updateNotesArray())
                 .catch(()=>{
                     db
                         .collection('userNotes')
@@ -88,7 +93,16 @@ export default {
                         .update({
                             collections: this.userNotes
                         })
+                        .then(()=>this.updateNotesArray())
                 })
+        },
+        updateNotesArray(){
+            this.userNotes.push({
+                collection: this.collection,
+                icon: this.icon,
+                sections:[]
+            })
+            this.$emit('cancel')
         },
         cancel(){
             this.$emit('cancel')
