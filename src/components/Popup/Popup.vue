@@ -17,13 +17,14 @@ export default {
     components:{
         'Icons': Icons
     },
-    data(){
+    data(){ 
         return{
 
         }
     },
     methods: {
         emitToParent(data, functionName){
+            console.log(functionName)
             this.$emit(functionName, data)
         }
     },

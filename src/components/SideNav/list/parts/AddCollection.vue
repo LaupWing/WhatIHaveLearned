@@ -14,8 +14,17 @@
             class="find-icon"
             :class="{'active' : popupSettings, 'disable': !collection}" 
             @click="setPopup"
+            v-if="!icon"
         >
             Search Icon<Search/>
+        </button>
+        <button 
+            class="chosen-icon"
+            :class="{'active' : popupSettings, 'disable': !collection}" 
+            @click="setPopup"
+            v-else
+        >
+            Change Icon <img :src="icon.src" alt="">
         </button>
         <p class="info-icon">Icons is not a must!</p>
         <div class="buttons">
@@ -43,7 +52,8 @@ export default {
     data(){
         return{
             collection: null,
-            popupSettings: null
+            popupSettings: null,
+            icon: null
         }
     },
     methods:{
@@ -60,7 +70,8 @@ export default {
             }
         },
         submitIcon(data){
-            console.log(data)
+            this.popupSettings = null,
+            this.icon = data
         }
     }
 }
@@ -84,16 +95,22 @@ export default {
     width: 100%;
 
 }
+#Add-Collection button.chosen-icon,
 #Add-Collection button.find-icon{
+    width: 100px;
+    height: 100px;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: .5em;
-    padding: 5px 10px;
     flex-direction: column;
     border-radius: 10px;
     color: var(--lighter-white);
     transition: .5s;
+}
+#Add-Collection button.chosen-icon img{
+    width: 80%;
 }
 #Add-Collection button.find-icon.disable{
     border-color: lightgray;

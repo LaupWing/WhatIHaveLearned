@@ -2,7 +2,7 @@
     <div 
         id="SideNav"
     >
-        <img src="../../assets/logo.png" alt="">
+        <img class="logo" src="../../assets/logo.png" alt="">
         <transition :name="setComponentId" mode="out-in">
             <!-- <AuthContainer 
                 v-if="!user"
@@ -57,7 +57,7 @@ export default {
     align-items: center;
     position: relative;
 }
-#SideNav img{
+#SideNav img.logo{
     margin: 20px 0;
 }
 .AuthContainer-enter-active {
