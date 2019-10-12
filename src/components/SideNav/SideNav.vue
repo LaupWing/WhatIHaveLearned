@@ -10,7 +10,11 @@
             <ListContainer
                 v-else
             /> -->
-            <component :is="setComponentId"></component>
+            <component 
+                :is="setComponentId"
+                :user="user"
+                :userNotes="userNotes"
+            ></component>
         </transition>
     </div>
 </template>

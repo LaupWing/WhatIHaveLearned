@@ -7,7 +7,11 @@
             <li v-if="!addCollection" @click="toggleAddCollection">
                 <p>Add a new collection</p><Plus/>
             </li>
-            <AddCollection v-else/>
+            <AddCollection 
+                v-on:cancel="toggleAddCollection"
+                :user="user"
+                :userNotes="userNotes"
+            v-else/>
         </div>
     </ul>
 </template>
@@ -17,7 +21,7 @@ import Plus from '@/components/Icons/Plus'
 import AddCollection from './parts/AddCollection'
 export default {
     name: 'ListContainer',
-    props:['userNotes'],
+    props:['userNotes', 'user'],
     components:{
         Plus,
         AddCollection

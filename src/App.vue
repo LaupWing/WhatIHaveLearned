@@ -3,6 +3,7 @@
     <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <SideNav
       :user="user"
+      :userNotes="userNotes"
     />
     <Main 
       msg="Welcome to Your Vue.js App"
@@ -26,28 +27,50 @@ export default {
   data(){
     return{
       user: null,
-      userNotes: null
+      userNotes: []
     }
   },
   methods:{
     getNotes(){
       db
-        .collection('user-notes')
-        .doc(this.user.email)
+        .collection('userNotes')
+        .doc(this.user.uid)
         .get()
         .then(doc=>{
           if(doc.exits){
-            this.userNotes = doc
-          }else{
-            this.userNotes = null
+            this.userNotes = doc.data().collections
           }
+        })
+    },
+    loginStates(){
+      firebase.auth().onAuthStateChanged(user=>{
+        if(user){
+          this.user = user
+          this.getNotes()
+        }else{
+          this.user = null
+          this.userNotes = []
+        }
+      })
+    },
+    dbStates(){
+      let ref = db.collection('userNotes')
+        ref.onSnapshot(snapshot=>{
+          snapshot.docChanges().forEach(change=>{
+            if(change.type === 'modified' && change.doc.id === this.user.uid){
+              console.log(change)
+              // console.log(this.userNotes)
+            }
+          })
         })
     }
   },
   created(){
-    firebase.auth().onAuthStateChanged(user=>{
-      user ? this.user = user : this.user = null
-    })
+    this.loginStates()
+    this.dbStates()
+  },
+  mounted(){
+    console.log(this.userNotes)
   }
 }
 </script>

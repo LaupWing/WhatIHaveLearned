@@ -34,8 +34,8 @@
         </transition>
         <p class="info-icon">Icons is not a must!</p>
         <div class="buttons">
-            <button>Cancel</button>
-            <button>Create</button>
+            <button @click="cancel">Cancel</button>
+            <button @click="create">Create</button>
         </div>
         <Popup 
             :settings="popupSettings"
@@ -49,8 +49,10 @@
 <script>
 import Search from '@/components/Icons/Search'
 import Popup from '@/components/Popup/Popup'
+import db from '@/firebase/init'
 export default {
     name: 'AddCollection',
+    props:['user', 'userNotes'],
     components:{
         Search,
         Popup
@@ -63,6 +65,34 @@ export default {
         }
     },
     methods:{
+        create(){
+            this.userNotes.push({
+                collection: this.collection,
+                icon: this.icon,
+                sections:[]
+            })
+            console.log(this.userNotes)
+            db
+                .collection('userNotes')
+                .doc(this.user.uid)
+                .update({
+                    collections: this.userNotes
+                })
+                .then(()=>{
+
+                })
+                .catch(()=>{
+                    db
+                        .collection('userNotes')
+                        .doc(this.user.uid)
+                        .set({
+                            collections: this.userNotes
+                        })
+                })
+        },
+        cancel(){
+            this.$emit('cancel')
+        },
         setPopup(){
             if(!this.collection)    return
             const button = this.$el.querySelector('button.find-icon') || this.$el.querySelector('button.chosen-icon')
@@ -79,6 +109,9 @@ export default {
             this.popupSettings = null,
             this.icon = data
         }
+    },
+    created(){
+        
     }
 }
 </script>
