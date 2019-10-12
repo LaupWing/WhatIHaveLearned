@@ -130,9 +130,16 @@ svg{
   transition: .25s;
 }
 @keyframes heightAnim {
-    to{
-        max-height: 100px;   
-    }
+  from{
+    /* overflow: hidden;
+    max-height: 0; */
+    transform: scaleX(0);
+  }
+  to{
+    /* overflow: hidden;
+    max-height: 1000px;    */
+    transform: scaleX(1);
+  }
 }
 @keyframes flipAnim {
   from{

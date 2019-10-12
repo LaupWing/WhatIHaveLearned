@@ -4,14 +4,20 @@
             Begin your everlasting knowledge journey by adding your first collection!
         </p>
         <div class="add">
-            <li v-if="!addCollection" @click="toggleAddCollection">
-                <p>Add a new collection</p><Plus/>
-            </li>
-            <AddCollection 
-                v-on:cancel="toggleAddCollection"
-                :user="user"
-                :userNotes="userNotes"
-            v-else/>
+            <transition name="slideTopDown" mode="out-in">
+                <li 
+                    v-if="!addCollection" 
+                    @click="toggleAddCollection"
+                >
+                    <p>Add a new collection</p><Plus/>
+                </li>
+                <AddCollection
+                    v-on:cancel="toggleAddCollection"
+                    :user="user"
+                    :userNotes="userNotes"
+                    v-else
+                />
+            </transition>
         </div>
         <div class="list-collection">
             <li 
@@ -70,6 +76,7 @@ ul#List-Container .add{
     border: solid 1px var(--lighter-white);
     border-left: none;
     border-right: none;
+    overflow: hidden;
 }
 ul#List-Container li.collection{
     border-bottom: solid 1px var(--lighter-white);
@@ -106,5 +113,11 @@ ul#List-Container p.no-collection{
     margin-top: 0;
     font-size: .9em;
     color: var(--contrast-color);
+}
+.slideTopDown-enter-active {
+  animation: heightAnim 1s;
+}
+.slideTopDown-leave-active {
+  animation: heightAnim 1s reverse;
 }
 </style>
