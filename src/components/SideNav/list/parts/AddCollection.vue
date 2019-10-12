@@ -71,7 +71,7 @@ export default {
                 icon: this.icon,
                 sections:[]
             })
-            console.log(this.userNotes)
+            this.$emit('cancel')
             db
                 .collection('userNotes')
                 .doc(this.user.uid)
@@ -85,7 +85,7 @@ export default {
                     db
                         .collection('userNotes')
                         .doc(this.user.uid)
-                        .set({
+                        .update({
                             collections: this.userNotes
                         })
                 })

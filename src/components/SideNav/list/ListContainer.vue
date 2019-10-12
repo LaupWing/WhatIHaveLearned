@@ -13,6 +13,17 @@
                 :userNotes="userNotes"
             v-else/>
         </div>
+        <div class="list-collection">
+            <li 
+                class="collection"
+                v-for="(collection, index) in userNotes"
+                :key="index"
+            >
+                <p>{{collection.collection}}</p>
+                <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
+                <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
+            </li> 
+        </div>
     </ul>
 </template>
 
@@ -35,6 +46,9 @@ export default {
         toggleAddCollection(){
             this.addCollection = !this.addCollection
         }
+    },
+    created(){
+        console.log(this.userNotes, this.user)
     }
 }
 </script>
@@ -48,11 +62,17 @@ ul#List-Container{
     flex-direction: column;
     /* animation: slideToLeft 1s reverse; */
 }
-ul#List-Container .add{
+ul#List-Container .add,
+ul#List-Container .list-collection{
     width: 100%;
+}
+ul#List-Container .add{
     border: solid 1px var(--lighter-white);
     border-left: none;
     border-right: none;
+}
+ul#List-Container li.collection{
+    border-bottom: solid 1px var(--lighter-white);
 }
 ul#List-Container li{
     display: flex;
@@ -63,9 +83,13 @@ ul#List-Container li{
     cursor: pointer;
     transition: .25s;
 }
-ul#List-Container li svg{
+ul#List-Container li svg,
+ul#List-Container li img{
     width: 20px;
     margin-left: 10px;
+}
+ul#List-Container li svg{
+    height: 100%;
 }
 ul#List-Container li:hover{
     background: var(--contrast-color);
