@@ -4,12 +4,6 @@
     >
         <img class="logo" src="../../assets/logo.png" alt="">
         <transition :name="setComponentId" mode="out-in">
-            <!-- <AuthContainer 
-                v-if="!user"
-            />
-            <ListContainer
-                v-else
-            /> -->
             <component 
                 :is="setComponentId"
                 :user="user"
@@ -43,8 +37,6 @@ export default {
     computed:{
         setComponentId(){
             return this.user ? 'ListContainer' : 'AuthContainer'
-            // if(this.user)    return 'ListContainer'
-            // return 'AuthContainer'
         }
     }
 }

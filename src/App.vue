@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import sortByName from './helpers/sortName.js'
 import Main from './components/Main.vue'
 import SideNav from './components/SideNav/SideNav.vue'
 import firebase from 'firebase'
@@ -38,7 +39,10 @@ export default {
         .get()
         .then(doc=>{
           if(doc.exists){
-            this.userNotes = doc.data().collections
+            this.userNotes = doc
+              .data()
+              .collections
+              .sort(sortByName('collection'))
           }
         })
     },
