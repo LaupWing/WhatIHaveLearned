@@ -1,5 +1,5 @@
 <template>
-    <form id="Icons" :style="setStyling">
+    <form id="Icons" :style="setStyling" @submit.prevent="loadingAllIcons">
         <div class="input-container">
             <input 
                 class="icon" 
@@ -10,17 +10,29 @@
                 spellcheck="false"  
                 v-model="settings.searchTerm"
             >
-            <Search/>
+            <Search @click="loadingAllIcons"/>
         </div>
         <div class="search-container">
             <div class="loading" v-if="loading">
                 <p>Waiting for the source {{loading}}</p>
                 <p>It is worth it!</p>
             </div>
+            <div 
+                class="icons-result"
+                v-for="(item,index) in allIcons"
+                :class="{chosen: chosen===item}"
+                :key="index"
+                @click="chosen = item"
+            >
+                <img v-if="item.type === 'img'" :src="item.src" alt="">
+                <div v-else class="svg-container" v-html="item.src">
+
+                </div>
+            </div>
         </div>
         <div class="buttons">
             <button type="button">Cancel</button>
-            <button type="button">Confirm</button>
+            <button type="button" @click="submitIcon">Confirm</button>
         </div>        
     </form>
 </template>
@@ -41,11 +53,12 @@ export default {
             undraw: null,
             noun: null,
             flatIcon: null,
-            allIcons: []
+            allIcons: [],
+            chosen:null
         }
     },
     methods:{
-         async getIcon(source){
+        async getIcon(source){
             try{
                 const config = {
                     method: 'POST',
@@ -107,6 +120,11 @@ export default {
                 console.log(err)
             }
         },
+        submitIcon(){
+            if(this.chosen){
+                this.$emit('chosenIcon', this.chosen)
+            }
+        }
     },
     computed:{
         setStyling(){
@@ -154,12 +172,34 @@ export default {
     width: auto;
 }
 #Icons .search-container{
-    background: orange;
-    width: 100%;
+    max-width: 100%;
     margin-top: 10px;
-    display: block;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
     max-height: 80%;
     overflow-y: auto;
+    overflow-x: hidden;
+    background: var(--lighter-white);
+}
+#Icons .search-container .icons-result{
+    width: 50px;
+    margin: 10px; 
+    transition: .25s;
+    cursor: pointer;
+    padding: 5px;
+}
+#Icons .search-container .icons-result.chosen,
+#Icons .search-container .icons-result:hover{
+    /* border: solid var(--contrast-color) 2px;      */
+    background: var(--contrast-color);
+}
+#Icons .search-container .icons-result img,
+#Icons .search-container .icons-result svg{
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 #Icons::before{
     content: '';
