@@ -72,7 +72,7 @@ export default {
                 icon: this.icon,
                 sections:[]
             })
-            console.log(this.copiedNotes, this.userNotes)
+            // console.log(this.copiedNotes, this.userNotes)
             // this.userNotes.push({
             //     collection: this.collection,
             //     icon: this.icon,
