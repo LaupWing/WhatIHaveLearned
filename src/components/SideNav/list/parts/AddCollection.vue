@@ -83,7 +83,7 @@ export default {
                 .collection('userNotes')
                 .doc(this.user.uid)
                 .update({
-                    collections: this.userNotes
+                    collections: this.copiedNotes
                 })
                 .then(()=>this.updateNotesArray())
                 .catch(()=>{
@@ -91,7 +91,7 @@ export default {
                         .collection('userNotes')
                         .doc(this.user.uid)
                         .update({
-                            collections: this.userNotes
+                            collections: this.copiedNotes
                         })
                         .then(()=>this.updateNotesArray())
                 })
