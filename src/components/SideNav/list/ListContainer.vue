@@ -4,7 +4,11 @@
             Begin your everlasting knowledge journey by adding your first collection!
         </p>
         <div class="add">
-            <transition name="slideTopDown" mode="out-in">
+            <transition 
+                name="slideTopDown" 
+                mode="out-in" 
+                v-on:enter="animEnded"
+            >
                 <li 
                     v-if="!addCollection" 
                     @click="toggleAddCollection"
@@ -13,6 +17,7 @@
                 </li>
                 <AddCollection
                     v-on:cancel="toggleAddCollection"
+                    v-on:create="create"
                     :user="user"
                     :userNotes="userNotes"
                     v-else
@@ -20,15 +25,17 @@
             </transition>
         </div>
         <div class="list-collection">
-            <li 
-                class="collection"
-                v-for="(collection, index) in userNotes"
-                :key="index"
-            >
-                <p>{{collection.collection}}</p>
-                <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
-                <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
-            </li> 
+            <transition-group name="fadeIn">
+                <li 
+                    class="collection"
+                    v-for="(collection) in userNotes"
+                    :key="collection.collection"
+                >
+                    <p>{{collection.collection}}</p>
+                    <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
+                    <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
+                </li> 
+            </transition-group>
         </div>
     </ul>
 </template>
@@ -36,6 +43,8 @@
 <script>
 import Plus from '@/components/Icons/Plus'
 import AddCollection from './parts/AddCollection'
+import db from '@/firebase/init'
+
 export default {
     name: 'ListContainer',
     props:['userNotes', 'user'],
@@ -45,13 +54,47 @@ export default {
     },
     data(){
         return{
-            addCollection: false
+            addCollection: false,
+            newCollection: null,
+            copiedNotes: JSON.parse(JSON.stringify(this.userNotes))
         }
     },
     methods:{
         toggleAddCollection(){
             this.addCollection = !this.addCollection
-        }
+        },
+        animEnded(){
+            if(this.newCollection){
+                this.saveCollection()
+            }
+        },
+        create(data){
+            this.newCollection = data
+            this.toggleAddCollection()
+        },
+        saveCollection(){
+            this.copiedNotes.push(this.newCollection)
+            db
+                .collection('userNotes')
+                .doc(this.user.uid)
+                .update({
+                    collections: this.copiedNotes
+                })
+                .then(()=>this.updateNotesArray())
+                .catch(()=>{
+                    db
+                        .collection('userNotes')
+                        .doc(this.user.uid)
+                        .update({
+                            collections: this.copiedNotes
+                        })
+                        .then(()=>this.updateNotesArray())
+                })
+        },
+        updateNotesArray(){
+            this.userNotes.push(this.newCollection)
+            this.newCollection = null
+        },
     },
     created(){
         
@@ -120,5 +163,11 @@ ul#List-Container p.no-collection{
 }
 .slideTopDown-leave-active {
   animation: heightAnim 1s reverse;
+}
+.fadeIn-enter-active {
+  animation: fadeIn 1s;
+}
+.fadeIn-leave-active {
+  animation: fadeIn 1s reverse;
 }
 </style>

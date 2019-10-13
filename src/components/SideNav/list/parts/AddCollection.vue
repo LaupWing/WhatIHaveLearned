@@ -49,7 +49,6 @@
 <script>
 import Search from '@/components/Icons/Search'
 import Popup from '@/components/Popup/Popup'
-import db from '@/firebase/init'
 export default {
     name: 'AddCollection',
     props:['user', 'userNotes'],
@@ -61,48 +60,16 @@ export default {
         return{
             collection: null,
             popupSettings: null,
-            icon: null,
-            copiedNotes: JSON.parse(JSON.stringify(this.userNotes))
+            icon: null
         }
     },
     methods:{
         create(){
-            this.copiedNotes.push({
+            this.$emit('create', {
                 collection: this.collection,
                 icon: this.icon,
                 sections:[]
             })
-            // console.log(this.copiedNotes, this.userNotes)
-            // this.userNotes.push({
-            //     collection: this.collection,
-            //     icon: this.icon,
-            //     sections:[]
-            // })
-            // this.$emit('cancel')
-            db
-                .collection('userNotes')
-                .doc(this.user.uid)
-                .update({
-                    collections: this.copiedNotes
-                })
-                .then(()=>this.updateNotesArray())
-                .catch(()=>{
-                    db
-                        .collection('userNotes')
-                        .doc(this.user.uid)
-                        .update({
-                            collections: this.copiedNotes
-                        })
-                        .then(()=>this.updateNotesArray())
-                })
-        },
-        updateNotesArray(){
-            this.userNotes.push({
-                collection: this.collection,
-                icon: this.icon,
-                sections:[]
-            })
-            this.$emit('cancel')
         },
         cancel(){
             this.$emit('cancel')

@@ -155,4 +155,14 @@ svg{
     transform: scaleX(1);   
   }
 }
+@keyframes fadeIn {
+  from{
+    transform: translate(0,50%);
+    opacity: 0;
+  }
+  to{
+    transform: translate(0,0);
+    opacity: 1;   
+  }
+}
 </style>
