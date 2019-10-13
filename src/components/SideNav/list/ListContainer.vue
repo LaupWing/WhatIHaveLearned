@@ -24,19 +24,26 @@
                 />
             </transition>
         </div>
-        <div class="list-collection">
-            <transition-group name="fadeIn">
-                <li 
-                    class="collection"
-                    v-for="(collection) in userNotes"
-                    :key="collection.collection"
-                >
-                    <p>{{collection.collection}}</p>
-                    <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
-                    <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
-                </li> 
-            </transition-group>
-        </div>
+        <transition name="slideInOut" mode="out-in">
+            <div class="list-collection" v-if="!showCollectionDetails" key="1">
+                <transition-group name="fadeIn" v-on:enter="newItemAdded">
+                    <li 
+                        class="collection"
+                        v-for="(collection) in userNotes"
+                        :class="{'go-to':goToNewCollection===collection}"
+                        :key="collection.collection"
+                    >
+                        <p>{{collection.collection}}</p>
+                        <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
+                        <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
+                    </li> 
+                </transition-group>
+            </div>
+            <CollectionDetails 
+                key="2"
+                :collection="showCollectionDetails"
+            v-else/>
+        </transition>
     </ul>
 </template>
 
@@ -44,19 +51,23 @@
 import Plus from '@/components/Icons/Plus'
 import AddCollection from './parts/AddCollection'
 import db from '@/firebase/init'
-
+import sortByName from '@/helpers/sortName.js'
+import CollectionDetails from './parts/CollectionDetails'
 export default {
     name: 'ListContainer',
     props:['userNotes', 'user'],
     components:{
         Plus,
-        AddCollection
+        AddCollection,
+        CollectionDetails
     },
     data(){
         return{
+            goToNewCollection: null,
             addCollection: false,
             newCollection: null,
-            copiedNotes: JSON.parse(JSON.stringify(this.userNotes))
+            copiedNotes: JSON.parse(JSON.stringify(this.userNotes)),
+            showCollectionDetails: null
         }
     },
     methods:{
@@ -68,32 +79,44 @@ export default {
                 this.saveCollection()
             }
         },
+        newItemAdded(){
+            setTimeout(()=>{
+                this.goToNewCollection = this.newCollection
+                setTimeout(()=>{
+                    this.showCollectionDetails = this.goToNewCollection
+                    this.goToNewCollection = null
+                    this.newCollection = null
+                },500)
+            },1000)
+        },
         create(data){
             this.newCollection = data
             this.toggleAddCollection()
         },
         saveCollection(){
             this.copiedNotes.push(this.newCollection)
-            db
-                .collection('userNotes')
-                .doc(this.user.uid)
-                .update({
-                    collections: this.copiedNotes
-                })
-                .then(()=>this.updateNotesArray())
-                .catch(()=>{
-                    db
-                        .collection('userNotes')
-                        .doc(this.user.uid)
-                        .update({
-                            collections: this.copiedNotes
-                        })
-                        .then(()=>this.updateNotesArray())
-                })
+            this.updateNotesArray()
+            // db
+            //     .collection('userNotes')
+            //     .doc(this.user.uid)
+            //     .update({
+            //         collections: this.copiedNotes
+            //     })
+            //     .then(()=>this.updateNotesArray())
+            //     .catch(()=>{
+            //         db
+            //             .collection('userNotes')
+            //             .doc(this.user.uid)
+            //             .update({
+            //                 collections: this.copiedNotes
+            //             })
+            //             .then(()=>this.updateNotesArray())
+            //     })
         },
         updateNotesArray(){
             this.userNotes.push(this.newCollection)
-            this.newCollection = null
+            this.userNotes.sort(sortByName('collection'))
+            // this.newCollection = null
         },
     },
     created(){
@@ -142,7 +165,8 @@ ul#List-Container li img{
 ul#List-Container li svg{
     height: 100%;
 }
-ul#List-Container li:hover{
+ul#List-Container li:hover,
+ul#List-Container li.go-to{
     background: var(--contrast-color);
     border-color: var(--contrast-color);
     color: var(--secundair-color);
@@ -159,15 +183,21 @@ ul#List-Container p.no-collection{
     color: var(--contrast-color);
 }
 .slideTopDown-enter-active {
-  animation: heightAnim 1s;
+    animation: heightAnim 1s;
 }
 .slideTopDown-leave-active {
-  animation: heightAnim 1s reverse;
+    animation: heightAnim 1s reverse;
 }
 .fadeIn-enter-active {
-  animation: fadeIn 1s;
+    animation: fadeIn 1s;
 }
 .fadeIn-leave-active {
-  animation: fadeIn 1s reverse;
+    animation: fadeIn 1s reverse;
+}
+.slideInOut-enter-active {
+    animation: slideToLeft 1s reverse;
+}
+.slideInOut-leave-active {
+    animation: slideToRight 1s reverse;
 }
 </style>
