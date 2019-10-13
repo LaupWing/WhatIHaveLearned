@@ -79,12 +79,13 @@ export default {
             const button = this.$el.querySelector('button.find-icon') || this.$el.querySelector('button.chosen-icon')
             this.popupSettings = {
                 coords:{
-                    top: button.offsetTop,
+                    top: button.offsetTop + document.querySelector('#List-Container').offsetTop,
                     left: button.offsetLeft + button.offsetWidth,
                     height: button.offsetHeight
                 },
                 searchTerm: this.collection
             }
+            console.log(button, this.popupSettings)
         },
         submitIcon(data){
             this.popupSettings = null,
