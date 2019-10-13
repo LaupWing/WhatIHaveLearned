@@ -3,47 +3,49 @@
         <p class="no-collection" v-if="!userNotes">
             Begin your everlasting knowledge journey by adding your first collection!
         </p>
-        <div class="add">
-            <transition 
-                name="slideTopDown" 
-                mode="out-in" 
-                v-on:enter="animEnded"
-            >
-                <li 
-                    v-if="!addCollection" 
-                    @click="toggleAddCollection"
-                >
-                    <p>Add a new collection</p><Plus/>
-                </li>
-                <AddCollection
-                    v-on:cancel="toggleAddCollection"
-                    v-on:create="create"
-                    :user="user"
-                    :userNotes="userNotes"
-                    v-else
-                />
+        <div class="collections-wrapper">
+            <transition name="slideInOut">
+                <div class="list-collection" v-if="!showCollectionDetails" key="1">
+                    <div class="add">
+                        <transition 
+                            name="slideTopDown" 
+                            mode="out-in" 
+                            v-on:enter="animEnded"
+                        >
+                            <li 
+                                v-if="!addCollection" 
+                                @click="toggleAddCollection"
+                            >
+                                <p>Add a new collection</p><Plus/>
+                            </li>
+                            <AddCollection
+                                v-on:cancel="toggleAddCollection"
+                                v-on:create="create"
+                                :user="user"
+                                :userNotes="userNotes"
+                                v-else
+                            />
+                        </transition>
+                    </div>
+                    <transition-group name="fadeIn" v-on:enter="newItemAdded">
+                        <li 
+                            class="collection"
+                            v-for="(collection) in userNotes"
+                            :class="{'go-to':goToNewCollection===collection}"
+                            :key="collection.collection"
+                        >
+                            <p>{{collection.collection}}</p>
+                            <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
+                            <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
+                        </li> 
+                    </transition-group>
+                </div>
+                <CollectionDetails 
+                    key="2"
+                    :collection="showCollectionDetails"
+                v-else/>
             </transition>
         </div>
-        <transition name="slideInOut" mode="out-in">
-            <div class="list-collection" v-if="!showCollectionDetails" key="1">
-                <transition-group name="fadeIn" v-on:enter="newItemAdded">
-                    <li 
-                        class="collection"
-                        v-for="(collection) in userNotes"
-                        :class="{'go-to':goToNewCollection===collection}"
-                        :key="collection.collection"
-                    >
-                        <p>{{collection.collection}}</p>
-                        <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
-                        <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
-                    </li> 
-                </transition-group>
-            </div>
-            <CollectionDetails 
-                key="2"
-                :collection="showCollectionDetails"
-            v-else/>
-        </transition>
     </ul>
 </template>
 
@@ -133,10 +135,18 @@ ul#List-Container{
     align-items: center;
     flex-direction: column;
     /* animation: slideToLeft 1s reverse; */
+    position: relative;
 }
 ul#List-Container .add,
 ul#List-Container .list-collection{
     width: 100%;
+}
+ul#List-Container .collections-wrapper{
+    position: relative;
+    width: 100%;   
+}
+ul#List-Container .list-collection{
+    position: absolute;
 }
 ul#List-Container .add{
     border: solid 1px var(--lighter-white);

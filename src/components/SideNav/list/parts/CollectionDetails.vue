@@ -22,5 +22,6 @@ export default {
 <style>
 #Collection-Details{
     width: 100%;
+    position: absolute;
 }
 </style>
