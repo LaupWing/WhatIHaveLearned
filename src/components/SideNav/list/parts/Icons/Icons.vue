@@ -8,7 +8,7 @@
                 autocorrect="off" 
                 autocapitalize="off" 
                 spellcheck="false"  
-                v-model="settings.searchTerm"
+                v-model="searchTerm"
             >
             <Search @click="loadingAllIcons"/>
         </div>
@@ -77,6 +77,7 @@ export default {
             }
         },
         async loadingAllIcons(){
+            this.allIcons = []
             try{
                 this.loading = 'Undraw 1/3'
                 const undraw = await this.getIcon('undraw')   

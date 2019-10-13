@@ -42,6 +42,7 @@
             :componentId="'Icons'"
             v-if="popupSettings"
             v-on:submitIcon="submitIcon"
+            v-on:close="popupSettings = null"
         />
     </div>
 </template>

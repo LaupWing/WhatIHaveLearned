@@ -1,5 +1,5 @@
 <template>
-    <div id="Popup">
+    <div id="Popup" @click="closePopup">
         <component 
             :is="componentId"
             :settings="settings"
@@ -25,6 +25,11 @@ export default {
     methods: {
         emitToParent(data, functionName){
             this.$emit(functionName, data)
+        },
+        closePopup(){
+            if(event.target.id === 'Popup'){
+                this.$emit('close')
+            }
         }
     },
 }
