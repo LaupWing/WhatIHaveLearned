@@ -86,7 +86,6 @@ export default {
                 },
                 searchTerm: this.collection
             }
-            console.log(button, this.popupSettings)
         },
         submitIcon(data){
             this.popupSettings = null,
