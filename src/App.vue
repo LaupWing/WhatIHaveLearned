@@ -38,22 +38,22 @@ export default {
         .doc(this.user.uid)
         .get()
         .then(doc=>{
-          if(doc.exists){
-            this.userNotes = doc
-              .data()
-              .collections
-              .sort(sortByName('collection'))
-          }
+            if(doc.exists){
+                this.userNotes = doc
+                    .data()
+                    .collections
+                    .sort(sortByName('collection'))
+            }
         })
     },
     loginStates(){
       firebase.auth().onAuthStateChanged(user=>{
         if(user){
-          this.user = user
-          this.getNotes()
+            this.user = user
+            this.getNotes()
         }else{
-          this.user = null
-          this.userNotes = []
+            this.user = null
+            this.userNotes = []
         }
       })
     },
@@ -77,7 +77,6 @@ export default {
     this.dbStates()
   },
   mounted(){
-    
   }
 }
 </script>

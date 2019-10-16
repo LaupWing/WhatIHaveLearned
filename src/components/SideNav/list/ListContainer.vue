@@ -55,6 +55,8 @@ import AddCollection from './parts/AddCollection'
 import db from '@/firebase/init'
 import sortByName from '@/helpers/sortName.js'
 import CollectionDetails from './parts/CollectionDetails'
+import {mapGetters, mapActions} from 'vuex'
+
 export default {
     name: 'ListContainer',
     props:['userNotes', 'user'],
@@ -72,7 +74,11 @@ export default {
             showCollectionDetails: null
         }
     },
+    computed:{
+        ...mapGetters(['allCollections']),
+    },
     methods:{
+        ...mapActions(['getCollections', 'getUser']),
         toggleAddCollection(){
             this.addCollection = !this.addCollection
         },
@@ -122,7 +128,11 @@ export default {
         },
     },
     created(){
-        
+        this.getUser()
+        this.getCollections()
+        setTimeout(()=>{
+            console.log(this.allCollections)
+        },2000)
     }
 }
 </script>
