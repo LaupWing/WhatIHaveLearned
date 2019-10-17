@@ -23,6 +23,7 @@ const actions = {
         }else{
             collections = []
         }
+        console.log(collections)
         commit('setCollections', collections)
     },
     getUser({commit}){

@@ -70,12 +70,12 @@ export default {
             goToNewCollection: null,
             addCollection: false,
             newCollection: null,
-            copiedNotes: JSON.parse(JSON.stringify(this.userNotes)),
+            copiedNotes: JSON.parse(JSON.stringify(this.allCollections)),
             showCollectionDetails: null
         }
     },
     computed:{
-        ...mapGetters(['allCollections']),
+        ...mapGetters(['allCollections', 'currentUser']),
     },
     methods:{
         ...mapActions(['getCollections', 'getUser']),
@@ -129,7 +129,7 @@ export default {
     },
     created(){
         this.getCollections()
-        this.getUser()
+        // this.getUser()
         setTimeout(()=>{
             console.log(this.allCollections)
         },2000)
