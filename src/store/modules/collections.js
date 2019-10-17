@@ -4,11 +4,14 @@ import sortByName from '@/helpers/sortName.js'
 
 const state = {
     collections: [],
-    user: null
+    user: null,
+    activeMain: null
 }
 
 const getters = {
-    allCollections: state => state.collections
+    allCollections: state => state.collections,
+    currentUser: state => state.user,
+    activeMain: state => state.activeMain 
 }
 
 const actions = {
@@ -24,6 +27,7 @@ const actions = {
     },
     getUser({commit}){
         const user = firebase.auth().currentUser
+        console.log(user)
         commit('setUser', user)
     }
 }

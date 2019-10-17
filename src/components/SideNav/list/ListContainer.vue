@@ -128,8 +128,8 @@ export default {
         },
     },
     created(){
-        this.getUser()
         this.getCollections()
+        this.getUser()
         setTimeout(()=>{
             console.log(this.allCollections)
         },2000)

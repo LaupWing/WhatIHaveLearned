@@ -6,8 +6,6 @@
         <transition :name="setComponentId" mode="out-in">
             <component 
                 :is="setComponentId"
-                :user="user"
-                :userNotes="userNotes"
             ></component>
         </transition>
     </div>
@@ -16,27 +14,32 @@
 <script>
 import AuthContainer from './auth/AuthContainer'
 import ListContainer from './list/ListContainer'
+import {mapGetters, mapActions} from 'vuex'
+
+
 export default {
     name: 'SideNav',
     components:{
         'AuthContainer': AuthContainer,
         'ListContainer': ListContainer
     },
-    props:['user', 'userNotes'],
+    // props:['user', 'userNotes'],
     data(){
         return{
-            
+
         }
     },
     methods: {
-        
+        ...mapActions(['getCollections', 'getUser'])
     },
     created(){
-        
+        this.getUser()
+        console.log(this.currentUser)
     },
     computed:{
+        ...mapGetters(['currentUser']),
         setComponentId(){
-            return this.user ? 'ListContainer' : 'AuthContainer'
+            return this.currentUser ? 'ListContainer' : 'AuthContainer'
         }
     }
 }

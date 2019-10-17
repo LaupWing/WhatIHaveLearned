@@ -19,6 +19,9 @@ import Main from './components/Main.vue'
 import SideNav from './components/SideNav/SideNav.vue'
 import firebase from 'firebase'
 import db from '@/firebase/init' // This has to be started in order to start the app intial
+import {mapGetters, mapActions} from 'vuex'
+
+
 export default {
   name: 'app',
   components: {
@@ -32,6 +35,7 @@ export default {
     }
   },
   methods:{
+    ...mapActions(['getCollections', 'getUser']),
     getNotes(){
       db
         .collection('userNotes')
@@ -47,15 +51,17 @@ export default {
         })
     },
     loginStates(){
-      firebase.auth().onAuthStateChanged(user=>{
-        if(user){
-            this.user = user
-            this.getNotes()
-        }else{
-            this.user = null
-            this.userNotes = []
-        }
-      })
+        firebase.auth().onAuthStateChanged(user=>{
+            console.log(user)
+            this.getUser()
+            // if(user){
+            //     this.user = user
+            //     this.getNotes()
+            // }else{
+            //     this.user = null
+            //     this.userNotes = []
+            // }
+        })
     },
     dbStates(){
       let ref = db.collection('userNotes')
