@@ -23,14 +23,32 @@ const actions = {
         }else{
             collections = []
         }
-        console.log(collections)
         commit('setCollections', collections)
+    },
+    async updateCollections({dispatch},collection){
+        const tempArray = state.collections
+        tempArray.push(collection)
+        db
+            .collection('userNotes')
+            .doc(state.user.uid)
+            .update({
+                collections: tempArray
+            })
+            .then(()=>dispatch('getCollections'))
+            .catch(()=>{
+                db
+                    .collection('userNotes')
+                    .doc(state.user.uid)
+                    .update({
+                        collections: tempArray
+                    })
+                    .then(()=>dispatch('getCollections'))
+            })
     },
     getUser({commit}){
         const user = firebase.auth().currentUser
-        console.log(user)
         commit('setUser', user)
-    }
+    },
 }
 
 const mutations = {

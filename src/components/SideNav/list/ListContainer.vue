@@ -1,6 +1,6 @@
 <template>
     <ul id="List-Container">
-        <p class="no-collection" v-if="!userNotes">
+        <p class="no-collection" v-if="!allCollections">
             Begin your everlasting knowledge journey by adding your first collection!
         </p>
         <div class="collections-wrapper">
@@ -22,7 +22,7 @@
                                 v-on:cancel="toggleAddCollection"
                                 v-on:create="create"
                                 :user="user"
-                                :userNotes="userNotes"
+                                :userNotes="allCollections"
                                 v-else
                             />
                         </transition>
@@ -30,7 +30,7 @@
                     <transition-group name="fadeIn" v-on:enter="newItemAdded">
                         <li 
                             class="collection"
-                            v-for="(collection) in userNotes"
+                            v-for="(collection) in allCollections"
                             :class="{'go-to':goToNewCollection===collection}"
                             :key="collection.collection"
                         >
@@ -70,7 +70,7 @@ export default {
             goToNewCollection: null,
             addCollection: false,
             newCollection: null,
-            copiedNotes: JSON.parse(JSON.stringify(this.allCollections)),
+            // copiedNotes: JSON.parse(JSON.stringify(this.allCollections)),
             showCollectionDetails: null
         }
     },
@@ -102,23 +102,27 @@ export default {
             this.toggleAddCollection()
         },
         saveCollection(){
-            this.copiedNotes.push(this.newCollection)
-            this.updateNotesArray()
+            // this.copiedNotes.push(this.newCollection)
+            // this.updateNotesArray()
+            this.allCollections.push(this.newCollection)
+            // test.push(this.newCollection)
             // db
             //     .collection('userNotes')
-            //     .doc(this.user.uid)
+            //     .doc(this.currentUser.uid)
             //     .update({
-            //         collections: this.copiedNotes
+            //         collections: test
             //     })
-            //     .then(()=>this.updateNotesArray())
+            //     .then((huh)=>{console.log(huh)})
             //     .catch(()=>{
             //         db
             //             .collection('userNotes')
-            //             .doc(this.user.uid)
+            //             .doc(this.currentUser.uid)
             //             .update({
-            //                 collections: this.copiedNotes
+            //                 collections: test
             //             })
-            //             .then(()=>this.updateNotesArray())
+            //             .then((data)=>{
+            //                 console.log(data)
+            //             })
             //     })
         },
         updateNotesArray(){
