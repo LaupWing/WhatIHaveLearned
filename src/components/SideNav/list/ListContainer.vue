@@ -31,7 +31,7 @@
                     <transition-group name="fadeIn" v-on:enter="newItemAdded">
                         <li 
                             class="collection"
-                            v-for="(collection) in allCollections"
+                            v-for="(collection) in allCollections.collections"
                             :class="{'go-to':checkNewlyAdded(collection)}"
                             :key="collection.collection"
                         >
@@ -71,14 +71,29 @@ export default {
             goToNewCollection: null,
             addCollection: false,
             newCollection: null,
-            showCollectionDetails: null
+            showCollectionDetails: null,
+            defaultDisplay:[
+                {
+                    "attributes": {
+                    "color": "#ffffff",
+                    "underline": true
+                    },
+                    "insert": "Hello There"
+                },
+                {
+                    "attributes": {
+                    "header": 1
+                    },
+                    "insert": "\n"
+                }
+            ]
         }
     },
     computed:{
-        ...mapGetters(['allCollections', 'currentUser']),
+        ...mapGetters(['allCollections', 'currentUser', 'getMainContent']),
     },
     methods:{
-        ...mapActions(['getCollections','updateCollections']),
+        ...mapActions(['getCollections','updateCollections', 'setMainContent']),
         toggleAddCollection(){
             this.addCollection = !this.addCollection
         },
@@ -110,9 +125,20 @@ export default {
         saveCollection(){
             this.updateCollections(this.newCollection)
         },
+        checkContent(){
+            this.allCollections.introduction ? this.setMainContent(this.allCollections.introduction) : this.setMainContent(this.defaultDisplay) 
+            console.log(this.getMainContent)
+            // if(this.allCollections.introduction){
+            //     this.setMainContent(this.allCollections.introduction)
+            // }
+            // else{
+            //     this.setMainContent(this.defaultDisplay)
+            // }
+        }
     },
-    created(){
-        this.getCollections()
+    async created(){
+        await this.getCollections()
+        this.checkContent()
     }
 }
 </script>

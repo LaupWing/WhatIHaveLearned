@@ -11,7 +11,7 @@ const state = {
 const getters = {
     allCollections: state => state.collections,
     currentUser: state => state.user,
-    activeMainContent: state => state.mainContent 
+    getMainContent: state => state.mainContent 
 }
 
 const actions = {
@@ -19,7 +19,8 @@ const actions = {
         const data = await db.collection('userNotes').doc(state.user.uid).get()
         let collections 
         if(data.exists){
-            collections = data.data().collections.sort(sortByName('collection'))
+            collections = data.data()
+            collections.collections = collections.collections.sort(sortByName('collection'))
         }else{
             collections = []
         }
@@ -49,7 +50,7 @@ const actions = {
         const user = firebase.auth().currentUser
         commit('setUser', user)
     },
-    getMainContent({commit},content){
+    setMainContent({commit},content){
         commit('setMainContent', content)
     }
 }

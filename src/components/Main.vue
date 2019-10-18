@@ -4,54 +4,57 @@
       <button @click="signout">Signout</button>
     </div>
     <div class="editor-wrapper">
-        <div id="toolbar-container">
-            <span class="ql-formats">
-                <select class="ql-font"></select>
-                <select class="ql-size"></select>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-bold"></button>
-                <button class="ql-italic"></button>
-                <button class="ql-underline"></button>
-                <button class="ql-strike"></button>
-            </span>
-            <span class="ql-formats">
-                <select class="ql-color"></select>
-                <select class="ql-background"></select>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-script" value="sub"></button>
-                <button class="ql-script" value="super"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-header" value="1"></button>
-                <button class="ql-header" value="2"></button>
-                <button class="ql-blockquote"></button>
-                <button class="ql-code-block"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-list" value="ordered"></button>
-                <button class="ql-list" value="bullet"></button>
-                <button class="ql-indent" value="-1"></button>
-                <button class="ql-indent" value="+1"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-direction" value="rtl"></button>
-                <select class="ql-align"></select>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-link"></button>
-                <button class="ql-image"></button>
-                <button class="ql-video"></button>
-                <button class="ql-formula"></button>
-            </span>
-            <span class="ql-formats">
-                <button class="ql-clean"></button>
-            </span>
+        <div class="toolbar-wrapper" :class="{hide:!editMode}">
+            <div id="toolbar" >
+                <span class="ql-formats">
+                    <select class="ql-font"></select>
+                    <select class="ql-size"></select>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-bold"></button>
+                    <button class="ql-italic"></button>
+                    <button class="ql-underline"></button>
+                    <button class="ql-strike"></button>
+                </span>
+                <span class="ql-formats">
+                    <select class="ql-color"></select>
+                    <select class="ql-background"></select>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-script" value="sub"></button>
+                    <button class="ql-script" value="super"></button>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-header" value="1"></button>
+                    <button class="ql-header" value="2"></button>
+                    <button class="ql-blockquote"></button>
+                    <button class="ql-code-block"></button>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-list" value="ordered"></button>
+                    <button class="ql-list" value="bullet"></button>
+                    <button class="ql-indent" value="-1"></button>
+                    <button class="ql-indent" value="+1"></button>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-direction" value="rtl"></button>
+                    <select class="ql-align"></select>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-link"></button>
+                    <button class="ql-image"></button>
+                    <button class="ql-video"></button>
+                    <button class="ql-formula"></button>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-clean"></button>
+                </span>
+            </div>
         </div>
-        <div id="editor-container">
+        <div id="editor-container" :style="checkQuillState">
 
         </div>
+        <button @click="toggleEdit">Toggle Editmode</button>
         <button @click="getDelta">Get Delta</button>
     </div>
   </main>
@@ -69,7 +72,7 @@ export default {
                 theme: 'snow',
                 placeholder: 'Knowledge that will remain forever starts here!',
                 modules:{
-                    toolbar: '#toolbar-container'
+                    toolbar: '#toolbar'
                     // toolbar: [
                     //     ['bold', 'italic', 'underline', 'strike', 'link'],  // toggled buttons
                     //     ['blockquote', 'code-block'],
@@ -94,18 +97,50 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['currentUser']),
+        ...mapGetters(['currentUser', 'getMainContent']),
+        setToolbar(){
+            if(this.editMode)   return "#toolbar-container"
+            return false
+        },
+        checkQuillState(){
+            if(this.editMode){
+                return
+            }
+            return{
+                'border': 'none',
+                'background': 'transparent'
+            }
+        }
+    },
+    watch:{
+        getMainContent(value){
+            if(value.length>0){
+                this.quill.setContents(value)
+            }
+        }
     },
     methods:{
+        enableQuillCheck(){
+            if(this.editMode){
+                this.quill.enable()
+            }else{
+                this.quill.enable(false)
+            }
+        },
+        toggleEdit(){
+            this.editMode = !this.editMode
+            this.enableQuillCheck()
+        },
         signout(){
             firebase.auth().signOut()
         },
         getDelta(){
             console.log(this.quill.getContents())
-        }
+        },
     },
     mounted(){
         this.quill = new Quill('#editor-container', this.quillOptions)
+        this.enableQuillCheck()
     }
 }
 </script>
@@ -125,12 +160,23 @@ export default {
     top: 10px;
     right: 10px;
 }
+
+#Main .toolbar-wrapper.hide{
+    max-height: 0;
+    overflow: hidden;
+}
+#Main .toolbar-wrapper{
+    transition: 1s;
+    max-height: 200px;
+}
 .editor-wrapper{
     margin-top: 100px;
+    min-width: 1000px;
     max-width: 1000px;
 }
 #editor-container {
     min-height: 50vh;
+    transition: 1s;
 }
 
 /* Custom Rules for the Snow Theme */
