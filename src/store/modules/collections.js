@@ -5,13 +5,13 @@ import sortByName from '@/helpers/sortName.js'
 const state = {
     collections: [],
     user: null,
-    activeMain: null
+    mainContent: null
 }
 
 const getters = {
     allCollections: state => state.collections,
     currentUser: state => state.user,
-    activeMain: state => state.activeMain 
+    activeMainContent: state => state.mainContent 
 }
 
 const actions = {
@@ -49,11 +49,15 @@ const actions = {
         const user = firebase.auth().currentUser
         commit('setUser', user)
     },
+    getMainContent({commit},content){
+        commit('setMainContent', content)
+    }
 }
 
 const mutations = {
     setCollections: (state, collections)=>(state.collections = collections),
-    setUser: (state, user)=>(state.user = user)
+    setUser: (state, user)=>(state.user = user),
+    setMainContent: (state, content) =>(state.mainContent= content)
 }
 
 export default{
