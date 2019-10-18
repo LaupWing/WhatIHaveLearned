@@ -5,6 +5,7 @@
         </p>
         <div class="collections-wrapper">
             <transition name="slideInOut">
+                <!-- Show List of the collections -->
                 <div class="list-collection" v-if="!showCollectionDetails" key="1">
                     <div class="add">
                         <transition 
@@ -31,7 +32,7 @@
                         <li 
                             class="collection"
                             v-for="(collection) in allCollections"
-                            :class="{'go-to':goToNewCollection===collection}"
+                            :class="{'go-to':checkNewlyAdded(collection)}"
                             :key="collection.collection"
                         >
                             <p>{{collection.collection}}</p>
@@ -40,6 +41,7 @@
                         </li> 
                     </transition-group>
                 </div>
+                <!-- Show The collection details -->
                 <CollectionDetails 
                     key="2"
                     :collection="showCollectionDetails"
@@ -78,9 +80,15 @@ export default {
         ...mapGetters(['allCollections', 'currentUser']),
     },
     methods:{
-        ...mapActions(['getCollections', 'getUser']),
+        ...mapActions(['getCollections','updateCollections']),
         toggleAddCollection(){
             this.addCollection = !this.addCollection
+        },
+        checkNewlyAdded(collection){
+            if(this.goToNewCollection){
+                return this.goToNewCollection.collection === collection.collection
+            }
+            return false
         },
         animEnded(){
             if(this.newCollection){
@@ -102,28 +110,8 @@ export default {
             this.toggleAddCollection()
         },
         saveCollection(){
-            // this.copiedNotes.push(this.newCollection)
-            // this.updateNotesArray()
-            this.allCollections.push(this.newCollection)
-            // test.push(this.newCollection)
-            // db
-            //     .collection('userNotes')
-            //     .doc(this.currentUser.uid)
-            //     .update({
-            //         collections: test
-            //     })
-            //     .then((huh)=>{console.log(huh)})
-            //     .catch(()=>{
-            //         db
-            //             .collection('userNotes')
-            //             .doc(this.currentUser.uid)
-            //             .update({
-            //                 collections: test
-            //             })
-            //             .then((data)=>{
-            //                 console.log(data)
-            //             })
-            //     })
+            this.updateCollections(this.newCollection)
+            // this.allCollections.push(this.newCollection)
         },
         updateNotesArray(){
             this.userNotes.push(this.newCollection)
@@ -132,12 +120,7 @@ export default {
         },
     },
     created(){
-        console.log('getting collections')
         this.getCollections()
-        // this.getUser()
-        setTimeout(()=>{
-            console.log(this.allCollections)
-        },2000)
     }
 }
 </script>
