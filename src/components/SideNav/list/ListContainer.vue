@@ -61,7 +61,6 @@ import {mapGetters, mapActions} from 'vuex'
 
 export default {
     name: 'ListContainer',
-    props:['userNotes', 'user'],
     components:{
         Plus,
         AddCollection,
@@ -72,7 +71,6 @@ export default {
             goToNewCollection: null,
             addCollection: false,
             newCollection: null,
-            // copiedNotes: JSON.parse(JSON.stringify(this.allCollections)),
             showCollectionDetails: null
         }
     },
@@ -111,12 +109,6 @@ export default {
         },
         saveCollection(){
             this.updateCollections(this.newCollection)
-            // this.allCollections.push(this.newCollection)
-        },
-        updateNotesArray(){
-            this.userNotes.push(this.newCollection)
-            this.userNotes.sort(sortByName('collection'))
-            // this.newCollection = null
         },
     },
     created(){

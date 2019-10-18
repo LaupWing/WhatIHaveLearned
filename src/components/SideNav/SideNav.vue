@@ -23,18 +23,16 @@ export default {
         'AuthContainer': AuthContainer,
         'ListContainer': ListContainer
     },
-    // props:['user', 'userNotes'],
     data(){
         return{
 
         }
     },
     methods: {
-        ...mapActions(['getCollections', 'getUser'])
+        
     },
     created(){
-        this.getUser()
-        console.log(this.currentUser)
+        
     },
     computed:{
         ...mapGetters(['currentUser']),
