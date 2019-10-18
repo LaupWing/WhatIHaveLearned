@@ -132,6 +132,7 @@ export default {
         },
     },
     created(){
+        console.log('getting collections')
         this.getCollections()
         // this.getUser()
         setTimeout(()=>{

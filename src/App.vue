@@ -1,15 +1,7 @@
 <template>
   <div id="app">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
-    <SideNav
-      :user="user"
-      :userNotes="userNotes"
-    />
-    <Main 
-      msg="Welcome to Your Vue.js App"
-      :user="user"
-      :userNotes="userNotes"
-    />
+    <SideNav/>
+    <Main msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
@@ -30,60 +22,36 @@ export default {
   },
   data(){
     return{
-      user: null,
-      userNotes: []
     }
   },
   methods:{
     ...mapActions(['getCollections', 'getUser']),
-    getNotes(){
-      db
-        .collection('userNotes')
-        .doc(this.user.uid)
-        .get()
-        .then(doc=>{
-            if(doc.exists){
-                this.userNotes = doc
-                    .data()
-                    .collections
-                    .sort(sortByName('collection'))
-            }
-        })
-    },
     loginStates(){
         firebase.auth().onAuthStateChanged(user=>{
-            console.log(user)
             this.getUser()
-            // if(user){
-            //     this.user = user
-            //     this.getNotes()
-            // }else{
-            //     this.user = null
-            //     this.userNotes = []
-            // }
         })
     },
     dbStates(){
-      let ref = db.collection('userNotes')
-        ref.onSnapshot(snapshot=>{
-          snapshot.docChanges().forEach(change=>{
-            console.log(change)
-            if(!this.user)  return
-            console.log(change.doc.id, this.user.uid)
-            if(change.type === 'modified' && change.doc.id === this.user.uid){
-              console.log(change)
-              // console.log(this.userNotes)
-            }
-          })
-        })
+        let ref = db.collection('userNotes')
+            ref.onSnapshot(snapshot=>{
+                snapshot.docChanges().forEach(change=>{
+                    console.log(change)
+                    if(!this.user)  return
+                    console.log(change.doc.id, this.user.uid)
+                    if(change.type === 'modified' && change.doc.id === this.user.uid){
+                    console.log(change)
+                    // console.log(this.userNotes)
+                    }
+                })
+            })
+        }
+    },
+    created(){
+        this.loginStates()
+        this.dbStates()
+    },
+    mounted(){
     }
-  },
-  created(){
-    this.loginStates()
-    this.dbStates()
-  },
-  mounted(){
-  }
 }
 </script>
 
