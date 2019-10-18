@@ -4,9 +4,55 @@
       <button @click="signout">Signout</button>
     </div>
     <div class="editor-wrapper">
+        <div id="toolbar-container">
+            <span class="ql-formats">
+                <select class="ql-font"></select>
+                <select class="ql-size"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-bold"></button>
+                <button class="ql-italic"></button>
+                <button class="ql-underline"></button>
+                <button class="ql-strike"></button>
+            </span>
+            <span class="ql-formats">
+                <select class="ql-color"></select>
+                <select class="ql-background"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-script" value="sub"></button>
+                <button class="ql-script" value="super"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-header" value="1"></button>
+                <button class="ql-header" value="2"></button>
+                <button class="ql-blockquote"></button>
+                <button class="ql-code-block"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-list" value="ordered"></button>
+                <button class="ql-list" value="bullet"></button>
+                <button class="ql-indent" value="-1"></button>
+                <button class="ql-indent" value="+1"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-direction" value="rtl"></button>
+                <select class="ql-align"></select>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-link"></button>
+                <button class="ql-image"></button>
+                <button class="ql-video"></button>
+                <button class="ql-formula"></button>
+            </span>
+            <span class="ql-formats">
+                <button class="ql-clean"></button>
+            </span>
+        </div>
         <div id="editor-container">
 
         </div>
+        <button @click="getDelta">Get Delta</button>
     </div>
   </main>
 </template>
@@ -23,26 +69,28 @@ export default {
                 theme: 'snow',
                 placeholder: 'Knowledge that will remain forever starts here!',
                 modules:{
-                    toolbar: [
-                        ['bold', 'italic', 'underline', 'strike', 'link'],  // toggled buttons
-                        ['blockquote', 'code-block'],
-                        ['video', 'formula', 'image'],
-                        [{ 'header': 1 }, { 'header': 2 }],                 // custom button values
-                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                        [{ 'script': 'sub'}, { 'script': 'super' }],        // superscript/subscript
-                        [{ 'indent': '-1'}, { 'indent': '+1' }],            // outdent/indent
-                        [{ 'direction': 'rtl' }],                           // text direction
+                    toolbar: '#toolbar-container'
+                    // toolbar: [
+                    //     ['bold', 'italic', 'underline', 'strike', 'link'],  // toggled buttons
+                    //     ['blockquote', 'code-block'],
+                    //     ['video', 'formula', 'image'],
+                    //     [{ 'header': 1 }, { 'header': 2 }],                 // custom button values
+                    //     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                    //     [{ 'script': 'sub'}, { 'script': 'super' }],        // superscript/subscript
+                    //     [{ 'indent': '-1'}, { 'indent': '+1' }],            // outdent/indent
+                    //     [{ 'direction': 'rtl' }],                           // text direction
 
-                        [{ 'size': ['small', false, 'large', 'huge'] }],    // custom dropdown
-                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                    //     [{ 'size': ['small', false, 'large', 'huge'] }],    // custom dropdown
+                    //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
 
-                        [{ 'color': [] }, { 'background': [] }],            // dropdown with defaults from theme
-                        [{ 'font': [] }],
-                        [{ 'align': [] }],
-                        ['clean']                                           // remove formatting button
-                    ]
+                    //     [{ 'color': [] }, { 'background': [] }],            // dropdown with defaults from theme
+                    //     [{ 'font': [] }],
+                    //     [{ 'align': [] }],
+                    //     ['clean']                                           // remove formatting button
+                    // ]
                 }
             },
+            editMode: false
         }
     },
     computed:{
@@ -51,10 +99,13 @@ export default {
     methods:{
         signout(){
             firebase.auth().signOut()
+        },
+        getDelta(){
+            console.log(this.quill.getContents())
         }
     },
     mounted(){
-        var quill = new Quill('#editor-container', this.quillOptions)
+        this.quill = new Quill('#editor-container', this.quillOptions)
     }
 }
 </script>
@@ -123,7 +174,7 @@ export default {
 .ql-snow .ql-toolbar .ql-picker-item:hover,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-    color: var(--contrast-color);
+    color: var(--font-color);
 }
 .ql-snow.ql-toolbar button:hover .ql-fill,
 .ql-snow .ql-toolbar button:hover .ql-fill,
@@ -149,7 +200,7 @@ export default {
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke.ql-fill,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke.ql-fill {
-    fill: var(--contrast-color);
+    fill: var(--font-color);
 }
 .ql-snow.ql-toolbar button:hover .ql-stroke,
 .ql-snow .ql-toolbar button:hover .ql-stroke,
@@ -175,7 +226,7 @@ export default {
 .ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke-mitter,
 .ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke-mitter,
 .ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke-mitter {
-    stroke: var(--contrast-color);
+    stroke: var(--font-color);
 }
 
 .ql-editor.ql-blank::before {
