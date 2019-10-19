@@ -4,56 +4,10 @@
       <button @click="signout">Signout</button>
     </div>
     <div class="editor-wrapper">
-        <div class="toolbar-wrapper" :class="{hide:!editMode}">
-            <div id="toolbar" >
-                <span class="ql-formats">
-                    <select class="ql-font"></select>
-                    <select class="ql-size"></select>
-                </span>
-                <span class="ql-formats">
-                    <button class="ql-bold"></button>
-                    <button class="ql-italic"></button>
-                    <button class="ql-underline"></button>
-                    <button class="ql-strike"></button>
-                </span>
-                <span class="ql-formats">
-                    <select class="ql-color"></select>
-                    <select class="ql-background"></select>
-                </span>
-                <span class="ql-formats">
-                    <button class="ql-script" value="sub"></button>
-                    <button class="ql-script" value="super"></button>
-                </span>
-                <span class="ql-formats">
-                    <button class="ql-header" value="1"></button>
-                    <button class="ql-header" value="2"></button>
-                    <button class="ql-blockquote"></button>
-                    <button class="ql-code-block"></button>
-                </span>
-                <span class="ql-formats">
-                    <button class="ql-list" value="ordered"></button>
-                    <button class="ql-list" value="bullet"></button>
-                    <button class="ql-indent" value="-1"></button>
-                    <button class="ql-indent" value="+1"></button>
-                </span>
-                <span class="ql-formats">
-                    <button class="ql-direction" value="rtl"></button>
-                    <select class="ql-align"></select>
-                </span>
-                <span class="ql-formats">
-                    <button class="ql-link"></button>
-                    <button class="ql-image"></button>
-                    <button class="ql-video"></button>
-                    <button class="ql-formula"></button>
-                </span>
-                <span class="ql-formats">
-                    <button class="ql-clean"></button>
-                </span>
-            </div>
-        </div>
-        <div id="editor-container" :style="checkQuillState">
-
-        </div>
+        <quill-editor
+            :options="editorOption"
+        >
+        </quill-editor>
         <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
         <button @click="getDelta">Get Delta</button>
     </div>
@@ -63,39 +17,23 @@
 <script>
 import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
+import { quillEditor } from 'vue-quill-editor'
+
 export default {
     name: 'Main',
+    components:{
+        quillEditor
+    },
     data(){
         return{
             editBtnLeftVal: 0,
             editBtnTopVal: 30,
-            quill: null,
-            quillOptions:{
-                theme: 'snow',
-                placeholder: 'Knowledge that will remain forever starts here!',
-                modules:{
-                    toolbar: '#toolbar',
-                    // toolbar: [
-                    //     ['bold', 'italic', 'underline', 'strike', 'link'],  // toggled buttons
-                    //     ['blockquote', 'code-block'],
-                    //     ['video', 'formula', 'image'],
-                    //     [{ 'header': 1 }, { 'header': 2 }],                 // custom button values
-                    //     [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                    //     [{ 'script': 'sub'}, { 'script': 'super' }],        // superscript/subscript
-                    //     [{ 'indent': '-1'}, { 'indent': '+1' }],            // outdent/indent
-                    //     [{ 'direction': 'rtl' }],                           // text direction
-
-                    //     [{ 'size': ['small', false, 'large', 'huge'] }],    // custom dropdown
-                    //     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-
-                    //     [{ 'color': [] }, { 'background': [] }],            // dropdown with defaults from theme
-                    //     [{ 'font': [] }],
-                    //     [{ 'align': [] }],
-                    //     ['clean']                                           // remove formatting button
-                    // ]
+            editMode: false,
+            editorOption: {
+                modules: {
+                    toolbar: false
                 }
-            },
-            editMode: false
+            }
         }
     },
     computed:{
@@ -103,26 +41,10 @@ export default {
         setToolbar(){
             if(this.editMode)   return "#toolbar-container"
             return false
-        },
-        checkQuillState(){
-            if(this.editMode){
-                return {
-                    'marginTop': '150px'
-                    }
-            }
-            return{
-                'border': 'none',
-                'background': 'transparent',
-                'marginTop': '100px'
-            }
         }
     },
     watch:{
-        getMainContent(value){
-            if(value.length>0){
-                this.quill.setContents(value)
-            }
-        }
+        
     },
     methods:{
         enableQuillCheck(){
@@ -134,7 +56,6 @@ export default {
         },
         toggleEdit(){
             this.editMode = !this.editMode
-            this.enableQuillCheck()
         },
         signout(){
             firebase.auth().signOut()
@@ -145,8 +66,6 @@ export default {
         },
     },
     mounted(){
-        this.quill = new Quill('#editor-container', this.quillOptions)
-        this.enableQuillCheck()
         this.editBtnLeftVal = document.querySelector('#SideNav').offsetWidth + this.editBtnTopVal
     }
 }
