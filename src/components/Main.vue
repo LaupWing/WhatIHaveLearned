@@ -54,7 +54,7 @@
         <div id="editor-container" :style="checkQuillState">
 
         </div>
-        <button @click="toggleEdit">Toggle Editmode</button>
+        <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
         <button @click="getDelta">Get Delta</button>
     </div>
   </main>
@@ -67,12 +67,14 @@ export default {
     name: 'Main',
     data(){
         return{
+            editBtnLeftVal: 0,
+            editBtnTopVal: 30,
             quill: null,
             quillOptions:{
                 theme: 'snow',
                 placeholder: 'Knowledge that will remain forever starts here!',
                 modules:{
-                    toolbar: '#toolbar'
+                    toolbar: '#toolbar',
                     // toolbar: [
                     //     ['bold', 'italic', 'underline', 'strike', 'link'],  // toggled buttons
                     //     ['blockquote', 'code-block'],
@@ -139,11 +141,13 @@ export default {
         },
         getDelta(){
             console.log(this.quill.getContents())
+            console.log(this.quill.root())
         },
     },
     mounted(){
         this.quill = new Quill('#editor-container', this.quillOptions)
         this.enableQuillCheck()
+        this.editBtnLeftVal = document.querySelector('#SideNav').offsetWidth + this.editBtnTopVal
     }
 }
 </script>
@@ -162,6 +166,10 @@ export default {
     position: fixed;
     top: 10px;
     right: 10px;
+}
+
+#Main button.edit{
+    position: fixed;
 }
 
 #Main .toolbar-wrapper.hide{
