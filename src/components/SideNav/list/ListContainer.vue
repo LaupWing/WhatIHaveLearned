@@ -22,7 +22,6 @@
                             <AddCollection
                                 v-on:cancel="toggleAddCollection"
                                 v-on:create="create"
-                                :user="user"
                                 :userNotes="allCollections"
                                 v-else
                             />

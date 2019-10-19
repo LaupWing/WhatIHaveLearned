@@ -104,11 +104,14 @@ export default {
         },
         checkQuillState(){
             if(this.editMode){
-                return
+                return {
+                    'marginTop': '150px'
+                    }
             }
             return{
                 'border': 'none',
-                'background': 'transparent'
+                'background': 'transparent',
+                'marginTop': '100px'
             }
         }
     },
@@ -164,13 +167,18 @@ export default {
 #Main .toolbar-wrapper.hide{
     max-height: 0;
     overflow: hidden;
+    opacity: 0;
 }
 #Main .toolbar-wrapper{
     transition: 1s;
     max-height: 200px;
+    position: fixed;
+    z-index: 10000;
+    max-width: 1000px;
+    top: 150px;
+    transform: translate(0,-100%);
 }
 .editor-wrapper{
-    margin-top: 100px;
     min-width: 1000px;
     max-width: 1000px;
 }
@@ -188,7 +196,7 @@ export default {
 
 .ql-container.ql-snow{
     background-color: var(--main-color);  
-    border: 1px solid var(--contrast-color);
+    border: none;
     color:var(--contrast-color);
 }
 
