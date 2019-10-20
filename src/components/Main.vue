@@ -64,6 +64,7 @@
 import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
 import imageUrl from '../helpers/quillHandlers.js'
+import ImageResize from 'quill-image-resize-module'
 // Quill.register('modules/imageResize', ImageResize)
 export default {
     name: 'Main',
@@ -82,6 +83,14 @@ export default {
                             image: imageUrl
                         }
                     },
+                    // imageResize: {
+                    // displayStyles: {
+                    //     backgroundColor: 'black',
+                    //     border: 'none',
+                    //     color: 'white'
+                    // },
+                    //     modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+                    // }
                     // toolbar: [
                     //     ['bold', 'italic', 'underline', 'strike', 'link'],  // toggled buttons
                     //     ['blockquote', 'code-block'],
