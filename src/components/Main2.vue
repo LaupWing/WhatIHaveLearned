@@ -5,7 +5,6 @@
     </div>
     <div class="editor-wrapper">
         <quill-editor
-            :options="editorOption"
         >
         </quill-editor>
         <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
