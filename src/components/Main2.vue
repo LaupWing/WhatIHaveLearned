@@ -6,6 +6,7 @@
     <div class="editor-wrapper">
         <quill-editor
             :options="editorOption"
+            @change="onEditorChange($event)">
         >
         </quill-editor>
         <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
@@ -76,6 +77,10 @@ export default {
                 this.quill.enable(false)
             }
         },
+        onEditorChange({ quill, html, text }) {
+            console.log('editor change!', quill, html, text)
+            this.content = html
+        },
         toggleEdit(){
             this.editMode = !this.editMode
         },
@@ -83,8 +88,8 @@ export default {
             firebase.auth().signOut()
         },
         getDelta(){
-            console.log(this.quill.getContents())
-            console.log(this.quill.root.innerHTML)
+            console.log(quill.getContents())
+            console.log(quill.root.innerHTML)
         },
     },
     mounted(){

@@ -63,6 +63,8 @@
 <script>
 import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
+import imageUrl from '../helpers/quillHandlers.js'
+console.log(imageUrl)
 export default {
     name: 'Main',
     data(){
@@ -93,6 +95,9 @@ export default {
                     //     [{ 'align': [] }],
                     //     ['clean']                                           // remove formatting button
                     // ]
+                    // handlers: {
+                    //     image: imageUrl
+                    // }
                 }
             },
             editMode: false
@@ -119,6 +124,7 @@ export default {
     },
     watch:{
         getMainContent(value){
+            console.log(value)
             if(value.length>0){
                 this.quill.setContents(value)
             }
