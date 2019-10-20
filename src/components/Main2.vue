@@ -5,6 +5,7 @@
     </div>
     <div class="editor-wrapper">
         <quill-editor
+            :options="editorOption"
         >
         </quill-editor>
         <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
@@ -16,6 +17,8 @@
 <script>
 import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/monokai-sublime.css'
 import { quillEditor } from 'vue-quill-editor'
 
 export default {
@@ -30,9 +33,29 @@ export default {
             editMode: false,
             editorOption: {
                 modules: {
-                    toolbar: false
-                }
+                    toolbar: [
+                        ['bold', 'italic', 'underline', 'strike'],
+                        ['blockquote', 'code-block'],
+                        [{ 'header': 1 }, { 'header': 2 }],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'script': 'sub' }, { 'script': 'super' }],
+                        [{ 'indent': '-1' }, { 'indent': '+1' }],
+                        [{ 'direction': 'rtl' }],
+                        [{ 'size': ['small', false, 'large', 'huge'] }],
+                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                        [{ 'font': [] }],
+                        [{ 'color': [] }, { 'background': [] }],
+                        [{ 'align': [] }],
+                        ['clean'],
+                        ['link', 'image', 'video']
+                    ],
+                syntax: {
+                    highlight: (text) =>{
+                        console.log(hljs.highlightAuto(text).value) 
+                        return hljs.highlightAuto(text).value
+                }}
             }
+        }
         }
     },
     computed:{

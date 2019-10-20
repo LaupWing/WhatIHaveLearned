@@ -7,7 +7,7 @@
 
 <script>
 import sortByName from './helpers/sortName.js'
-import Main from './components/Main.vue'
+import Main from './components/Main2.vue'
 import SideNav from './components/SideNav/SideNav.vue'
 import firebase from 'firebase'
 import db from '@/firebase/init' // This has to be started in order to start the app intial
@@ -57,46 +57,46 @@ export default {
 
 <style>
 *{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 #app{
-  --contrast-color: #F6E64C;
-  --main-color:#272627;
-  --lighter-white: rgba(255,255,255,.2);
-  --secundair-color:#141414;
-  --font-color: white;
-  --main-font: 'Be Vietnam', sans-serif;
-  --secundair-font: 'Comfortaa', cursive;
-  display: flex;
-  font-family: var(--main-font);
-  color: var(--font-color);
+    --contrast-color: #F6E64C;
+    --main-color:#272627;
+    --lighter-white: rgba(255,255,255,.2);
+    --secundair-color:#141414;
+    --font-color: white;
+    --main-font: 'Be Vietnam', sans-serif;
+    --secundair-font: 'Comfortaa', cursive;
+    display: flex;
+    font-family: var(--main-font);
+    color: var(--font-color);
 }
 input,
 button{
-  outline: none;
-  border: none;
+    outline: none;
+    border: none;
 }
 input[type="text"]::placeholder{
-  font-style: italic;
-  opacity: .5;
+    font-style: italic;
+    opacity: .5;
 }
 li{
-  list-style: none;
+    list-style: none;
 }
 button{
-  padding: 7px 20px;
-  border: none;
-  text-transform: uppercase;
-  color: white;
-  background: transparent;
-  border:2px solid var(--contrast-color);
-  font-family: var(--secundair-font);
-  border-radius: 20px;
-  letter-spacing: 1px;
-  cursor: pointer;
-  transition: .25s;
+    padding: 7px 20px;
+    border: none;
+    text-transform: uppercase;
+    color: white;
+    background: transparent;
+    border:2px solid var(--contrast-color);
+    font-family: var(--secundair-font);
+    border-radius: 20px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .25s;
 }
 
 button:hover,
@@ -106,36 +106,36 @@ button.active{
 }
 
 svg{
-  transition: .25s;
+    transition: .25s;
 }
 @keyframes heightAnim {
-  from{
-    /* overflow: hidden;
-    max-height: 0; */
-    transform: scaleX(0);
-  }
-  to{
-    /* overflow: hidden;
-    max-height: 1000px;    */
-    transform: scaleX(1);
-  }
+    from{
+        /* overflow: hidden;
+        max-height: 0; */
+        transform: scaleX(0);
+    }
+    to{
+        /* overflow: hidden;
+        max-height: 1000px;    */
+        transform: scaleX(1);
+    }
 }
 @keyframes flipAnim {
-  from{
-    transform: scaleX(0);
-  }
-  to{
-    transform: scaleX(1);   
-  }
+    from{
+        transform: scaleX(0);
+    }
+    to{
+        transform: scaleX(1);   
+    }
 }
 @keyframes fadeIn {
-  from{
-    transform: translate(0,50%);
-    opacity: 0;
-  }
-  to{
-    transform: translate(0,0);
-    opacity: 1;   
-  }
+    from{
+        transform: translate(0,50%);
+        opacity: 0;
+    }
+    to{
+        transform: translate(0,0);
+        opacity: 1;   
+    }
 }
 </style>
