@@ -20,7 +20,9 @@ import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
-import { quillEditor } from 'vue-quill-editor'
+import ImageResize from '@/helpers/image-resize.min.js'
+import { quillEditor, Quill } from 'vue-quill-editor'
+// Quill.register('modules/imageResize', ImageResize)
 
 export default {
     name: 'Main',
@@ -50,13 +52,22 @@ export default {
                         ['clean'],
                         ['link', 'image', 'video']
                     ],
-                syntax: {
-                    highlight: (text) =>{
-                        console.log(hljs.highlightAuto(text).value) 
-                        return hljs.highlightAuto(text).value
-                }}
+                    syntax: {
+                        highlight: (text) =>{
+                            console.log(hljs.highlightAuto(text).value) 
+                            return hljs.highlightAuto(text).value
+                        }
+                    },
+                    // imageResize: {
+                    //     displayStyles: {
+                    //         backgroundColor: 'black',
+                    //         border: 'none',
+                    //         color: 'white'
+                    //     },
+                    //     modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
+                    // }
+                }
             }
-        }
         }
     },
     computed:{
