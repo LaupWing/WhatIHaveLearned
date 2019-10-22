@@ -7,7 +7,7 @@
 
 <script>
 import sortByName from './helpers/sortName.js'
-import Main from './components/Main/Main3.vue'
+import Main from './components/Main/Main2.vue'
 import SideNav from './components/SideNav/SideNav.vue'
 import firebase from 'firebase'
 import db from '@/firebase/init' // This has to be started in order to start the app intial

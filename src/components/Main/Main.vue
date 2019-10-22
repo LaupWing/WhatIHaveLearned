@@ -63,9 +63,9 @@
 <script>
 import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
-import imageUrl from '../helpers/quillHandlers.js'
-import ImageResize  from 'quill-image-resize-module';
-// console.log(Quill)
+import imageUrl from '@/helpers/quillHandlers.js'
+import ImageResize  from 'quill-image-resize-module'
+Quill.register('modules/imageResize', ImageResize)
 export default {
     name: 'Main',
     data(){

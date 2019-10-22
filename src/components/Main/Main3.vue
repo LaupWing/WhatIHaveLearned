@@ -8,7 +8,7 @@
             :options="editorOption"
             @change="onEditorChange($event)">
         >
-            <div id="toolbar" >
+            <div id="toolbar" slot="toolbar">
                 <span class="ql-formats">
                     <select class="ql-font"></select>
                     <select class="ql-size"></select>
@@ -65,9 +65,8 @@ import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
-import ImageResize from 'quill-image-resize-module'
-
 import { quillEditor, Quill } from 'vue-quill-editor'
+import ImageResize from 'quill-image-resize-module'
 Quill.register('modules/imageResize', ImageResize)
 
 export default {
@@ -85,9 +84,16 @@ export default {
                     toolbar: "#toolbar",
                     syntax: {
                         highlight: (text) =>{
-                            console.log(hljs.highlightAuto(text).value) 
                             return hljs.highlightAuto(text).value
                         }
+                    },
+                    imageResize: {
+                        displayStyles: {
+                            backgroundColor: 'black',
+                            border: 'none',
+                            color: 'white'
+                        },
+                        modules: [ 'Resize', 'DisplaySize', 'Toolbar' ]
                     }
                 }
             }
