@@ -65,9 +65,10 @@ import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
-// import ImageResize from 'quill-image-resize-module'
-// import { quillEditor, Quill } from 'vue-quill-editor'
-// Quill.register('modules/imageResize', ImageResize)
+import ImageResize from 'quill-image-resize-module'
+
+import { quillEditor, Quill } from 'vue-quill-editor'
+Quill.register('modules/imageResize', ImageResize)
 
 export default {
     name: 'Main',
