@@ -3,12 +3,12 @@
     <div class="user" v-if="currentUser">
       <button @click="signout">Signout</button>
     </div>
-    <div class="editor-wrapper">
+    <div class="editor-wrapper" :style="wrapperStyling">
         <quill-editor
             :options="editorOption"
             @change="onEditorChange($event)">
         >
-            <div id="toolbar" slot="toolbar">
+            <div id="toolbar" slot="toolbar" :style="toolbarStyling">
                 <span class="ql-formats">
                     <select class="ql-font"></select>
                     <select class="ql-size"></select>
@@ -65,6 +65,7 @@ import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
+import imageUrl from '@/helpers/quillHandlers.js'
 import { quillEditor } from 'vue-quill-editor'
 import ImageResize from 'quill-image-resize-module'
 Quill.register('modules/imageResize', ImageResize)
@@ -81,7 +82,12 @@ export default {
             editMode: false,
             editorOption: {
                 modules: {
-                    toolbar: "#toolbar",
+                    toolbar: {
+                        container:"#toolbar",
+                        handlers: {
+                            image: imageUrl
+                        }
+                    },
                     syntax: {
                         highlight: (text) =>{
                             return hljs.highlightAuto(text).value
@@ -101,9 +107,30 @@ export default {
     },
     computed:{
         ...mapGetters(['currentUser', 'getMainContent']),
-        setToolbar(){
-            if(this.editMode)   return "#toolbar-container"
-            return false
+        wrapperStyling(){
+            if(this.editMode){
+                return {
+                    'marginTop': '150px'
+                    }
+            }
+            return{
+                'border': 'none',
+                'background': 'transparent',
+                'marginTop': '100px'
+            }
+        },
+        toolbarStyling(){
+            if(this.editMode){
+                return {
+                    'maxHeight': '500px'
+                    }
+            }
+            return{
+                'maxHeight': '0',
+                'overflow': 'hidden',
+                'padding': '0',
+                'border': 'none'
+            }
         }
     },
     watch:{
@@ -131,6 +158,7 @@ export default {
             console.log(quill.getContents())
             console.log(quill.root.innerHTML)
         },
+        
     },
     mounted(){
         this.editBtnLeftVal = document.querySelector('#SideNav').offsetWidth + this.editBtnTopVal
@@ -163,14 +191,12 @@ export default {
     overflow: hidden;
     opacity: 0;
 }
-#Main .toolbar-wrapper{
+#Main #toolbar{
     transition: 1s;
-    max-height: 200px;
     position: fixed;
     z-index: 10000;
     max-width: 1000px;
     top: 150px;
-    transform: translate(0,-100%);
 }
 .editor-wrapper{
     min-width: 1000px;

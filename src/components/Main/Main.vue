@@ -4,7 +4,7 @@
       <button @click="signout">Signout</button>
     </div>
     <div class="editor-wrapper">
-        <div class="toolbar-wrapper" :class="{hide:!editMode}">
+        <div class="toolbar-wrapper" >
             <div id="toolbar" >
                 <span class="ql-formats">
                     <select class="ql-font"></select>
