@@ -122,13 +122,12 @@ export default {
         toolbarStyling(){
             if(this.editMode){
                 return {
-                    'maxHeight': '500px'
+                    'max-width': '500px'
                     }
             }
             return{
                 'maxHeight': '0',
                 'overflow': 'hidden',
-                'padding': '0',
                 'border': 'none'
             }
         }
@@ -191,12 +190,28 @@ export default {
     overflow: hidden;
     opacity: 0;
 }
-#Main #toolbar{
-    transition: 1s;
-    position: fixed;
-    z-index: 10000;
+/* #Main #toolbar{
     max-width: 1000px;
+} */
+/* Experimental Styles */
+#Main #toolbar{
     top: 150px;
+    z-index: 10000;
+    position: fixed;
+    transition: 1s;
+    /* max-height: 241px;  */
+    display: inline-flex;
+    width: auto;
+    /* justify-content: center; */
+    /* align-items: center; */
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 0;
+    border: none;
+    transform: translate(-105%, 0);
+}
+div#toolbar .ql-formats >* {
+    margin: 6px;
 }
 .editor-wrapper{
     min-width: 1000px;
