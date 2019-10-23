@@ -30,6 +30,16 @@
                 <span class="ql-formats">
                     <button class="ql-header" value="1"></button>
                     <button class="ql-header" value="2"></button>
+                    <select class="ql-header">
+                        <option value="1">Heading 1</option>
+                        <option value="2">Heading 2</option>
+                        <option value="3">Heading 3</option>
+                        <option value="4">Heading 4</option>
+                        <option value="5">Heading 5</option>
+                        <option value="6">Heading 6</option>
+                    </select>
+                </span>
+                <span class="ql-formats">
                     <button class="ql-blockquote"></button>
                     <button class="ql-code-block"></button>
                 </span>
@@ -122,13 +132,12 @@ export default {
         toolbarStyling(){
             if(this.editMode){
                 return {
-                    'max-width': '500px'
+                    'transform': 'translate(-105%, 0)'
                     }
             }
             return{
-                'maxHeight': '0',
-                'overflow': 'hidden',
-                'border': 'none'
+                'transform': 'translate(0,0)',
+                'opacity': '0'
             }
         }
     },
@@ -190,6 +199,14 @@ export default {
     overflow: hidden;
     opacity: 0;
 }
+.ql-snow .ql-formats {
+    margin: 0 !important;
+    display: flex;
+    /* vertical-align: middle; */
+    max-width: 100px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 /* #Main #toolbar{
     max-width: 1000px;
 } */
@@ -199,10 +216,11 @@ export default {
     z-index: 10000;
     position: fixed;
     transition: 1s;
+    display: flex;
     /* max-height: 241px;  */
-    display: inline-flex;
-    width: auto;
-    /* justify-content: center; */
+    /* display: inline-flex; */
+    /* width: auto; */
+    justify-content: center;
     /* align-items: center; */
     flex-direction: column;
     flex-wrap: wrap;
