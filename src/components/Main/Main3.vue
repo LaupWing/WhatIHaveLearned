@@ -3,7 +3,11 @@
     <div class="user" v-if="currentUser">
       <button @click="signout">Signout</button>
     </div>
-    <div class="editor-wrapper" :style="wrapperStyling">
+    <div 
+        class="editor-wrapper" 
+        :style="wrapperStyling"
+        :data-edit-mode="editMode"
+    >
         <quill-editor
             id="editor"
             v-model="content"
@@ -69,7 +73,7 @@
             </div>
         </quill-editor>
         <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
-        <button @click="getDelta">Get Delta</button>
+        <!-- <button @click="getDelta">Get Delta</button> -->
     </div>
   </main>
 </template>
@@ -219,19 +223,15 @@ export default {
 /* Experimental Styles */
 #Main #toolbar{
     top: 150px;
-    z-index: 10000;
     position: fixed;
     transition: 1s;
     display: flex;
-    /* max-height: 241px;  */
-    /* display: inline-flex; */
-    /* width: auto; */
     justify-content: center;
-    /* align-items: center; */
     flex-direction: column;
     flex-wrap: wrap;
     padding: 0;
     border: none;
+    border-radius: 5px;
     transform: translate(-105%, 0);
 }
 div#toolbar .ql-formats >* {
@@ -240,6 +240,14 @@ div#toolbar .ql-formats >* {
 .editor-wrapper{
     min-width: 1000px;
     max-width: 1000px;
+    transition: 1s;
+}
+.editor-wrapper .ql-container.ql-snow.ql-disabled{
+    background: transparent;
+}
+.editor-wrapper .ql-container{
+    min-height: 50vh;
+    transition: 1s;
 }
 #editor-container {
     min-height: 50vh;
