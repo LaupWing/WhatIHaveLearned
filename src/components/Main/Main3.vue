@@ -5,8 +5,12 @@
     </div>
     <div class="editor-wrapper" :style="wrapperStyling">
         <quill-editor
+            id="editor"
+            v-model="content"
             :options="editorOption"
-            @change="onEditorChange($event)">
+            @change="onEditorChange($event)"
+            :disabled="!editMode"
+        >
         >
             <div id="toolbar" slot="toolbar" :style="toolbarStyling">
                 <span class="ql-formats">
@@ -90,6 +94,7 @@ export default {
             editBtnLeftVal: 0,
             editBtnTopVal: 30,
             editMode: false,
+            content: `<pre class="ql-syntax" spellcheck="false"><span class="hljs-keyword">const</span> iets = <span class="hljs-string">'test'</span> <span class="hljs-comment">//some code</span></pre>`,
             editorOption: {
                 modules: {
                     toolbar: {
@@ -137,7 +142,8 @@ export default {
             }
             return{
                 'transform': 'translate(0,0)',
-                'opacity': '0'
+                'opacity': '0',
+                'pointer-events': 'none'
             }
         }
     },
@@ -153,7 +159,7 @@ export default {
             }
         },
         onEditorChange({ quill, html, text }) {
-            console.log('editor change!', quill, html, text)
+            console.log('editor change!', quill, html)
             this.content = html
         },
         toggleEdit(){
