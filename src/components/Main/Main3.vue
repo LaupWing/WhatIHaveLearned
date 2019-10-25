@@ -93,7 +93,7 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 import imageUrl from '@/helpers/quillHandlers.js'
 import { quillEditor } from 'vue-quill-editor'
-import ImageResize from '../../helpers/image-resize.min'
+import ImageResize from 'quill-image-resize-module'
 Quill.register('modules/imageResize', ImageResize)
 const Size = Quill.import('attributors/style/size');
 Size.whitelist = ['9px', '12px', '14px', '18px'];
@@ -160,6 +160,7 @@ export default {
                         }
                     },
                     imageResize: {
+
                         displayStyles: {
                             backgroundColor: 'black',
                             border: 'none',
@@ -214,6 +215,10 @@ export default {
             this.content = html
         },
         toggleEdit(){
+            if(this.editMode){
+                // When the user has the img resize screen on
+                this.$el.querySelector('#editor .ql-editor p span').click()
+            }
             this.editMode = !this.editMode
         },
         signout(){
@@ -227,6 +232,12 @@ export default {
     },
     mounted(){
         this.editBtnLeftVal = document.querySelector('#SideNav').offsetWidth + this.editBtnTopVal
+        document.querySelector('#editor img').addEventListener('click', (e)=>{
+            if(!this.editMode){
+                e.stopPropagation()
+            }
+        })
+        console.log(document.querySelector('#editor img'))
     }
 }
 </script>
