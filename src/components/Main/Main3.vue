@@ -21,6 +21,14 @@
                     <select class="ql-font"></select>
                     <select class="ql-size"></select>
                 </span>
+                <span class="ql-format">
+                    <select title="Size" class="ql-size">
+                        <option value="9px">9px</option>
+                        <option value="12px">12px</option>
+                        <option value="14px">14px</option>
+                        <option value="18px">18px</option>
+                    </select>
+                </span>
                 <span class="ql-formats">
                     <button class="ql-bold"></button>
                     <button class="ql-italic"></button>
@@ -87,6 +95,9 @@ import imageUrl from '@/helpers/quillHandlers.js'
 import { quillEditor } from 'vue-quill-editor'
 import ImageResize from 'quill-image-resize-module'
 Quill.register('modules/imageResize', ImageResize)
+const Size = Quill.import('attributors/style/size');
+Size.whitelist = ['9px', '12px', '14px', '18px'];
+Quill.register(Size, true);
 
 export default {
     name: 'Main',
@@ -98,7 +109,7 @@ export default {
             editBtnLeftVal: 0,
             editBtnTopVal: 30,
             editMode: false,
-            content: `<pre class="ql-syntax" spellcheck="false"><span class="hljs-keyword">const</span> iets = <span class="hljs-string">'test'</span> <span class="hljs-comment">//some code</span></pre>`,
+            content: `<h1><span class="ql-size-large" style="color: rgb(255, 255, 255);">Welcome to to your introduction page</span></h1><p><em class="ql-size-large" style="color: rgb(255, 255, 255);">This is your very own home page for your notes</em></p><p><br></p><p><span class="ql-size-large" style="color: rgb(255, 255, 255);">You can put whatever you want on your own homepage. But we some ideas for your homepage that you may want to use!</span></p><ul><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">Give an introduction about yourself!</span></li><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">Describe your collections in a short summary</span></li><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">But these are just some ideas but you can write whatever you want!</span></li></ul><p><br></p><p><img src="https://ourswissbusiness.com/wp-content/uploads/2017/01/wow-e1484418777188.png" style="display: block; margin: auto;" width="697"></p><p><br></p>`,
             editorOption: {
                 modules: {
                     toolbar: {
