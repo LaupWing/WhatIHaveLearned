@@ -23,10 +23,21 @@
                 </span>
                 <span class="ql-format">
                     <select title="Size" class="ql-size">
+                        <option value="8px">8px</option>
                         <option value="9px">9px</option>
+                        <option value="10px">10px</option>
                         <option value="12px">12px</option>
                         <option value="14px">14px</option>
+                        <option value="16px">16px</option>
                         <option value="18px">18px</option>
+                        <option value="20px">20px</option>
+                        <option value="24px">24px</option>
+                        <option value="30px">30px</option>
+                        <option value="36px">36px</option>
+                        <option value="48px">48px</option>
+                        <option value="64px">64px</option>
+                        <option value="72px">72px</option>
+                        <option value="96px">96px</option>
                     </select>
                 </span>
                 <span class="ql-formats">
@@ -96,7 +107,23 @@ import { quillEditor } from 'vue-quill-editor'
 import ImageResize from 'quill-image-resize-module'
 Quill.register('modules/imageResize', ImageResize)
 const Size = Quill.import('attributors/style/size');
-Size.whitelist = ['9px', '12px', '14px', '18px'];
+Size.whitelist = [
+    '8px',
+    '9px',
+    '10px', 
+    '12px', 
+    '14px', 
+    '16px',
+    '18px',
+    '20px',
+    '24px',
+    '30px',
+    '36px',
+    '48px',
+    '64px',
+    '72px',
+    '96px',
+];
 Quill.register(Size, true);
 
 const BaseImageFormat = Quill.import('formats/image');
