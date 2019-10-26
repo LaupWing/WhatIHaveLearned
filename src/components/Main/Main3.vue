@@ -244,7 +244,7 @@ export default {
         toggleEdit(){
             if(this.editMode){
                 // When the user has the img resize screen on
-                this.$el.querySelector('#editor .ql-editor p span').click()
+                this.$el.querySelector('#editor .ql-editor p *').click()
             }
             this.editMode = !this.editMode
         },
