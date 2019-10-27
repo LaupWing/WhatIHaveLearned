@@ -13,6 +13,7 @@
             v-model="content"
             :options="editorOption"
             @change="onEditorChange($event)"
+            @blur="test($event)"
             :disabled="!editMode"
         >
         >
@@ -67,14 +68,14 @@
                     </select>
                 </span>
                 <span class="ql-formats">
-                    <button class="ql-blockquote"></button>
-                    <button class="ql-code-block"></button>
-                </span>
-                <span class="ql-formats">
                     <button class="ql-list" value="ordered"></button>
                     <button class="ql-list" value="bullet"></button>
                     <button class="ql-indent" value="-1"></button>
                     <button class="ql-indent" value="+1"></button>
+                </span>
+                <span class="ql-formats">
+                    <button class="ql-blockquote"></button>
+                    <button class="ql-code-block"></button>
                 </span>
                 <span class="ql-formats">
                     <button class="ql-direction" value="rtl"></button>
@@ -137,21 +138,21 @@ const ImageFormatAttributesList = [
 class ImageFormat extends BaseImageFormat {
   static formats(domNode) {
     return ImageFormatAttributesList.reduce(function(formats, attribute) {
-      if (domNode.hasAttribute(attribute)) {
-        formats[attribute] = domNode.getAttribute(attribute);
-      }
-      return formats;
+        if (domNode.hasAttribute(attribute)) {
+            formats[attribute] = domNode.getAttribute(attribute);
+        }
+        return formats;
     }, {});
   }
   format(name, value) {
     if (ImageFormatAttributesList.indexOf(name) > -1) {
-      if (value) {
-        this.domNode.setAttribute(name, value);
-      } else {
-        this.domNode.removeAttribute(name);
-      }
+        if (value) {
+            this.domNode.setAttribute(name, value);
+        } else {
+            this.domNode.removeAttribute(name);
+        }
     } else {
-      super.format(name, value);
+        super.format(name, value);
     }
   }
 }
@@ -209,14 +210,15 @@ export default {
             }
             return{
                 'border': 'none',
-                'background': 'transparent',
+                'background': 'var(--secundair-color)',
                 'marginTop': '100px'
             }
         },
         toolbarStyling(){
             if(this.editMode){
                 return {
-                    'transform': 'translate(-105%, 0)'
+                    'transform': 'translate(0, -100%)',
+                    'z-index': '1000'
                     }
             }
             return{
@@ -230,6 +232,15 @@ export default {
         
     },
     methods:{
+        test(obj){
+            console.log('test')
+            const range = {
+                index: obj.selection.savedRange.index,
+                length: obj.selection.savedRange.length
+            }
+            console.log(range)
+            this.quillEditor.formatText(range.index, range.length, 'background', '#3399FF');
+        },
         enableQuillCheck(){
             if(this.editMode){
                 this.quill.enable()
@@ -244,7 +255,10 @@ export default {
         toggleEdit(){
             if(this.editMode){
                 // When the user has the img resize screen on
-                this.$el.querySelector('#editor .ql-editor p *').click()
+                const clickToUncheck = Array.from(this.$el.querySelectorAll('#editor .ql-editor p *')).find(p=>{
+                    return p.tagName.toLowerCase() !== 'img'
+                })
+                clickToUncheck.click()
             }
             this.editMode = !this.editMode
         },
@@ -277,6 +291,7 @@ export default {
     display: flex;
     align-items: center;
     flex-direction: column;
+    --max-width: 1000px;
 }
 
 #Main .user{
@@ -298,33 +313,34 @@ export default {
     margin: 0 !important;
     display: flex;
     /* vertical-align: middle; */
-    max-width: 100px;
-    flex-wrap: wrap;
-    justify-content: center;
+    /* max-width: 100px; */
+    /* flex-wrap: wrap; */
+    /* justify-content: center; */
 }
 /* #Main #toolbar{
     max-width: 1000px;
 } */
 /* Experimental Styles */
 #Main #toolbar{
-    top: 150px;
+    /* top: 150px; */
     position: fixed;
     transition: 1s;
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    /* justify-content: center; */
+    /* flex-direction: column; */
     flex-wrap: wrap;
     padding: 0;
-    border: none;
+    max-width: var(--max-width);
+    /* border: none; */
     border-radius: 5px;
-    transform: translate(-105%, 0);
+    /* transform: translate(-105%, 0); */
 }
 div#toolbar .ql-formats >* {
     margin: 6px;
 }
 .editor-wrapper{
-    min-width: 1000px;
-    max-width: 1000px;
+    min-width: var(--max-width);
+    max-width: var(--max-width);
     transition: 1s;
 }
 .editor-wrapper .ql-container.ql-snow.ql-disabled{
