@@ -278,7 +278,6 @@ export default {
                 e.stopPropagation()
             }
         })
-        console.log(document.querySelector('#editor img'))
     }
 }
 </script>
@@ -312,28 +311,15 @@ export default {
 .ql-snow .ql-formats {
     margin: 0 !important;
     display: flex;
-    /* vertical-align: middle; */
-    /* max-width: 100px; */
-    /* flex-wrap: wrap; */
-    /* justify-content: center; */
 }
-/* #Main #toolbar{
-    max-width: 1000px;
-} */
-/* Experimental Styles */
 #Main #toolbar{
-    /* top: 150px; */
     position: fixed;
     transition: 1s;
     display: flex;
-    /* justify-content: center; */
-    /* flex-direction: column; */
     flex-wrap: wrap;
     padding: 0;
     max-width: var(--max-width);
-    /* border: none; */
     border-radius: 5px;
-    /* transform: translate(-105%, 0); */
 }
 div#toolbar .ql-formats >* {
     margin: 6px;
