@@ -10,7 +10,7 @@
     >
         <quill-editor
             id="editor"
-            v-model="content"
+            v-model="getMainContent"
             :options="editorOption"
             @change="onEditorChange($event)"
             @blur="test($event)"
@@ -273,11 +273,11 @@ export default {
     },
     mounted(){
         this.editBtnLeftVal = document.querySelector('#SideNav').offsetWidth + this.editBtnTopVal
-        document.querySelector('#editor img').addEventListener('click', (e)=>{
-            if(!this.editMode){
-                e.stopPropagation()
-            }
-        })
+        // document.querySelector('#editor img').addEventListener('click', (e)=>{
+        //     if(!this.editMode){
+        //         e.stopPropagation()
+        //     }
+        // })
     }
 }
 </script>
