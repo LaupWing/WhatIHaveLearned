@@ -10,7 +10,7 @@
     >
         <quill-editor
             id="editor"
-            v-model="getMainContent"
+            :content="getMainContent"
             :options="editorOption"
             @change="onEditorChange($event)"
             @blur="test($event)"
@@ -232,6 +232,7 @@ export default {
         
     },
     methods:{
+        ...mapActions(['setMainContent']),
         test(obj){
             console.log('test')
             const range = {
@@ -250,7 +251,8 @@ export default {
         },
         onEditorChange({ quill, html, text }) {
             console.log('editor change!', quill, html)
-            this.content = html
+            this.setMainContent(html)
+
         },
         toggleEdit(){
             if(this.editMode){
