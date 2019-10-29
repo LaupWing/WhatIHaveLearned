@@ -240,7 +240,7 @@ export default {
                 length: obj.selection.savedRange.length
             }
             console.log(range)
-            this.quillEditor.formatText(range.index, range.length, 'background', '#3399FF');
+            // this.quillEditor.formatText(range.index, range.length, 'background', '#3399FF');
         },
         enableQuillCheck(){
             if(this.editMode){

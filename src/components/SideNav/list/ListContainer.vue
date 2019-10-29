@@ -33,6 +33,7 @@
                             v-for="(collection) in allCollections.collections"
                             :class="{'go-to':checkNewlyAdded(collection)}"
                             :key="collection.collection"
+                            @click="openCollection(collection)"
                         >
                             <p>{{collection.collection}}</p>
                             <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
@@ -119,6 +120,9 @@ export default {
             // else{
             //     this.setMainContent(this.defaultDisplay)
             // }
+        },
+        openCollection(collection){
+            this.showCollectionDetails = collection
         }
     },
     async created(){
