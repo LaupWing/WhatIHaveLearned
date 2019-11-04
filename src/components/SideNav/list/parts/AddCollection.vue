@@ -177,9 +177,9 @@ export default {
     margin-top: 20px;
 }
 .flip-enter-active {
-  animation: flipAnim .5s;
+    animation: flipAnim .5s;
 }
 .flip-leave-active {
-  animation: flipAnim .5s reverse;
+    animation: flipAnim .5s reverse;
 }
 </style>

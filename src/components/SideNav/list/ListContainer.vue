@@ -4,7 +4,7 @@
             Begin your everlasting knowledge journey by adding your first collection!
         </p>
         <div class="collections-wrapper">
-            <transition name="slideInOut">
+            <transition :name="animation">
                 <!-- Show List of the collections -->
                 <div class="list-collection" v-if="!showCollectionDetails" key="1">
                     <div class="add">
@@ -45,7 +45,7 @@
                 <CollectionDetails 
                     key="2"
                     :collection="showCollectionDetails"
-                    v-on:backToCollection="showCollectionDetails=null"
+                    v-on:backToCollection="showCollectionDetails = null"
                 v-else/>
             </transition>
         </div>
@@ -78,6 +78,13 @@ export default {
     },
     computed:{
         ...mapGetters(['allCollections', 'currentUser', 'getMainContent']),
+        animation(){
+            if(this.showCollectionDetails){
+                return 'slideToLeft'
+            }else{
+                return 'slideToRight'
+            }
+        }
     },
     methods:{
         ...mapActions(['getCollections','updateCollections', 'setMainContent']),
@@ -121,6 +128,9 @@ export default {
             // else{
             //     this.setMainContent(this.defaultDisplay)
             // }
+        },
+        setAnim(anim){
+            return anim
         }
     },
     async created(){
@@ -206,10 +216,16 @@ ul#List-Container p.no-collection{
 .fadeIn-leave-active {
     animation: fadeIn 1s reverse;
 }
-.slideInOut-enter-active {
+.slideToLeft-enter-active {
     animation: slideToLeft 1s reverse;
 }
-.slideInOut-leave-active {
+.slideToLeft-leave-active {
     animation: slideToRight 1s reverse;
+}
+.slideToRight-enter-active {
+    animation: slideToRight 1s;
+}
+.slideToRight-leave-active {
+    animation: slideToLeft 1s;
 }
 </style>

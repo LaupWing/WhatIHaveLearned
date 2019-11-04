@@ -39,7 +39,6 @@ export default {
         if(!this.collection.introduction){
             this.setMainContent(this.defaultDisplay)
         }
-        console.log(this.defaultDisplay)
     }
 }
 </script>
