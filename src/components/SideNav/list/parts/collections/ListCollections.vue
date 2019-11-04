@@ -1,5 +1,5 @@
 <template>
-    <div class="list-collection" v-if="!showCollectionDetails" key="1">
+    <div class="list-collection">
         <div class="add">
             <transition 
                 name="slideTopDown" 
@@ -8,12 +8,12 @@
             >
                 <li 
                     v-if="!addCollection" 
-                    @click="toggleAddCollection"
+                    @click="addCollection = !addCollection"
                 >
                     <p>Add a new collection</p><Plus/>
                 </li>
                 <AddCollection
-                    v-on:cancel="toggleAddCollection"
+                    v-on:cancel="addCollection = !addCollection"
                     v-on:create="create"
                     :userNotes="allCollections"
                     v-else
@@ -26,7 +26,7 @@
                 v-for="(collection) in allCollections.collections"
                 :class="{'go-to':checkNewlyAdded(collection)}"
                 :key="collection.collection"
-                @click="showCollectionDetails=collection"
+                @click="emitCollectionDetails(collection)"
             >
                 <p>{{collection.collection}}</p>
                 <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
@@ -36,7 +36,7 @@
     </div>
 </template>
 
-<script>
+<script>    
 import Plus from '@/components/Icons/Plus'
 import AddCollection from './parts/AddCollection'
 import {mapGetters, mapActions} from 'vuex'
@@ -45,17 +45,36 @@ export default {
     data(){
         return{
             goToNewCollection: null,
+            addCollection: false,
+            newCollection: null,
         }
     },
     computed:{
         ...mapGetters(['allCollections'])
     },
     methods:{
+        emitCollectionDetails(value){
+            thsi.$emit('showCollectionDetails', value)
+        },
         checkNewlyAdded(collection){
             if(this.goToNewCollection){
                 return this.goToNewCollection.collection === collection.collection
             }
             return false
+        },
+        create(data){
+            this.newCollection = data
+            this.addCollection = !this.addCollection
+        },
+        newItemAdded(){
+            setTimeout(()=>{
+                this.goToNewCollection = this.newCollection
+                setTimeout(()=>{
+                    this.emitCollectionDetails(this.goToNewCollection)
+                    this.goToNewCollection = null
+                    this.newCollection = null
+                },500)
+            },1000)
         },
     }
 }
