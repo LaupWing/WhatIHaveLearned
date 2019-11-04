@@ -38,10 +38,13 @@
 
 <script>    
 import Plus from '@/components/Icons/Plus'
-import AddCollection from './parts/AddCollection'
+import AddCollection from '../AddCollection'
 import {mapGetters, mapActions} from 'vuex'
 export default {
     name: 'List-Container',
+    components:{
+        Plus
+    },
     data(){
         return{
             goToNewCollection: null,
@@ -53,8 +56,9 @@ export default {
         ...mapGetters(['allCollections'])
     },
     methods:{
+        ...mapActions(['updateCollections']),
         emitCollectionDetails(value){
-            thsi.$emit('showCollectionDetails', value)
+            this.$emit('showCollectionDetails', value)
         },
         checkNewlyAdded(collection){
             if(this.goToNewCollection){
@@ -75,6 +79,14 @@ export default {
                     this.newCollection = null
                 },500)
             },1000)
+        },
+        animEnded(){
+            if(this.newCollection){
+                this.saveCollection()
+            }
+        },
+        saveCollection(){
+            this.updateCollections(this.newCollection)
         },
     }
 }

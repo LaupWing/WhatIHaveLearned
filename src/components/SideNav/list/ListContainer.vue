@@ -6,7 +6,11 @@
         <div class="collections-wrapper">
             <transition :name="animation">
                 <!-- Show List of the collections -->
-                <div class="list-collection" v-if="!showCollectionDetails" key="1">
+                <ListCollections 
+                    v-if="!showCollectionDetails"
+                    v-on:showCollectionDetails="showCollectionDetails = $event"
+                />
+                <!-- <div class="list-collection" v-if="!showCollectionDetails" key="1">
                     <div class="add">
                         <transition 
                             name="slideTopDown" 
@@ -40,7 +44,7 @@
                             <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
                         </li> 
                     </transition-group>
-                </div>
+                </div> -->
                 <!-- Show The collection details -->
                 <CollectionDetails 
                     key="2"
@@ -59,13 +63,16 @@ import db from '@/firebase/init'
 import sortByName from '@/helpers/sortName.js'
 import CollectionDetails from './parts/CollectionDetails'
 import {mapGetters, mapActions} from 'vuex'
+import ListCollections from './parts/collections/ListCollections'
+
 
 export default {
     name: 'ListContainer',
     components:{
         Plus,
         AddCollection,
-        CollectionDetails
+        CollectionDetails,
+        ListCollections
     },
     data(){
         return{
