@@ -27,7 +27,7 @@ const actions = {
         commit('setCollections', collections)
     },
     async updateCollections({dispatch},collection){
-        const tempArray = state.collections
+        const tempArray = state.collections.collections
         tempArray.push(collection)
         db
             .collection('userNotes')

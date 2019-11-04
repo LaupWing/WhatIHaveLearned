@@ -43,7 +43,8 @@ import {mapGetters, mapActions} from 'vuex'
 export default {
     name: 'List-Container',
     components:{
-        Plus
+        Plus,
+        AddCollection
     },
     data(){
         return{
