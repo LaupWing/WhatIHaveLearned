@@ -1,5 +1,6 @@
 <template>
     <div id="Collection-Details">
+        <li @click="backToCollection">Back to collection</li>
         <li class="collection">{{collection.collection}}</li>
     </div>
 </template>
@@ -23,15 +24,16 @@ export default {
     methods:{
         ...mapActions(['setMainContent']),
         checkTypeIcon(){
-            console.log('checking type icon', this.collection.type)
             if(this.collection.icon.type === 'img'){
-                console.log(this.collection, 'img')
                 return `<img src="${this.collection.icon.src}" width="100" style="display: block; margin: auto;">`
             }else if(this.collection.icon.type === 'svg'){
-                console.log(this.collection.icon.src, 'svg')
                 return this.collection.icon.src
             }
+        },
+        backToCollection(){
+            this.$emit('backToCollection')
         }
+
     },
     created(){
         if(!this.collection.introduction){

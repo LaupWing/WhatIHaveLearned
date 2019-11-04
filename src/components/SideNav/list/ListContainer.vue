@@ -33,7 +33,7 @@
                             v-for="(collection) in allCollections.collections"
                             :class="{'go-to':checkNewlyAdded(collection)}"
                             :key="collection.collection"
-                            @click="openCollection(collection)"
+                            @click="showCollectionDetails=collection"
                         >
                             <p>{{collection.collection}}</p>
                             <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
@@ -45,6 +45,7 @@
                 <CollectionDetails 
                     key="2"
                     :collection="showCollectionDetails"
+                    v-on:backToCollection="showCollectionDetails=null"
                 v-else/>
             </transition>
         </div>
@@ -120,9 +121,6 @@ export default {
             // else{
             //     this.setMainContent(this.defaultDisplay)
             // }
-        },
-        openCollection(collection){
-            this.showCollectionDetails = collection
         }
     },
     async created(){
@@ -139,7 +137,6 @@ ul#List-Container{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    /* animation: slideToLeft 1s reverse; */
     position: relative;
 }
 ul#List-Container .add,

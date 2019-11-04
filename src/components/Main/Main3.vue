@@ -271,15 +271,18 @@ export default {
             console.log(quill.getContents())
             console.log(quill.root.innerHTML)
         },
+        prevenClickOnReadOnly(){
+            document.querySelector('#editor img').addEventListener('click', (e)=>{
+                if(!this.editMode){
+                    e.stopPropagation()
+                }
+            })
+        }
         
     },
     mounted(){
         this.editBtnLeftVal = document.querySelector('#SideNav').offsetWidth + this.editBtnTopVal
-        // document.querySelector('#editor img').addEventListener('click', (e)=>{
-        //     if(!this.editMode){
-        //         e.stopPropagation()
-        //     }
-        // })
+        this.prevenClickOnReadOnly()
     }
 }
 </script>
