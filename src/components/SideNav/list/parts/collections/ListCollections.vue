@@ -38,7 +38,7 @@
 
 <script>    
 import Plus from '@/components/Icons/Plus'
-import AddCollection from '../AddCollection'
+import AddCollection from './parts/AddCollection'
 import {mapGetters, mapActions} from 'vuex'
 export default {
     name: 'List-Container',
