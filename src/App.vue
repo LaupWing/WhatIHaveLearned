@@ -25,7 +25,7 @@ export default {
     }
   },
   methods:{
-    ...mapActions(['getCollections', 'getUser']),
+    ...mapActions(['getUser']),
     loginStates(){
         firebase.auth().onAuthStateChanged(user=>{
             this.getUser()

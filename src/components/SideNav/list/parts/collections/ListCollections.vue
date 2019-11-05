@@ -97,6 +97,7 @@ export default {
     async created(){
         await this.getCollections()
         this.checkContent()
+        console.log(this.allCollections)
     }
 }
 </script>

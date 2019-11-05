@@ -2,17 +2,19 @@
     <div id="Collection-Details">
         <li @click="backToCollection">Back to collection</li>
         <li class="collection">{{collection.collection}}</li>
+        <li>Add new Section<Plus/></li>
     </div>
 </template>
 
 <script>
+import Plus from '@/components/Icons/Plus'
 import {mapGetters, mapActions} from 'vuex'
 import capatalize from '@/helpers/string'
 export default {
     name: 'CollectionDetails',
     props:['collection'],
-    computed:{
-
+    components:{
+        Plus
     },
     data(){
         return{
