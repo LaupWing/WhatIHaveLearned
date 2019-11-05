@@ -1,14 +1,14 @@
 <template>
     <div id="Collection-Details">
-        <div class="overview">
-            <li @click="backToCollection">Back to collection</li>
-            <li class="collection">{{collection.collection}}</li>
-            <li>Add new Section<Plus/></li>
-        </div>
+        <Overview
+            :collection="collection"
+            v-on:backToCollection="backToCollection"
+        />
     </div>
 </template>
 
 <script>
+import Overview from './parts/Overview'
 import Plus from '@/components/Icons/Plus'
 import {mapGetters, mapActions} from 'vuex'
 import capatalize from '@/helpers/string'
@@ -16,7 +16,8 @@ export default {
     name: 'CollectionDetails',
     props:['collection'],
     components:{
-        Plus
+        Plus,
+        Overview
     },
     data(){
         return{
