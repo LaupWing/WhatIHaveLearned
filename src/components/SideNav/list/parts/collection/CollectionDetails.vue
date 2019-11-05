@@ -1,8 +1,10 @@
 <template>
     <div id="Collection-Details">
-        <li @click="backToCollection">Back to collection</li>
-        <li class="collection">{{collection.collection}}</li>
-        <li>Add new Section<Plus/></li>
+        <div class="overview">
+            <li @click="backToCollection">Back to collection</li>
+            <li class="collection">{{collection.collection}}</li>
+            <li>Add new Section<Plus/></li>
+        </div>
     </div>
 </template>
 

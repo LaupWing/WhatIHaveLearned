@@ -22,20 +22,14 @@
 </template>
 
 <script>
-import Plus from '@/components/Icons/Plus'
-import AddCollection from './parts/AddCollection'
-import db from '@/firebase/init'
 import sortByName from '@/helpers/sortName.js'
-import CollectionDetails from './parts/CollectionDetails'
-import {mapGetters, mapActions} from 'vuex'
+import CollectionDetails from './parts/collection/CollectionDetails'
 import ListCollections from './parts/collections/ListCollections'
-
+import {mapGetters, mapActions} from 'vuex'
 
 export default {
     name: 'ListContainer',
     components:{
-        Plus,
-        AddCollection,
         CollectionDetails,
         ListCollections
     },
