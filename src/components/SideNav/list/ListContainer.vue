@@ -91,16 +91,9 @@ export default {
         saveCollection(){
             this.updateCollections(this.newCollection)
         },
-        checkContent(){
-            this.allCollections.introduction ? this.setMainContent(this.allCollections.introduction) : this.setMainContent(this.defaultDisplay)
-        },
         setAnim(anim){
             return anim
         }
-    },
-    async created(){
-        await this.getCollections()
-        this.checkContent()
     }
 }
 </script>
