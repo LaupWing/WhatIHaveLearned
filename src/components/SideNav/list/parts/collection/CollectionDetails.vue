@@ -1,8 +1,14 @@
 <template>
     <div id="Collection-Details">
+        <li @click="backToCollection">Back to collection</li>
+        <li class="collection">{{collection.collection}}</li>
         <Overview
-            :collection="collection"
+            :sections="collection.sections"
             v-on:backToCollection="backToCollection"
+        />
+        <Section
+            v-if="section"
+            :section="section"
         />
     </div>
 </template>
@@ -23,7 +29,8 @@ export default {
         return{
             defaultDisplay: `
                 <p class="ql-align-center">${this.checkTypeIcon()}</p><p class="ql-align-center"></p><h1 class="ql-align-center"><span style="color: rgb(255, 255, 255); font-size: 48px;">${capatalize(this.collection.collection)}</span></h1><p><br></p>
-            `
+            `,
+            section: null
         }
     },
     methods:{
