@@ -10,41 +10,6 @@
                     v-if="!showCollectionDetails"
                     v-on:showCollectionDetails="showCollectionDetails = $event"
                 />
-                <!-- <div class="list-collection" v-if="!showCollectionDetails" key="1">
-                    <div class="add">
-                        <transition 
-                            name="slideTopDown" 
-                            mode="out-in" 
-                            v-on:enter="animEnded"
-                        >
-                            <li 
-                                v-if="!addCollection" 
-                                @click="toggleAddCollection"
-                            >
-                                <p>Add a new collection</p><Plus/>
-                            </li>
-                            <AddCollection
-                                v-on:cancel="toggleAddCollection"
-                                v-on:create="create"
-                                :userNotes="allCollections"
-                                v-else
-                            />
-                        </transition>
-                    </div>
-                    <transition-group name="fadeIn" v-on:enter="newItemAdded">
-                        <li 
-                            class="collection"
-                            v-for="(collection) in allCollections.collections"
-                            :class="{'go-to':checkNewlyAdded(collection)}"
-                            :key="collection.collection"
-                            @click="showCollectionDetails=collection"
-                        >
-                            <p>{{collection.collection}}</p>
-                            <img v-if="collection.icon.type === 'img'" :src="collection.icon.src" alt="">
-                            <div v-else class="svg-wrapper" v-html="collection.icon.src"></div>
-                        </li> 
-                    </transition-group>
-                </div> -->
                 <!-- Show The collection details -->
                 <CollectionDetails 
                     key="2"
@@ -127,14 +92,7 @@ export default {
             this.updateCollections(this.newCollection)
         },
         checkContent(){
-            this.allCollections.introduction ? this.setMainContent(this.allCollections.introduction) : this.setMainContent(this.defaultDisplay) 
-            console.log(this.getMainContent)
-            // if(this.allCollections.introduction){
-            //     this.setMainContent(this.allCollections.introduction)
-            // }
-            // else{
-            //     this.setMainContent(this.defaultDisplay)
-            // }
+            this.allCollections.introduction ? this.setMainContent(this.allCollections.introduction) : this.setMainContent(this.defaultDisplay)
         },
         setAnim(anim){
             return anim
