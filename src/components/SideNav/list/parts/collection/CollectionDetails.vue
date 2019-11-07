@@ -4,6 +4,7 @@
         <li class="collection">{{collection.collection}}</li>
         <Overview
             :sections="collection.sections"
+            :collection="collection"
             v-on:backToCollection="backToCollection"
         />
         <Section

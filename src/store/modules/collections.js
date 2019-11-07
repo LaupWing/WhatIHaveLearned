@@ -46,7 +46,7 @@ const actions = {
                     .then(()=>dispatch('getCollections'))
             })
     },
-    updateSections({dispatch}, newSection){
+    addSectionToCollection({dispatch}, {newSection, collection}){
         
     },
     getUser({commit}){

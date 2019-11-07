@@ -25,12 +25,14 @@
 
 <script>
 import Plus from '@/components/Icons/Plus'
+import {mapActions} from 'vuex'
+
 export default {
     name: 'Overview',
     components:{
         Plus
     },
-    props:['sections'],
+    props:['sections', 'collection'],
     data(){
         return{
             addSection: false,
@@ -38,13 +40,18 @@ export default {
         }
     },
     methods:{
+        ...mapActions(['addSectionToCollection']),
         createSection(){
             if(this.newSection !== null || this.newSection !== ''){
-                this.$emit('createSection')
+                this.addSection = !this.addSection
             }
         },
         animEnded(){
             if(this.newSection){
+                this.addSectionToCollection({
+                    collection: this.collection.collection,
+                    newSection: this.newSection
+                })
                 console.log(this.newSection, this.addSection)
             }
         },
