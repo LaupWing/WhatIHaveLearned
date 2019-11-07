@@ -46,8 +46,24 @@ const actions = {
                     .then(()=>dispatch('getCollections'))
             })
     },
-    addSectionToCollection({dispatch}, {newSection, collection}){
-        
+    async addSectionToCollection({dispatch}, {newSection, collection}){
+        const tempArray = state.collections.collections
+            .map(c=>{
+                if(c.collection === collection){
+                    c.sections.push({
+                        section: newSection,
+                        chapters: []
+                    })
+                }   
+                return c
+            })
+        await db
+            .collection('userNotes')
+            .doc(state.user.uid)
+            .update({
+                collections: tempArray
+            })
+        dispatch('getCollections')
     },
     getUser({commit}){
         const user = firebase.auth().currentUser

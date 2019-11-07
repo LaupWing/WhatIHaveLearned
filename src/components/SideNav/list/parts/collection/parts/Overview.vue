@@ -14,12 +14,14 @@
                 </div>
             </div>
         </transition>
-        <li 
-            v-for="(section, index) in sections"
-            :key="index"
-        >
-            {{section}}
-        </li>
+        <transition-group name="fadeIn" v-on:enter="newItemAdded">
+            <li 
+                v-for="(section) in sections"
+                :key="section.section"
+            >
+                {{section.section}}
+            </li>
+        </transition-group>
     </div>
 </template>
 
@@ -52,8 +54,18 @@ export default {
                     collection: this.collection.collection,
                     newSection: this.newSection
                 })
-                console.log(this.newSection, this.addSection)
             }
+        },
+        newItemAdded(){
+            console.log('new item added')
+            // setTimeout(()=>{
+            //     this.goToNewCollection = this.newCollection
+            //     setTimeout(()=>{
+            //         this.emitCollectionDetails(this.goToNewCollection)
+            //         this.goToNewCollection = null
+            //         this.newCollection = null
+            //     },500)
+            // },1000)
         },
     }
 
