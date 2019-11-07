@@ -46,6 +46,9 @@ const actions = {
                     .then(()=>dispatch('getCollections'))
             })
     },
+    updateSections({dispatch}, newSection){
+        
+    },
     getUser({commit}){
         const user = firebase.auth().currentUser
         commit('setUser', user)

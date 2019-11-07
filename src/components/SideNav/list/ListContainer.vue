@@ -68,20 +68,6 @@ export default {
                 this.saveCollection()
             }
         },
-        newItemAdded(){
-            setTimeout(()=>{
-                this.goToNewCollection = this.newCollection
-                setTimeout(()=>{
-                    this.showCollectionDetails = this.goToNewCollection
-                    this.goToNewCollection = null
-                    this.newCollection = null
-                },500)
-            },1000)
-        },
-        create(data){
-            this.newCollection = data
-            this.toggleAddCollection()
-        },
         saveCollection(){
             this.updateCollections(this.newCollection)
         },

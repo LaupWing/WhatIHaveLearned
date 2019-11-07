@@ -84,11 +84,8 @@ export default {
         },
         animEnded(){
             if(this.newCollection){
-                this.saveCollection()
+                this.updateCollections(this.newCollection)
             }
-        },
-        saveCollection(){
-            this.updateCollections(this.newCollection)
         },
         checkContent(){
             this.allCollections.introduction ? this.setMainContent(this.allCollections.introduction) : this.setMainContent(this.defaultDisplay)
@@ -97,7 +94,6 @@ export default {
     async created(){
         await this.getCollections()
         this.checkContent()
-        console.log(this.allCollections)
     }
 }
 </script>

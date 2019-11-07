@@ -1,14 +1,19 @@
 <template>
     <div class="overview">
-
-        <li v-if="!addSection" @click="addSection = true">Add new Section<Plus/></li>
-        <div class="add-section" v-else>
-            <input type="text" v-model="newSection">
-            <div class="buttons">
-                <button @click="addSection = false">cancel</button>
-                <button>create</button>
+        <transition
+            name="slideTopDown" 
+            mode="out-in" 
+            v-on:enter="animEnded"
+        >
+            <li v-if="!addSection" @click="addSection = true">Add new Section<Plus/></li>
+            <div class="add-section" v-else>
+                <input type="text" v-model="newSection">
+                <div class="buttons">
+                    <button @click="addSection = false, newSection = null">cancel</button>
+                    <button @click="createSection">create</button>
+                </div>
             </div>
-        </div>
+        </transition>
         <li 
             v-for="(section, index) in sections"
             :key="index"
@@ -35,9 +40,14 @@ export default {
     methods:{
         createSection(){
             if(this.newSection !== null || this.newSection !== ''){
-                
+                this.$emit('createSection')
             }
-        }
+        },
+        animEnded(){
+            if(this.newSection){
+                console.log(this.newSection, this.addSection)
+            }
+        },
     }
 
 }
