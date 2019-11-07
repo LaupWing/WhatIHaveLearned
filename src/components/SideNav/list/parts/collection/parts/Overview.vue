@@ -18,6 +18,7 @@
             <li 
                 v-for="(section) in sections"
                 :key="section.section"
+                :class="{'go-to':checkNewlyAdded(section)}"
             >
                 {{section.section}}
             </li>
@@ -38,7 +39,8 @@ export default {
     data(){
         return{
             addSection: false,
-            newSection: null
+            newSection: null,
+            goToNewSection: null
         }
     },
     methods:{
@@ -56,16 +58,22 @@ export default {
                 })
             }
         },
+        checkNewlyAdded(section){
+            console.log(section, this.goToNewSection)
+            if(this.goToNewSection){
+                return this.goToNewSection === section.section
+            }
+            return false
+        },
         newItemAdded(){
             console.log('new item added')
-            // setTimeout(()=>{
-            //     this.goToNewCollection = this.newCollection
-            //     setTimeout(()=>{
-            //         this.emitCollectionDetails(this.goToNewCollection)
-            //         this.goToNewCollection = null
-            //         this.newCollection = null
-            //     },500)
-            // },1000)
+            setTimeout(()=>{
+                this.goToNewSection = this.newSection
+                // setTimeout(()=>{
+                //     this.goToNewSection = null
+                //     this.newSection = null
+                // },500)
+            },1000)
         },
     }
 
