@@ -19,6 +19,7 @@
                 v-for="(section) in sections"
                 :key="section.section"
                 :class="{'go-to':checkNewlyAdded(section)}"
+                @click="$emit('showSectionDetails', section)"
             >
                 {{section.section}}
             </li>
