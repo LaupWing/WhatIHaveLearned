@@ -7,10 +7,11 @@
                 :sections="collection.sections"
                 :collection="collection"
                 v-on:backToCollection="backToCollection"
-                v-on:showSectionDetails="showSectionDetails"
+                v-on:showSectionDetails="section = $event"
+                v-if="!section"
             />
             <Section
-                v-if="section"
+                v-else
                 :section="section"
             />
         </transition>
@@ -22,11 +23,13 @@ import Overview from './parts/Overview'
 import Plus from '@/components/Icons/Plus'
 import {mapGetters, mapActions} from 'vuex'
 import capatalize from '@/helpers/string'
+import Section from './parts/Section'
 export default {
     name: 'CollectionDetails',
     props:['collection'],
     components:{
         Plus,
+        Section,
         Overview
     },
     computed:{
@@ -58,9 +61,6 @@ export default {
         backToCollection(){
             this.$emit('backToCollection')
         },
-        showSectionDetails(section){
-            this.section = section
-        }
 
     },
     created(){
