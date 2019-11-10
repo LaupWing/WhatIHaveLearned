@@ -2,15 +2,18 @@
     <div id="Collection-Details">
         <li @click="backToCollection">Back to collection</li>
         <li class="collection">{{collection.collection}}</li>
-        <Overview
-            :sections="collection.sections"
-            :collection="collection"
-            v-on:backToCollection="backToCollection"
-        />
-        <Section
-            v-if="section"
-            :section="section"
-        />
+        <transition :name="animation">
+            <Overview
+                :sections="collection.sections"
+                :collection="collection"
+                v-on:backToCollection="backToCollection"
+                v-on:showSectionDetails="showSectionDetails"
+            />
+            <Section
+                v-if="section"
+                :section="section"
+            />
+        </transition>
     </div>
 </template>
 
@@ -25,6 +28,15 @@ export default {
     components:{
         Plus,
         Overview
+    },
+    computed:{
+        animation(){
+            if(this.section){
+                return 'slideToLeft'
+            }else{
+                return 'slideToRight'
+            }
+        }
     },
     data(){
         return{
@@ -45,6 +57,9 @@ export default {
         },
         backToCollection(){
             this.$emit('backToCollection')
+        },
+        showSectionDetails(section){
+            this.section = section
         }
 
     },

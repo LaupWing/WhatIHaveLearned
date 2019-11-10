@@ -59,20 +59,19 @@ export default {
             }
         },
         checkNewlyAdded(section){
-            console.log(section, this.goToNewSection)
             if(this.goToNewSection){
                 return this.goToNewSection === section.section
             }
             return false
         },
         newItemAdded(){
-            console.log('new item added')
             setTimeout(()=>{
                 this.goToNewSection = this.newSection
-                // setTimeout(()=>{
-                //     this.goToNewSection = null
-                //     this.newSection = null
-                // },500)
+                setTimeout(()=>{
+                    this.$emit('showSectionDetails', this.goToNewSection)
+                    this.goToNewSection = null
+                    this.newSection = null
+                },500)
             },1000)
         },
     }
