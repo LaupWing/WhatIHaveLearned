@@ -257,10 +257,13 @@ export default {
         toggleEdit(){
             if(this.editMode){
                 // When the user has the img resize screen on
-                const clickToUncheck = Array.from(this.$el.querySelectorAll('#editor .ql-editor p *')).find(p=>{
-                    return p.tagName.toLowerCase() !== 'img'
-                })
-                clickToUncheck.click()
+                const clickToUncheck = Array.from(this.$el.querySelectorAll('#editor .ql-editor span'))
+                if(clickToUncheck.length >0){
+                    clickToUncheck[0].click()
+                }
+                else{
+                    document.querySelector('#editor ql.editor').click()
+                }
             }
             this.editMode = !this.editMode
         },
@@ -270,19 +273,10 @@ export default {
         getDelta(){
             console.log(quill.getContents())
             console.log(quill.root.innerHTML)
-        },
-        prevenClickOnReadOnly(){
-            document.querySelector('#editor img').addEventListener('click', (e)=>{
-                if(!this.editMode){
-                    e.stopPropagation()
-                }
-            })
         }
-        
     },
     mounted(){
         this.editBtnLeftVal = document.querySelector('#SideNav').offsetWidth + this.editBtnTopVal
-        this.prevenClickOnReadOnly()
     }
 }
 </script>

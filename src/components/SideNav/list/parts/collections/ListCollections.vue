@@ -40,6 +40,7 @@
 import Plus from '@/components/Icons/Plus'
 import AddCollection from './parts/AddCollection'
 import {mapGetters, mapActions} from 'vuex'
+import prevenClickOnReadOnly from '@/helpers/editorHelpers'
 export default {
     name: 'List-Container',
     components:{
@@ -93,7 +94,8 @@ export default {
     },
     async created(){
         await this.getCollections()
-        this.checkContent()
+        await this.checkContent()
+        prevenClickOnReadOnly()
     }
 }
 </script>
