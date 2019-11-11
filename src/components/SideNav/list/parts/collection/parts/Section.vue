@@ -18,5 +18,8 @@ export default {
 </script>
 
 <style>
-
+.section{
+    position: absolute;
+    width: 100%;
+}
 </style>

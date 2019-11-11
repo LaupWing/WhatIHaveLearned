@@ -81,6 +81,10 @@ export default {
 </script>
 
 <style>
+.overview{
+    position: absolute;
+    width: 100%;
+}
 .overview .add-section{
     display: flex;
     justify-content: center;

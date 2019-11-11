@@ -69,6 +69,8 @@ export default {
 .ListContainer-leave-active {
   animation: slideToRight .5s reverse;
 }
+
+
 @keyframes slideToLeft {
     from{
         transform: translate(0,0);
