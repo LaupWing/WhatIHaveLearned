@@ -5,13 +5,15 @@ import sortByName from '@/helpers/sortName.js'
 const state = {
     collections: [],
     user: null,
-    mainContent: null
+    mainContent: null,
+    mainContentTransition: null
 }
 
 const getters = {
     allCollections: state => state.collections,
     currentUser: state => state.user,
-    getMainContent: state => state.mainContent 
+    getMainContent: state => state.mainContent,
+    getMainContentTransition: state => state.mainContentTransition,
 }
 
 const actions = {
@@ -71,13 +73,17 @@ const actions = {
     },
     setMainContent({commit},content){
         commit('setMainContent', content)
+    },
+    setMainContentTransition({commit},content){
+        commit('setMainContentTransition', content)
     }
 }
 
 const mutations = {
     setCollections: (state, collections)=>(state.collections = collections),
     setUser: (state, user)=>(state.user = user),
-    setMainContent: (state, content) =>(state.mainContent= content)
+    setMainContent: (state, content) =>(state.mainContent= content),
+    setMainContentTransition: (state, value) =>(state.mainContentTransition= value)
 }
 
 export default{

@@ -59,8 +59,9 @@ export default {
         ...mapGetters(['allCollections'])
     },
     methods:{
-        ...mapActions(['updateCollections', 'setMainContent', 'getCollections']),
+        ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition']),
         emitCollectionDetails(value){
+            
             this.$emit('showCollectionDetails', value)
         },
         checkNewlyAdded(collection){

@@ -202,6 +202,10 @@ export default {
     },
     computed:{
         ...mapGetters(['currentUser', 'getMainContent']),
+        contentTransition(){
+            const content = this.getMainContent
+            
+        },
         wrapperStyling(){
             if(this.editMode){
                 return {
@@ -227,9 +231,6 @@ export default {
                 'pointer-events': 'none'
             }
         }
-    },
-    watch:{
-        
     },
     methods:{
         ...mapActions(['setMainContent']),

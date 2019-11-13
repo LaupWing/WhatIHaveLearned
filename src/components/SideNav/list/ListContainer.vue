@@ -53,7 +53,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['getCollections','updateCollections', 'setMainContent']),
+        ...mapActions(['getCollections','updateCollections']),
         toggleAddCollection(){
             this.addCollection = !this.addCollection
         },
