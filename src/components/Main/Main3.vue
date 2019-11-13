@@ -7,6 +7,7 @@
         class="editor-wrapper" 
         :style="wrapperStyling"
         :data-edit-mode="editMode"
+        @animationend="animEnded"
     >
         <quill-editor
             id="editor"
@@ -173,6 +174,7 @@ export default {
             editBtnLeftVal: 0,
             editBtnTopVal: 30,
             editMode: false,
+            contentChange: false,
             content: `<h1><span class="ql-size-large" style="color: rgb(255, 255, 255);">Welcome to to your introduction page</span></h1><p><em class="ql-size-large" style="color: rgb(255, 255, 255);">This is your very own home page for your notes</em></p><p><br></p><p><span class="ql-size-large" style="color: rgb(255, 255, 255);">You can put whatever you want on your own homepage. But we some ideas for your homepage that you may want to use!</span></p><ul><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">Give an introduction about yourself!</span></li><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">Describe your collections in a short summary</span></li><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">But these are just some ideas but you can write whatever you want!</span></li></ul><p><br></p><p><img src="https://ourswissbusiness.com/wp-content/uploads/2017/01/wow-e1484418777188.png" style="display: block; margin: auto;" width="697"></p><p><br></p>`,
             editorOption: {
                 modules: {
@@ -200,12 +202,16 @@ export default {
             }
         }
     },
+    watch:{
+        getMainContent(oldContent, newContent){
+            if(!this.contentChange && this.getMainContentTransition!==null){
+                this.contentChange = true
+                this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)
+            }
+        }
+    },
     computed:{
-        ...mapGetters(['currentUser', 'getMainContent']),
-        contentTransition(){
-            const content = this.getMainContent
-            
-        },
+        ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition']),
         wrapperStyling(){
             if(this.editMode){
                 return {
@@ -235,12 +241,10 @@ export default {
     methods:{
         ...mapActions(['setMainContent']),
         test(obj){
-            console.log('test')
             const range = {
                 index: obj.selection.savedRange.index,
                 length: obj.selection.savedRange.length
             }
-            console.log(range)
             // this.quillEditor.formatText(range.index, range.length, 'background', '#3399FF');
         },
         enableQuillCheck(){
@@ -250,8 +254,16 @@ export default {
                 this.quill.enable(false)
             }
         },
+        animEnded(){
+            if(!this.contentChange) return
+            const container = this.$el.querySelector('.editor-wrapper')
+            if(this.getMainContentTransition === 'right'){
+                container.classList.remove(this.getMainContentTransition)
+                container.classList.add('left')
+                this.contentChange = false
+            }
+        },
         onEditorChange({ quill, html, text }) {
-            console.log('editor change!', quill, html)
             this.setMainContent(html)
 
         },
@@ -272,8 +284,6 @@ export default {
             firebase.auth().signOut()
         },
         getDelta(){
-            console.log(quill.getContents())
-            console.log(quill.root.innerHTML)
         }
     },
     mounted(){
@@ -291,6 +301,7 @@ export default {
     align-items: center;
     flex-direction: column;
     --max-width: 1000px;
+    overflow-x: hidden;
 }
 
 #Main .user{
@@ -328,6 +339,7 @@ div#toolbar .ql-formats >* {
     min-width: var(--max-width);
     max-width: var(--max-width);
     transition: 1s;
+    overflow-x: hidden;
 }
 .editor-wrapper .ql-container.ql-snow.ql-disabled{
     background: transparent;
@@ -439,5 +451,11 @@ div#toolbar .ql-formats >* {
 
 .ql-editor.ql-blank::before {
     color: rgba(255,99,71,0.6);
+}
+.right{
+    animation: forwards 1s fadeRight;
+}
+.left{
+    animation: forwards 1s fadeInLeft;
 }
 </style>

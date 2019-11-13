@@ -138,6 +138,26 @@ svg{
         opacity: 1;   
     }
 }
+@keyframes fadeRight {
+    from{
+        transform: translate(0,0);
+        opacity: 1;
+    }
+    to{
+        transform: translate(50%,0);
+        opacity: 0;   
+    }
+}
+@keyframes fadeInLeft {
+    from{
+        transform: translate(-50%,0);
+        opacity: 0;
+    }
+    to{
+        transform: translate(0,0);
+        opacity: 1;   
+    }
+}
 /* Animation classes */
 .slideTopDown-enter-active {
     animation: heightAnim 1s;

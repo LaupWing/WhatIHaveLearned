@@ -60,8 +60,8 @@ export default {
     },
     methods:{
         ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition']),
-        emitCollectionDetails(value){
-            
+        emitCollectionDetails(value){    
+            this.setMainContentTransition('right')   
             this.$emit('showCollectionDetails', value)
         },
         checkNewlyAdded(collection){
