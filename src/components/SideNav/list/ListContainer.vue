@@ -142,28 +142,4 @@ ul#List-Container p.no-collection{
     font-size: .9em;
     color: var(--contrast-color);
 }
-.slideTopDown-enter-active {
-    animation: heightAnim 1s;
-}
-.slideTopDown-leave-active {
-    animation: heightAnim 1s reverse;
-}
-.fadeIn-enter-active {
-    animation: fadeIn 1s;
-}
-.fadeIn-leave-active {
-    animation: fadeIn 1s reverse;
-}
-.forward-enter-active {
-    animation: slideToLeft 1s reverse;
-}
-.forward-leave-active {
-    animation: slideToRight 1s reverse;
-}
-.backward-enter-active {
-    animation: slideToRight 1s;
-}
-.backward-leave-active {
-    animation: slideToLeft 1s;
-}
 </style>
