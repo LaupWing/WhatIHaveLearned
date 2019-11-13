@@ -46,9 +46,9 @@ export default {
         ...mapGetters(['allCollections', 'currentUser', 'getMainContent']),
         animation(){
             if(this.showCollectionDetails){
-                return 'slideToLeft'
+                return 'forward'
             }else{
-                return 'slideToRight'
+                return 'backward'
             }
         }
     },
@@ -154,16 +154,16 @@ ul#List-Container p.no-collection{
 .fadeIn-leave-active {
     animation: fadeIn 1s reverse;
 }
-.slideToLeft-enter-active {
+.forward-enter-active {
     animation: slideToLeft 1s reverse;
 }
-.slideToLeft-leave-active {
+.forward-leave-active {
     animation: slideToRight 1s reverse;
 }
-.slideToRight-enter-active {
+.backward-enter-active {
     animation: slideToRight 1s;
 }
-.slideToRight-leave-active {
+.backward-leave-active {
     animation: slideToLeft 1s;
 }
 </style>

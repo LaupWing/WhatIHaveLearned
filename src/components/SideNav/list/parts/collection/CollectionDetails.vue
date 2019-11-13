@@ -35,9 +35,9 @@ export default {
     computed:{
         animation(){
             if(this.section){
-                return 'slideToLeft'
+                return 'forward'
             }else{
-                return 'slideToRight'
+                return 'backward'
             }
         }
     },
