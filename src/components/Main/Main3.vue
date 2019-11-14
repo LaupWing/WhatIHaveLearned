@@ -260,10 +260,10 @@ export default {
         animEnded(){
             if(!this.contentChange) return
             const container = this.$el.querySelector('.editor-wrapper')
-            if(this.getMainContentTransition === 'right'){
+            if(this.getMainContentTransition === 'leftFadeOut'){
                 container.classList.remove(this.getMainContentTransition)
                 this.content = this.getMainContent
-                container.classList.add('left')
+                container.classList.add('right')
                 this.contentChange = false
             }
         },
@@ -454,9 +454,12 @@ div#toolbar .ql-formats >* {
     color: rgba(255,99,71,0.6);
 }
 .right{
-    animation: forwards 1s fadeRight;
+    animation: forwards .5s fadeRight;
 }
 .left{
-    animation: forwards 1s fadeInLeft;
+    animation: forwards .5s fadeInLeft;
+}
+.leftFadeOut{
+    animation: forwards .5s fadeOutLeft;
 }
 </style>

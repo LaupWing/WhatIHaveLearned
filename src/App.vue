@@ -144,18 +144,28 @@ svg{
         opacity: 1;
     }
     to{
-        transform: translate(50%,0);
+        transform: translate(20%,0);
         opacity: 0;   
     }
 }
 @keyframes fadeInLeft {
     from{
-        transform: translate(-50%,0);
+        transform: translate(-20%,0);
         opacity: 0;
     }
     to{
         transform: translate(0,0);
         opacity: 1;   
+    }
+}
+@keyframes fadeOutLeft {
+    from{
+        transform: translate(0,0);
+        opacity: 1;
+    }
+    to{
+        transform: translate(-20%,0);
+        opacity: 0;
     }
 }
 /* Animation classes */

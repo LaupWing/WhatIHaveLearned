@@ -61,7 +61,7 @@ export default {
     methods:{
         ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition']),
         emitCollectionDetails(value){    
-            this.setMainContentTransition('right')   
+            this.setMainContentTransition('leftFadeOut')   
             this.$emit('showCollectionDetails', value)
         },
         checkNewlyAdded(collection){
