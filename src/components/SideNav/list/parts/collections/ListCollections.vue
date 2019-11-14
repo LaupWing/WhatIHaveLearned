@@ -61,6 +61,7 @@ export default {
     methods:{
         ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition']),
         emitCollectionDetails(value){    
+            console.log('setting transition')
             this.setMainContentTransition('leftFadeOut')   
             this.$emit('showCollectionDetails', value)
         },
@@ -75,6 +76,7 @@ export default {
             this.addCollection = !this.addCollection
         },
         newItemAdded(){
+            if(this.newCollection === null) return
             setTimeout(()=>{
                 this.goToNewCollection = this.newCollection
                 setTimeout(()=>{

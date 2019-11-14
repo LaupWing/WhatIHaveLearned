@@ -207,13 +207,17 @@ export default {
             if(oldContent===null){
                 this.content = this.getMainContent
             }
-            console.log('Old: '+oldContent, 'New: ', newContent)
-            console.log('Check equal or not', oldContent===newContent)
+            // console.log('Old: '+oldContent, 'New: ', newContent)
+            // console.log('Check equal or not', oldContent===newContent)
             if(!this.contentChange && this.getMainContentTransition!==null){
                 this.contentChange = true
-                console.log('setcontentchange')
+                // console.log('setcontentchange')
                 this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)
             }
+        },
+        getMainContentTransition(newTransition, oldTransition ){
+            console.log(newTransition, oldTransition)
+            console.log(this.getMainContentTransition)
         }
     },
     computed:{
