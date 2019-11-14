@@ -11,7 +11,7 @@
     >
         <quill-editor
             id="editor"
-            :content="getMainContent"
+            :content="content"
             :options="editorOption"
             @change="onEditorChange($event)"
             @blur="test($event)"
@@ -175,7 +175,7 @@ export default {
             editBtnTopVal: 30,
             editMode: false,
             contentChange: false,
-            content: `<h1><span class="ql-size-large" style="color: rgb(255, 255, 255);">Welcome to to your introduction page</span></h1><p><em class="ql-size-large" style="color: rgb(255, 255, 255);">This is your very own home page for your notes</em></p><p><br></p><p><span class="ql-size-large" style="color: rgb(255, 255, 255);">You can put whatever you want on your own homepage. But we some ideas for your homepage that you may want to use!</span></p><ul><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">Give an introduction about yourself!</span></li><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">Describe your collections in a short summary</span></li><li><span class="ql-size-large" style="color: rgb(255, 255, 255);">But these are just some ideas but you can write whatever you want!</span></li></ul><p><br></p><p><img src="https://ourswissbusiness.com/wp-content/uploads/2017/01/wow-e1484418777188.png" style="display: block; margin: auto;" width="697"></p><p><br></p>`,
+            content: null,
             editorOption: {
                 modules: {
                     toolbar: {
@@ -203,7 +203,10 @@ export default {
         }
     },
     watch:{
-        getMainContent(oldContent, newContent){
+        getMainContent(newContent, oldContent){
+            if(oldContent===null){
+                this.content = this.getMainContent
+            }
             if(!this.contentChange && this.getMainContentTransition!==null){
                 this.contentChange = true
                 this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)
@@ -259,13 +262,13 @@ export default {
             const container = this.$el.querySelector('.editor-wrapper')
             if(this.getMainContentTransition === 'right'){
                 container.classList.remove(this.getMainContentTransition)
+                this.content = this.getMainContent
                 container.classList.add('left')
                 this.contentChange = false
             }
         },
         onEditorChange({ quill, html, text }) {
             this.setMainContent(html)
-
         },
         toggleEdit(){
             if(this.editMode){
@@ -283,10 +286,8 @@ export default {
         signout(){
             firebase.auth().signOut()
         },
-        getDelta(){
-        }
     },
-    mounted(){
+    async mounted(){
         this.editBtnLeftVal = document.querySelector('#SideNav').offsetWidth + this.editBtnTopVal
     }
 }
