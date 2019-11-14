@@ -207,8 +207,11 @@ export default {
             if(oldContent===null){
                 this.content = this.getMainContent
             }
+            console.log('Old: '+oldContent, 'New: ', newContent)
+            console.log('Check equal or not', oldContent===newContent)
             if(!this.contentChange && this.getMainContentTransition!==null){
                 this.contentChange = true
+                console.log('setcontentchange')
                 this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)
             }
         }
@@ -260,10 +263,11 @@ export default {
         animEnded(){
             if(!this.contentChange) return
             const container = this.$el.querySelector('.editor-wrapper')
-            if(this.getMainContentTransition === 'leftFadeOut'){
+            if(this.getMainContentTransition === 'leftFadeOut' && this.contentChange){
+                console.log('anim ended check')
                 container.classList.remove(this.getMainContentTransition)
                 this.content = this.getMainContent
-                container.classList.add('right')
+                container.classList.add('rightFadeIn')
                 this.contentChange = false
             }
         },
@@ -453,12 +457,12 @@ div#toolbar .ql-formats >* {
 .ql-editor.ql-blank::before {
     color: rgba(255,99,71,0.6);
 }
-.right{
-    animation: forwards .5s fadeRight;
+.rightFadeIn{
+    animation: forwards .5s fadeInRight;
 }
-.left{
+/* .left{
     animation: forwards .5s fadeInLeft;
-}
+} */
 .leftFadeOut{
     animation: forwards .5s fadeOutLeft;
 }
