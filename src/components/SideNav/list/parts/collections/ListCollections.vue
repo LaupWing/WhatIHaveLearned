@@ -61,7 +61,6 @@ export default {
     methods:{
         ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition']),
         emitCollectionDetails(value){    
-            console.log('setting transition')
             this.setMainContentTransition('leftFadeOut')   
             this.$emit('showCollectionDetails', value)
         },

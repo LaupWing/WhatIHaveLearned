@@ -207,20 +207,13 @@ export default {
             if(oldContent===null){
                 this.content = this.getMainContent
             }
-            // console.log('Old: '+oldContent, 'New: ', newContent)
-            // console.log('Check equal or not', oldContent===newContent)
         },
         getMainContentTransition(newTransition, oldTransition ){
-            const changed = newTransition === oldTransition
-            console.log(changed)
-            if(!this.contentChange && !changed){
+            console.log(newTransition, oldTransition)
+            if(!this.contentChange && this.getMainContentTransition !== null){
                 this.contentChange = true
-                console.log('setcontentchange')
                 this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)
             }
-
-            console.log(newTransition, oldTransition)
-            console.log(this.getMainContentTransition)
         }
     },
     computed:{
@@ -252,7 +245,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['setMainContent']),
+        ...mapActions(['setMainContent', 'setMainContentTransition']),
         test(obj){
             const range = {
                 index: obj.selection.savedRange.index,
@@ -270,14 +263,12 @@ export default {
         animEnded(){
             if(!this.contentChange) return
             const container = this.$el.querySelector('.editor-wrapper')
-            console.log(this.contentChange)
             if(this.getMainContentTransition === 'leftFadeOut'){
-                console.log('anim ended check')
                 container.classList.remove(this.getMainContentTransition)
                 this.content = this.getMainContent
+                this.setMainContentTransition(null)
                 container.classList.add('rightFadeIn')
                 this.contentChange = false
-                console.log(this.contentChange)
             }
         },
         onEditorChange({ quill, html, text }) {
@@ -467,12 +458,12 @@ div#toolbar .ql-formats >* {
     color: rgba(255,99,71,0.6);
 }
 .rightFadeIn{
-    animation: forwards .5s fadeInRight;
+    animation: forwards 1s fadeInRight;
 }
 /* .left{
     animation: forwards .5s fadeInLeft;
 } */
 .leftFadeOut{
-    animation: forwards .5s fadeOutLeft;
+    animation: forwards 1s fadeOutLeft;
 }
 </style>
