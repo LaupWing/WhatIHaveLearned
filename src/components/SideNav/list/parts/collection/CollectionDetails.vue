@@ -59,11 +59,11 @@ export default {
             }
         },
         backToCollection(){
+            this.setMainContentTransition('rightFadeOut')
             this.$emit('backToCollection')
         },
         test(){
             console.log('setTransition')
-            this.setMainContentTransition('leftFadeOut')
         }
     },
     created(){

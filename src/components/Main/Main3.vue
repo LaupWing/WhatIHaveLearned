@@ -261,13 +261,25 @@ export default {
             }
         },
         animEnded(){
-            if(!this.contentChange) return
             const container = this.$el.querySelector('.editor-wrapper')
+            if(this.getMainContentTransition === null){
+                container.classList.remove(...container.classList)
+                container.classList.add('editor-wrapper')
+            }
+            console.log('animEnded', this.getMainContentTransition)
+            if(!this.contentChange) return
             if(this.getMainContentTransition === 'leftFadeOut'){
                 container.classList.remove(this.getMainContentTransition)
                 this.content = this.getMainContent
                 this.setMainContentTransition(null)
                 container.classList.add('rightFadeIn')
+                this.contentChange = false
+            }
+            if(this.getMainContentTransition === 'rightFadeOut'){
+                container.classList.remove(this.getMainContentTransition)
+                this.content = this.getMainContent
+                this.setMainContentTransition(null)
+                container.classList.add('leftFadeIn')
                 this.contentChange = false
             }
         },
@@ -460,10 +472,16 @@ div#toolbar .ql-formats >* {
 .rightFadeIn{
     animation: forwards 1s fadeInRight;
 }
+.rightFadeOut{
+    animation: forwards 1s fadeInRight reverse;
+}
 /* .left{
     animation: forwards .5s fadeInLeft;
 } */
 .leftFadeOut{
     animation: forwards 1s fadeOutLeft;
+}
+.leftFadeIn{
+    animation: forwards 1s fadeOutLeft reverse;
 }
 </style>
