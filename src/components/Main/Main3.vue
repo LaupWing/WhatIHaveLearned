@@ -209,13 +209,16 @@ export default {
             }
             // console.log('Old: '+oldContent, 'New: ', newContent)
             // console.log('Check equal or not', oldContent===newContent)
-            if(!this.contentChange && this.getMainContentTransition!==null){
-                this.contentChange = true
-                // console.log('setcontentchange')
-                this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)
-            }
         },
         getMainContentTransition(newTransition, oldTransition ){
+            const changed = newTransition === oldTransition
+            console.log(changed)
+            if(!this.contentChange && !changed){
+                this.contentChange = true
+                console.log('setcontentchange')
+                this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)
+            }
+
             console.log(newTransition, oldTransition)
             console.log(this.getMainContentTransition)
         }
@@ -267,12 +270,14 @@ export default {
         animEnded(){
             if(!this.contentChange) return
             const container = this.$el.querySelector('.editor-wrapper')
-            if(this.getMainContentTransition === 'leftFadeOut' && this.contentChange){
+            console.log(this.contentChange)
+            if(this.getMainContentTransition === 'leftFadeOut'){
                 console.log('anim ended check')
                 container.classList.remove(this.getMainContentTransition)
                 this.content = this.getMainContent
                 container.classList.add('rightFadeIn')
                 this.contentChange = false
+                console.log(this.contentChange)
             }
         },
         onEditorChange({ quill, html, text }) {
