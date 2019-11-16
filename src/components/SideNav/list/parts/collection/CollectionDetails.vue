@@ -44,7 +44,7 @@ export default {
     data(){
         return{
             defaultDisplay: `
-                <p class="ql-align-center">${this.checkTypeIcon()}</p><p class="ql-align-center"></p><h1 class="ql-align-center"><span style="color: rgb(255, 255, 255); font-size: 48px;">${capatalize(this.collection.collection)}</span></h1><p><br></p>
+                <p class="ql-align-center">${this.checkTypeIcon()}</p><p class="ql-align-center"></p><h1 class="ql-align-center"><span style="font-size: 48px;">${capatalize(this.collection.collection)}</span></h1><p><br></p>
             `,
             section: null
         }

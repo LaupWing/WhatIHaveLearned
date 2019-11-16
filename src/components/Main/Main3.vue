@@ -1,6 +1,7 @@
 <template>
   <main id="Main">
     <div class="user" v-if="currentUser">
+        <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
       <button @click="signout">Signout</button>
     </div>
     <div 
@@ -93,7 +94,6 @@
                 </span>
             </div>
         </quill-editor>
-        <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
         <!-- <button @click="getDelta">Get Delta</button> -->
     </div>
   </main>
@@ -226,7 +226,7 @@ export default {
             }
             return{
                 'border': 'none',
-                'background': 'var(--secundair-color)',
+                'background': 'white',
                 'marginTop': '100px'
             }
         },
@@ -311,7 +311,7 @@ export default {
 <style>
 #Main{
     flex-grow: 1;
-    background: var(--secundair-color);
+    background: white;
     position: relative;
     display: flex;
     align-items: center;
@@ -370,16 +370,15 @@ div#toolbar .ql-formats >* {
 }
 
 /* Custom Rules for the Snow Theme */
-
 .ql-toolbar.ql-snow{
     background-color: #222;
     border: 1px solid var(--contrast-color);
 }
 
 .ql-container.ql-snow{
-    background-color: var(--main-color);  
+    background-color: white;  
     border: none;
-    color:var(--contrast-color);
+    color:black;
 }
 
 .ql-snow .ql-fill,
