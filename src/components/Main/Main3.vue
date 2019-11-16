@@ -103,7 +103,7 @@
 <script>
 import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
-import Settings from './parts/settings'
+import Settings from './parts/Settings'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 import imageUrl from '@/helpers/quillHandlers.js'
@@ -322,7 +322,6 @@ export default {
     --max-width: 1000px;
     overflow-x: hidden;
 }
-
 #Main .user{
     position: fixed;
     top: 10px;
