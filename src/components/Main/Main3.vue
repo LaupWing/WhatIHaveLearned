@@ -381,6 +381,7 @@ div#toolbar .ql-formats >* {
     background-color: white;  
     border: none;
     color:black;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .ql-snow .ql-fill,

@@ -36,11 +36,13 @@ export default {
 <style>
 .settings{
     width: 100%;
-    background: var(--secundair-color);
+    background: transparent;
+    border-bottom: solid #f2f2f2 2px;
     display: flex;
 }
 .settings button{
     border-radius: 0;
+    color: #999;
 }
 .settings button.signout{
     margin-left: auto;
@@ -57,7 +59,10 @@ export default {
     align-items: center;
     transition: .25s;
     cursor: pointer;
-    border-right: solid 1px white;
+    border-right: solid 2px #f2f2f2;
+}
+.settings .icon-container:hover{
+    background: var(--contrast-color);
 }
 .settings svg > *{
     transition: .5s;

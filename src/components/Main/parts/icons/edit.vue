@@ -55,14 +55,17 @@ export default {
     background: var(--contrast-color);
 }
 #pencil .frame,
-#pencil .outline,
 #pencil .pencil-outline,
 #pencil .pencil-tip,
-#pencil .pencil-body,
+#pencil .pencil-body{
+    fill:#999;
+}
+#pencil.active .outline,
 #pencil.active .pencil-gum,
 #pencil.active .pencil-head{
     fill: #fff;
 }
+#pencil .outline,
 #pencil .pencil-highlight,
 #pencil .pencil-gum,
 #pencil .frame,
