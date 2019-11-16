@@ -1,6 +1,9 @@
 <template>
     <div class="settings">
-        <EditBtn/>
+        <EditBtn 
+            @click="setSetting('edit')"
+            :active="active"
+        />
         <!-- <button class="edit">Toggle Editmode</button> -->
         <button class="signout">Signout</button>
     </div>
@@ -13,8 +16,19 @@ export default {
     components:{
         EditBtn
     },
+    data(){
+        return{
+            active:[]
+        }
+    },
     methods:{
-
+        test(){
+            console.log(this.active)
+        },
+        setSetting(item){
+            this.active.push(item)
+            console.log(this.active)
+        }
     }
 }
 </script>
@@ -42,8 +56,12 @@ export default {
     justify-content: center;
     align-items: center;
     transition: .25s;
+    cursor: pointer;
 }
 .settings .icon-container:hover{
     background: var(--contrast-color);
+}
+.settings svg > *{
+    transition: .5s;
 }
 </style>
