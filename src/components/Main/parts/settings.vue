@@ -57,9 +57,7 @@ export default {
     align-items: center;
     transition: .25s;
     cursor: pointer;
-}
-.settings .icon-container:hover{
-    background: var(--contrast-color);
+    border-right: solid 1px white;
 }
 .settings svg > *{
     transition: .5s;

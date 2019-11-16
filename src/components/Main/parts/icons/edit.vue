@@ -1,5 +1,10 @@
 <template>
-<div :class="['icon-container', active? 'active': '']" @click="activate">
+<div 
+    :class="['icon-container', active? 'active': '']" 
+    @click="activate"
+    @mouseover="handleHover(true)"
+    @mouseout="handleHover(false)"
+>
     <svg
         :class="active? 'active':''"
         id="pencil" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 349.87 349.87"
@@ -22,12 +27,24 @@ export default {
     name: 'EditBtn',
     data(){
         return{
-            active: false
+            active: false,
+            clicked: false
         }
     },
     methods:{
         activate(){
-            this.active = !this.active
+            if(!this.clicked){
+                this.active = true
+                this.clicked = true
+            }else{
+                this.clicked = false
+                this.active = false
+            }
+        },
+        handleHover(state){
+            if(!this.clicked){
+                this.active = state
+            }
         }
     }
 }
