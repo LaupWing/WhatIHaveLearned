@@ -1,9 +1,10 @@
 <template>
   <main id="Main">
-    <div class="user" v-if="currentUser">
+    <!-- <div class="user" v-if="currentUser">
         <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
-      <button @click="signout">Signout</button>
-    </div>
+        <button @click="signout">Signout</button>
+    </div> -->
+    <Settings/>
     <div 
         class="editor-wrapper" 
         :style="wrapperStyling"
@@ -102,6 +103,7 @@
 <script>
 import firebase from 'firebase'
 import {mapGetters, mapActions} from 'vuex'
+import Settings from './parts/settings'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/monokai-sublime.css'
 import imageUrl from '@/helpers/quillHandlers.js'
@@ -167,7 +169,8 @@ Quill.register(ImageFormat, true);
 export default {
     name: 'Main',
     components:{
-        quillEditor
+        quillEditor,
+        Settings
     },
     data(){
         return{
