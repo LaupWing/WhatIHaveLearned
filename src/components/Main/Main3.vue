@@ -266,7 +266,6 @@ export default {
                 container.classList.remove(...container.classList)
                 container.classList.add('editor-wrapper')
             }
-            console.log('animEnded', this.getMainContentTransition)
             if(!this.contentChange) return
             if(this.getMainContentTransition === 'leftFadeOut'){
                 container.classList.remove(this.getMainContentTransition)
@@ -470,18 +469,18 @@ div#toolbar .ql-formats >* {
     color: rgba(255,99,71,0.6);
 }
 .rightFadeIn{
-    animation: forwards 1s fadeInRight;
+    animation: forwards .5s fadeInRight;
 }
 .rightFadeOut{
-    animation: forwards 1s fadeInRight reverse;
+    animation: forwards .5s fadeInRight reverse;
 }
 /* .left{
     animation: forwards .5s fadeInLeft;
 } */
 .leftFadeOut{
-    animation: forwards 1s fadeOutLeft;
+    animation: forwards .5s fadeOutLeft;
 }
 .leftFadeIn{
-    animation: forwards 1s fadeOutLeft reverse;
+    animation: forwards .5s fadeOutLeft reverse;
 }
 </style>

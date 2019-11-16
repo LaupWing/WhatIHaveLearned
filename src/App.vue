@@ -140,7 +140,7 @@ svg{
 }
 @keyframes fadeInRight {
     from{
-        transform: translate(20%,0);
+        transform: translate(10%,0);
         opacity: 0;
     }
     to{
@@ -150,7 +150,7 @@ svg{
 }
 @keyframes fadeInLeft {
     from{
-        transform: translate(-20%,0);
+        transform: translate(-10%,0);
         opacity: 0;
     }
     to{
@@ -164,7 +164,7 @@ svg{
         opacity: 1;
     }
     to{
-        transform: translate(-20%,0);
+        transform: translate(-10%,0);
         opacity: 0;
     }
 }
