@@ -1,8 +1,8 @@
 <template>
     <div id="align">
-        <LeftAlign/>
-        <CenterAlign/>
-        <RightAlign/>
+        <LeftAlign @click="active = 'left'"/>
+        <CenterAlign @click="active = 'center'"/>
+        <RightAlign @click="active = 'right'"/>
     </div>
 </template>
 
@@ -16,6 +16,11 @@ export default {
         CenterAlign,
         RightAlign,
         LeftAlign
+    },
+    data(){
+        return{
+            active: 'left'  
+        }
     }
     
 }
