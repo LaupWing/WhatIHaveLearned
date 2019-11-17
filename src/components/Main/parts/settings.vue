@@ -4,6 +4,7 @@
             @click="setSetting('edit')"
             :active="active"
         />
+        <Align/>
         <!-- <button class="edit">Toggle Editmode</button> -->
         <button class="signout">Signout</button>
     </div>
@@ -11,10 +12,12 @@
 
 <script>
 import EditBtn from './icons/edit'
+import Align from './icons/align'
 export default {
     name: 'Settings',
     components:{
-        EditBtn
+        EditBtn,
+        Align
     },
     data(){
         return{
