@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" @click="togglePopup">
     <SideNav/>
     <Main msg="Welcome to Your Vue.js App"/>
   </div>
@@ -20,6 +20,9 @@ export default {
     Main,
     SideNav
   },
+  computed:{
+      ...mapGetters(['getSettings'])
+  },
   data(){
     return{
     }
@@ -30,6 +33,13 @@ export default {
         firebase.auth().onAuthStateChanged(user=>{
             this.getUser()
         })
+    },
+    togglePopup(){
+        if(this.getSettings.activePopup){
+            console.log('shut down popup')
+        }
+        console.log(this.getSettings)
+        console.log('popup')
     },
     dbStates(){
         let ref = db.collection('userNotes')
@@ -107,6 +117,14 @@ button.active{
 
 svg{
     transition: .25s;
+}
+@keyframes topBottomSlide{
+    from{
+        max-height: 0;
+    }
+    to{
+        max-height: 1000px;
+    }
 }
 @keyframes heightAnim {
     from{
@@ -192,6 +210,12 @@ svg{
 }
 .backward-leave-active {
     animation: slideToLeft 1s;
+}
+.topBottomSlide-enter-active{
+    animation: topBottomSlide 2s;
+}
+.topBottomSlide-leave-active{
+    animation: topBottomSlide 2s reverse;
 }
 
 </style>

@@ -224,7 +224,7 @@ export default {
         wrapperStyling(){
             if(this.getSettings){
                 let styleObj = {
-                    'marginTop': '100px'
+                    'marginTop': '50px'
                 }
                 if(this.getSettings.editMode){
                     styleObj.marginTop = '150px'
