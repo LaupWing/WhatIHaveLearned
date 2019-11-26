@@ -9,6 +9,7 @@
             class="icon-collection"
             :align="align"
         />
+        <MinWidth/>
         <!-- <button class="edit">Toggle Editmode</button> -->
         <!-- <button class="signout">Signout</button> -->
     </div>
@@ -17,13 +18,15 @@
 <script>
 import EditBtn from './icons/edit'
 import Align from './icons/align'
+import MinWidth from './icons/minWidth'
 import {mapGetters} from 'vuex'
 
 export default {
     name: 'Settings',
     components:{
         EditBtn,
-        Align
+        Align,
+        MinWidth
     },
     computed:{
         ...mapGetters(['getSettings'])
