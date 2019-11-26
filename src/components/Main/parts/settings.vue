@@ -3,8 +3,11 @@
         <EditBtn 
             @click="setSetting('edit')"
             :active="active"
+            class="icon-collection"            
         />
-        <Align/>
+        <Align
+            class="icon-collection"
+        />
         <!-- <button class="edit">Toggle Editmode</button> -->
         <button class="signout">Signout</button>
     </div>
@@ -30,7 +33,6 @@ export default {
         },
         setSetting(item){
             this.active.push(item)
-            console.log(this.active)
         }
     }
 }
@@ -62,6 +64,8 @@ export default {
     align-items: center;
     transition: .25s;
     cursor: pointer;
+}
+.settings .icon-collection{
     border-right: solid 2px #f2f2f2;
 }
 .settings .icon-container:hover{
