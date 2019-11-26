@@ -7,6 +7,7 @@
         />
         <Align
             class="icon-collection"
+            :align="align"
         />
         <!-- <button class="edit">Toggle Editmode</button> -->
         <!-- <button class="signout">Signout</button> -->
@@ -16,15 +17,21 @@
 <script>
 import EditBtn from './icons/edit'
 import Align from './icons/align'
+import {mapGetters} from 'vuex'
+
 export default {
     name: 'Settings',
     components:{
         EditBtn,
         Align
     },
+    computed:{
+        ...mapGetters(['getSettings'])
+    },
     data(){
         return{
-            active:[]
+            active:[],
+            align: null
         }
     },
     methods:{
@@ -34,7 +41,11 @@ export default {
         setSetting(item){
             this.active.push(item)
         }
+    },
+    created(){
+        console.log(this.getSettings)
     }
+
 }
 </script>
 

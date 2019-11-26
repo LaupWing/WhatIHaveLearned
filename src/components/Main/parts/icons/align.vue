@@ -1,15 +1,15 @@
 <template>
     <div id="align">
         <LeftAlign
-            :clicked="active"
-            v-on:click.native="active = 'left'"/>
+            :clicked="getSettings.align"
+            v-on:click.native="saveAlignment('left')"/>
         <CenterAlign 
-            :clicked="active"
-            v-on:click.native="active = 'center'"
+            :clicked="getSettings.align"
+            v-on:click.native="saveAlignment('center')"
         />
         <RightAlign 
-            :clicked="active"
-            v-on:click.native="active = 'right'"
+            :clicked="getSettings.align"
+            v-on:click.native="saveAlignment('right')"
         />
     </div>
 </template>
@@ -18,6 +18,7 @@
 import CenterAlign from './align/centerAlign'
 import RightAlign from './align/rightAlign'
 import LeftAlign from './align/leftAlign'
+import {mapGetters, mapActions} from 'vuex'
 export default {
     name: 'align',
     components:{
@@ -25,12 +26,16 @@ export default {
         RightAlign,
         LeftAlign
     },
+    computed:{
+    ...mapGetters(['getSettings'])
+    },
     data(){
         return{
             active: 'left'  
         }
     },
     methods:{
+        ...mapActions(['saveAlignment'])
     }
     
 }
