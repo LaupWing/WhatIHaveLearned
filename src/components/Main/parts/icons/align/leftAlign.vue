@@ -1,6 +1,6 @@
 <template>
 <div 
-    :class="['icon-container', active? 'active': '']"
+    :class="['icon-container', active || clicked === 'left'? 'active': '']"
     @mouseover="handleHover(true)"
     @mouseout="handleHover(false)"
 >
@@ -20,18 +20,19 @@
 <script>
 export default {
     name: 'leftAlign',
+    props:['clicked'],
     data(){
         return{
-            active: false,
-            clicked: false
+            active: false
         }
     },
     methods:{
         handleHover(state){
-            if(!this.clicked){
-                this.active = state
-            }
+            this.active = state
         }
+    },
+    created(){
+        console.log(this.clicked)
     }
 }
 </script>

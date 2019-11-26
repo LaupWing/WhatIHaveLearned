@@ -1,6 +1,6 @@
 <template>
 <div 
-    :class="['icon-container', active? 'active': '']"
+    :class="['icon-container', active || clicked === 'center'? 'active': '']"
     @mouseover="handleHover(true)"
     @mouseout="handleHover(false)"
 >
@@ -24,17 +24,16 @@
 <script>
 export default {
     name: 'EditBtn',
+    props:['clicked'],
     data(){
         return{
-            active: false,
-            clicked: false
+            active: false
         }
     },
     methods:{
         handleHover(state){
-            if(!this.clicked){
-                this.active = state
-            }
+            this.active = state
+            
         }
     }
 }

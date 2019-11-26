@@ -1,15 +1,15 @@
 <template>
     <div id="align">
         <LeftAlign
-            :class="active === 'left'? 'active': ''"  
-            @click="active = 'left'"/>
+            :clicked="active"
+            v-on:click.native="active = 'left'"/>
         <CenterAlign 
-            @click="active = 'center'"
-            :class="active === 'center'? 'active': ''"
+            :clicked="active"
+            v-on:click.native="active = 'center'"
         />
         <RightAlign 
-            @click="active = 'right'"
-            :class="active === 'right'? 'active': ''"
+            :clicked="active"
+            v-on:click.native="active = 'right'"
         />
     </div>
 </template>
@@ -29,6 +29,8 @@ export default {
         return{
             active: 'left'  
         }
+    },
+    methods:{
     }
     
 }
