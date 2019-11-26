@@ -1,9 +1,5 @@
 <template>
   <main id="Main">
-    <!-- <div class="user" v-if="currentUser">
-        <button @click="toggleEdit" class="edit" :style="{left : editBtnLeftVal+'px', top: editBtnTopVal+ 'px'}">Toggle Editmode</button>
-        <button @click="signout">Signout</button>
-    </div> -->
     <Settings/>
     <div 
         class="editor-wrapper" 

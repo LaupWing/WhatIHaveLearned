@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @click="togglePopup">
+  <div id="app">
     <SideNav/>
     <Main msg="Welcome to Your Vue.js App"/>
   </div>
@@ -33,16 +33,6 @@ export default {
         firebase.auth().onAuthStateChanged(user=>{
             this.getUser()
         })
-    },
-    togglePopup(event){
-        if(this.getSettings.activePopup){
-            console.log(this.$el.querySelector('.popup'))
-            if(!this.$el.querySelector('.popup'))    return
-            console.log(parentClassChecker(event.target, 'popup'))
-            // console.log(this.getSettings)
-            console.log(event.target)
-            console.log('shut down popup')
-        }
     },
     dbStates(){
         let ref = db.collection('userNotes')

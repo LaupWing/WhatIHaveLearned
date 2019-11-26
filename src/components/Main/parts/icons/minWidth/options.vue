@@ -1,8 +1,8 @@
 <template>
     <div class="options">
-        <li class="option">500</li>
-        <li class="option">600</li>
-        <li class="option">700</li>
+        <li class="option">500<span>px</span></li>
+        <li class="option">600<span>px</span></li>
+        <li class="option">700<span>px</span></li>
     </div>
 </template>
 

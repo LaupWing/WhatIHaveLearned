@@ -1,7 +1,7 @@
 <template>
-    <div id="MinWidth" class="icon-collection">
+    <div id="MinWidth" class="icon-collection" v-click-outside="outside">
         <p>Min Width</p>
-        <h2 @click="openPopup">500</h2>
+        <h2 @click="openPopup">500<span>px</span> </h2>
         <transition name="topBottomSlide">
             <Options class="popup" v-if="activePopup"/>
         </transition>
@@ -11,6 +11,7 @@
 <script>
 import {mapActions, mapGetters} from 'vuex'
 import Options from './minWidth/options'
+import ClickOutside from 'vue-click-outside'
 export default {
     name: 'MinWidth',
     components:{
@@ -25,13 +26,17 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['elActivePopup']),
         openPopup(){
             this.activePopup = !this.activePopup
+        },
+        outside(){
             if(this.activePopup){
-                this.elActivePopup(`${this.$el.id} popup`)
+                this.activePopup = false
             }
         }
+    },
+    directives: {
+        ClickOutside
     }
 }
 </script>
@@ -70,5 +75,8 @@ export default {
     text-align: center;
     padding: 10px;
     background: white;
+}
+#MinWidth span{
+    font-size: .5em;
 }
 </style>
