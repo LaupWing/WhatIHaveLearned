@@ -17,7 +17,7 @@
             :options="editorOption"
             @change="onEditorChange($event)"
             @blur="test($event)"
-            :disabled="!editMode"
+            :disabled="!getSettings.editMode"
         >
         >
             <div id="toolbar" slot="toolbar" :style="toolbarStyling">
@@ -220,7 +220,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition']),
+        ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition', 'getSettings']),
         wrapperStyling(){
             if(this.editMode){
                 return {
