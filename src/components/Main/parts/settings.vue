@@ -9,6 +9,7 @@
             class="icon-collection"
             :align="align"
         />
+        <MaxWidth/>
         <MinWidth/>
         <!-- <button class="edit">Toggle Editmode</button> -->
         <!-- <button class="signout">Signout</button> -->
@@ -19,6 +20,7 @@
 import EditBtn from './icons/edit'
 import Align from './icons/align'
 import MinWidth from './icons/minWidth'
+import MaxWidth from './icons/maxWidth'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -26,7 +28,8 @@ export default {
     components:{
         EditBtn,
         Align,
-        MinWidth
+        MinWidth,
+        MaxWidth
     },
     computed:{
         ...mapGetters(['getSettings'])
@@ -84,5 +87,8 @@ export default {
 }
 .settings svg > *{
     transition: .5s;
+}
+.settings h2{
+    font-weight: 550;
 }
 </style>
