@@ -222,7 +222,7 @@ export default {
     computed:{
         ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition', 'getSettings']),
         wrapperStyling(){
-            if(this.editMode){
+            if(this.getSettings.editMode){
                 return {
                     'marginTop': '150px'
                     }
@@ -234,7 +234,7 @@ export default {
             }
         },
         toolbarStyling(){
-            if(this.editMode){
+            if(this.getSettings.editMode){
                 return {
                     'transform': 'translate(0, -100%)',
                     'z-index': '1000'
@@ -255,13 +255,6 @@ export default {
                 length: obj.selection.savedRange.length
             }
             // this.quillEditor.formatText(range.index, range.length, 'background', '#3399FF');
-        },
-        enableQuillCheck(){
-            if(this.editMode){
-                this.quill.enable()
-            }else{
-                this.quill.enable(false)
-            }
         },
         animEnded(){
             const container = this.$el.querySelector('.editor-wrapper')
