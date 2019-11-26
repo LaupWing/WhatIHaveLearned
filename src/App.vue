@@ -12,7 +12,7 @@ import SideNav from './components/SideNav/SideNav.vue'
 import firebase from 'firebase'
 import db from '@/firebase/init' // This has to be started in order to start the app intial
 import {mapGetters, mapActions} from 'vuex'
-
+import parentClassChecker from './helpers/parentClass'
 
 export default {
   name: 'app',
@@ -34,12 +34,15 @@ export default {
             this.getUser()
         })
     },
-    togglePopup(){
+    togglePopup(event){
         if(this.getSettings.activePopup){
+            console.log(this.$el.querySelector('.popup'))
+            if(!this.$el.querySelector('.popup'))    return
+            console.log(parentClassChecker(event.target, 'popup'))
+            // console.log(this.getSettings)
+            console.log(event.target)
             console.log('shut down popup')
         }
-        console.log(this.getSettings)
-        console.log('popup')
     },
     dbStates(){
         let ref = db.collection('userNotes')
@@ -123,7 +126,7 @@ svg{
         max-height: 0;
     }
     to{
-        max-height: 1000px;
+        max-height: 150px;
     }
 }
 @keyframes heightAnim {
@@ -212,10 +215,10 @@ svg{
     animation: slideToLeft 1s;
 }
 .topBottomSlide-enter-active{
-    animation: topBottomSlide 2s;
+    animation: topBottomSlide 1s;
 }
 .topBottomSlide-leave-active{
-    animation: topBottomSlide 2s reverse;
+    animation: topBottomSlide 1s reverse;
 }
 
 </style>

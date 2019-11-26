@@ -3,20 +3,21 @@
         <p>Min Width</p>
         <h2 @click="openPopup">500</h2>
         <transition name="topBottomSlide">
-            <div v-if="activePopup" class="options">
-                <li class="option">500</li>
-                <li class="option">600</li>
-                <li class="option">700</li>
-            </div>
+            <Options class="popup" v-if="activePopup"/>
         </transition>
     </div>
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
+import Options from './minWidth/options'
 export default {
     name: 'MinWidth',
+    components:{
+        Options
+    },
     computed:{
-
+        ...mapGetters(['getSettings'])
     },
     data(){
         return{
@@ -24,8 +25,12 @@ export default {
         }
     },
     methods:{
+        ...mapActions(['elActivePopup']),
         openPopup(){
             this.activePopup = !this.activePopup
+            if(this.activePopup){
+                this.elActivePopup(`${this.$el.id} popup`)
+            }
         }
     }
 }
@@ -58,9 +63,7 @@ export default {
     width: 100%;
     z-index: 10;
     box-shadow: 0px 17px 23px 0px rgba(0,0,0,0.2);
-    max-height: 0;
     overflow: hidden;
-    transition: 1s;
 }
 #MinWidth .options li.option{
     border-bottom: #f2f2f2 2px solid;
