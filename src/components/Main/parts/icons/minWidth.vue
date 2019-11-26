@@ -62,7 +62,7 @@ export default {
 #MinWidth .options{
     position: absolute;
     bottom: 0;
-    transform: translate(0,102%);
+    transform: translate(0,100%);
     border-left: #f2f2f2 2px solid;
     border-right: #f2f2f2 2px solid;
     width: 100%;
@@ -75,8 +75,14 @@ export default {
     text-align: center;
     padding: 10px;
     background: white;
+    transition: .5s;
+    cursor: pointer;
 }
 #MinWidth span{
     font-size: .5em;
 }
+#MinWidth .options li.option:hover,
+#MinWidth .options li.option.active{
+    background: var(--contrast-color);
+} 
 </style>

@@ -116,7 +116,7 @@ svg{
         max-height: 0;
     }
     to{
-        max-height: 150px;
+        max-height: 260px;
     }
 }
 @keyframes heightAnim {

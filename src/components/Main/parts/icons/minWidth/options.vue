@@ -1,8 +1,13 @@
 <template>
     <div class="options">
-        <li class="option">500<span>px</span></li>
-        <li class="option">600<span>px</span></li>
-        <li class="option">700<span>px</span></li>
+        <li 
+            v-for="(val, index) in options" 
+            :key="index" 
+            class="option"
+            :class="checkActiveOption(val)"    
+        >
+                {{val}}<span>px</span>
+        </li>
     </div>
 </template>
 
@@ -12,14 +17,24 @@ export default {
     name: 'options',
     props:['activePopup'],
     computed:{
-        
+        ...mapGetters(['getSettings']),
+    },
+    data(){
+        return{
+            options:[500, 600, 700, 800, 900, 1000]
+        }
     },
     methods:{
-        
+        checkActiveOption(val){
+            if(val === this.getSettings.minWidth)   return 'active'
+        }
     }
 }
 </script>
 
 <style>
+#MinWidth .options li.option.active{
+    background: var(--contrast-color);
+} 
 
 </style>
