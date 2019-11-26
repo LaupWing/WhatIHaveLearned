@@ -1,9 +1,9 @@
 <template>
     <div id="MinWidth" class="icon-collection" v-click-outside="outside">
         <p>Min Width</p>
-        <h2 @click="openPopup">500<span>px</span> </h2>
+        <h2 @click="openPopup">{{getSettings.minWidth}}<span>px</span> </h2>
         <transition name="topBottomSlide">
-            <Options class="popup" v-if="activePopup"/>
+            <Options class="popup" v-if="activePopup" v-on:toggle="openPopup"/>
         </transition>
     </div>
 </template>

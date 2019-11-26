@@ -5,14 +5,15 @@
             :key="index" 
             class="option"
             :class="checkActiveOption(val)"    
+            @click="setMinWidth(val)"
         >
-                {{val}}<span>px</span>
+            {{val}}<span>px</span>
         </li>
     </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapActions} from 'vuex'
 export default {
     name: 'options',
     props:['activePopup'],
@@ -25,16 +26,17 @@ export default {
         }
     },
     methods:{
+        ...mapActions(['valueMaxMinWidth']),
         checkActiveOption(val){
             if(val === this.getSettings.minWidth)   return 'active'
+        },
+        setMinWidth(value){
+            this.$emit('toggle')
+            this.valueMaxMinWidth({
+                type: 'minWidth',
+                value
+            })
         }
     }
 }
 </script>
-
-<style>
-#MinWidth .options li.option.active{
-    background: var(--contrast-color);
-} 
-
-</style>
