@@ -1,7 +1,6 @@
 <template>
 <div 
-    :class="['icon-container', active? 'active': '']" 
-    @click="activate"
+    :class="['icon-container', active? 'active': '']"
     @mouseover="handleHover(true)"
     @mouseout="handleHover(false)"
 >
@@ -32,15 +31,6 @@ export default {
         }
     },
     methods:{
-        activate(){
-            if(!this.clicked){
-                this.active = true
-                this.clicked = true
-            }else{
-                this.clicked = false
-                this.active = false
-            }
-        },
         handleHover(state){
             if(!this.clicked){
                 this.active = state

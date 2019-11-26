@@ -1,8 +1,16 @@
 <template>
     <div id="align">
-        <LeftAlign @click="active = 'left'"/>
-        <CenterAlign @click="active = 'center'"/>
-        <RightAlign @click="active = 'right'"/>
+        <LeftAlign
+            :class="active === 'left'? 'active': ''"  
+            @click="active = 'left'"/>
+        <CenterAlign 
+            @click="active = 'center'"
+            :class="active === 'center'? 'active': ''"
+        />
+        <RightAlign 
+            @click="active = 'right'"
+            :class="active === 'right'? 'active': ''"
+        />
     </div>
 </template>
 

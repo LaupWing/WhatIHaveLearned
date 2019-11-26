@@ -9,7 +9,7 @@
             class="icon-collection"
         />
         <!-- <button class="edit">Toggle Editmode</button> -->
-        <button class="signout">Signout</button>
+        <!-- <button class="signout">Signout</button> -->
     </div>
 </template>
 
