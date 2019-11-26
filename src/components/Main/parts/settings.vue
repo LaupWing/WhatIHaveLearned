@@ -35,9 +35,6 @@ export default {
         }
     },
     methods:{
-        test(){
-            console.log(this.active)
-        },
         setSetting(item){
             this.active.push(item)
         }

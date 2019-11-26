@@ -1,7 +1,7 @@
 <template>
 <div 
-    :class="['icon-container', active? 'active': '']" 
-    @click="activate"
+    :class="['icon-container', getSettings.editMode||active? 'active': '']" 
+    @click="toggleEdit"
     @mouseover="handleHover(true)"
     @mouseout="handleHover(false)"
 >
@@ -23,28 +23,22 @@
 </template>
 
 <script>
+import {mapGetters,mapActions} from 'vuex'
 export default {
     name: 'EditBtn',
+    computed: {
+        ...mapGetters(['getSettings'])
+    },
     data(){
         return{
             active: false,
-            clicked: false
         }
     },
     methods:{
-        activate(){
-            if(!this.clicked){
-                this.active = true
-                this.clicked = true
-            }else{
-                this.clicked = false
-                this.active = false
-            }
-        },
+        ...mapActions(['toggleEdit']),
         handleHover(state){
-            if(!this.clicked){
-                this.active = state
-            }
+            this.active = state
+            
         }
     }
 }
@@ -60,9 +54,9 @@ export default {
 #pencil .pencil-body{
     fill:#999;
 }
-#pencil.active .outline,
-#pencil.active .pencil-gum,
-#pencil.active .pencil-head{
+.icon-container.active #pencil .outline,
+.icon-container.active #pencil .pencil-gum,
+.icon-container.active #pencil .pencil-head{
     fill: #fff;
 }
 #pencil .outline,
@@ -73,20 +67,20 @@ export default {
 #pencil .pencil-shadow{
     fill: transparent;
 }
-#pencil.active .frame,
-#pencil.active .pencil-outline{
+.icon-container.active #pencil .frame,
+.icon-container.active #pencil .pencil-outline{
     fill:#464c56;
 }
-#pencil.active .pencil-body{
+.icon-container.active #pencil .pencil-body{
     fill:#f5afb4;
 }
-#pencil.active .pencil-tip{
+.icon-container.active #pencil .pencil-tip{
     fill:#a9b3c6;
 }
-#pencil.active .pencil-highlight{
+.icon-container.active #pencil .pencil-highlight{
     fill:#ef7c7f;
 }
-#pencil.active .pencil-shadow{
+.icon-container.active #pencil .pencil-shadow{
     fill:#1d1d1b;
     opacity:0.4;
 }
