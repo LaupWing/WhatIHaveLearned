@@ -222,15 +222,23 @@ export default {
     computed:{
         ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition', 'getSettings']),
         wrapperStyling(){
-            if(this.getSettings.editMode){
-                return {
-                    'marginTop': '150px'
-                    }
-            }
-            return{
-                'border': 'none',
-                'background': 'white',
-                'marginTop': '100px'
+            if(this.getSettings){
+                let styleObj = {
+                    'marginTop': '100px'
+                }
+                if(this.getSettings.editMode){
+                    styleObj.marginTop = '150px'
+                }
+                if(this.getSettings.align === 'left'){
+                    styleObj.alignSelf = 'flex-start'
+                }
+                if(this.getSettings.align === 'center'){
+                    styleObj.alignSelf = 'center'
+                }
+                if(this.getSettings.align === 'right'){
+                    styleObj.alignSelf = 'flex-end'
+                }
+                return styleObj
             }
         },
         toolbarStyling(){
