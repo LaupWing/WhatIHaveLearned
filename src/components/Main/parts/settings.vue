@@ -11,7 +11,7 @@
         />
         <MaxWidth/>
         <MinWidth/>
-        <h3>These settings are for: <span></span></h3>
+        <h3>These settings are for:  <span>{{getSettings.settingFor}}</span></h3>
         <!-- <button class="edit">Toggle Editmode</button> -->
         <!-- <button class="signout">Signout</button> -->
     </div>
@@ -100,5 +100,9 @@ export default {
     justify-content: center;
     align-items: center;
     padding-left: 10px;
+}
+.settings h3 span{
+    margin-left: 5px;
+    border-bottom: solid 2px var(--contrast-color);
 }
 </style>

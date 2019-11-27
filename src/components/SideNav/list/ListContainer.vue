@@ -53,7 +53,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['getCollections','updateCollections']),
+        ...mapActions(['getCollections','updateCollections', 'setSettingFor']),
         toggleAddCollection(){
             this.addCollection = !this.addCollection
         },
@@ -74,6 +74,9 @@ export default {
         setAnim(anim){
             return anim
         }
+    },
+    created(){
+        this.setSettingFor('All Collections Homepage')
     }
 }
 </script>
