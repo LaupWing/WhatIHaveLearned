@@ -54,6 +54,10 @@ export default {
     align-items: center;
     position: relative;
 }
+#SideNav h2.title{
+    padding: 10px;
+    color: var(--contrast-color);
+}
 #SideNav img.logo{
     margin: 20px 0;
 }

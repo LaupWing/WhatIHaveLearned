@@ -1,5 +1,6 @@
 <template>
     <div class="list-collection">
+        <h2 class="title">Collections</h2>
         <div class="add">
             <transition 
                 name="slideTopDown" 

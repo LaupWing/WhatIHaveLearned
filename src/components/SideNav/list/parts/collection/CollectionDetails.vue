@@ -1,7 +1,7 @@
 <template>
     <div id="Collection-Details">
-        <li @click="backToCollection">Back to collection</li>
-        <li class="collection" @click="test">{{collection.collection}}</li>
+        <li class="back" @click="backToCollection">Back to collection</li>
+        <h2 class="title" @click="test">{{collection.collection}}</h2>
         <transition :name="animation">
             <Overview
                 :sections="collection.sections"
@@ -79,7 +79,13 @@ export default {
     width: 100%;
     position: absolute;
 }
-#Collection_Details h1{
+#Collection-Details li.back{
+    border: solid white 1px;
+    border-left: none;
+    border-radius: 0 20px 20px 0;
+    width: 70%;
+}
+#Collection-Details h2{
     text-transform: capitalize;
 }
 </style>
