@@ -219,8 +219,11 @@ export default {
         ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition', 'getSettings']),
         wrapperStyling(){
             if(this.getSettings){
+                console.log(this.getSettings)
                 let styleObj = {
-                    'marginTop': '50px'
+                    'marginTop': '50px',
+                    'maxWidth': this.getSettings.maxWidth +'px',
+                    'minWidth': this.getSettings.minWidth + 'px',
                 }
                 if(this.getSettings.editMode){
                     styleObj.marginTop = '150px'
@@ -241,14 +244,21 @@ export default {
             if(this.getSettings.editMode){
                 return {
                     'transform': 'translate(0, -100%)',
-                    'z-index': '1000'
-                    }
+                    'z-index': '1000',
+                    'maxWidth': this.getSettings.maxWidth +'px',
+                    'minWidth': this.getSettings.minWidth +'px'
+                 }
             }
-            return{
+            let styleObj ={
                 'transform': 'translate(0,0)',
                 'opacity': '0',
                 'pointer-events': 'none'
             }
+            if(this.getSettings){
+                styleObj.maxWidth = this.getSettings.maxWidth +'px'
+                styleObj.minWidth = this.getSettings.minWidth +'px'
+            }
+            return styleObj
         }
     },
     methods:{
