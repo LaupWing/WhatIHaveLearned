@@ -104,7 +104,7 @@ ul#List-Container .add{
     border-right: none;
     overflow: hidden;
 }
-ul#List-Container li.collection{
+ul#List-Container li.item{
     border-bottom: solid 1px var(--lighter-white);
     text-transform: capitalize;
 }

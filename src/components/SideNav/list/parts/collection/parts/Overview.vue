@@ -5,7 +5,7 @@
             mode="out-in" 
             v-on:enter="animEnded"
         >
-            <li v-if="!addSection" @click="addSection = true">Add new Section<Plus/></li>
+            <li class="add" v-if="!addSection" @click="addSection = true">Add new Section<Plus/></li>
             <div class="add-section" v-else>
                 <input type="text" v-model="newSection">
                 <div class="buttons">
@@ -20,6 +20,7 @@
                 :key="section.section"
                 :class="{'go-to':checkNewlyAdded(section)}"
                 @click="$emit('showSectionDetails', section)"
+                class="item"
             >
                 {{section.section}}
             </li>

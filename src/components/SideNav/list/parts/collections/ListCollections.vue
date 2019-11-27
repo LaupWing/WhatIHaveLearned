@@ -23,7 +23,7 @@
         </div>
         <transition-group name="fadeIn" v-on:enter="newItemAdded">
             <li 
-                class="collection"
+                class="item"
                 v-for="(collection) in allCollections.collections"
                 :class="{'go-to':checkNewlyAdded(collection)}"
                 :key="collection.collection"
