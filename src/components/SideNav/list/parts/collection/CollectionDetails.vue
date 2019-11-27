@@ -50,7 +50,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['setMainContent', 'setMainContentTransition']),
+        ...mapActions(['setMainContent', 'setMainContentTransition', 'setSettingFor']),
         checkTypeIcon(){
             if(this.collection.icon.type === 'img'){
                 return `<img src="${this.collection.icon.src}" width="100" style="display: block; margin: auto;">`
@@ -70,6 +70,7 @@ export default {
         if(!this.collection.introduction){
             this.setMainContent(this.defaultDisplay)
         }
+        this.setSettingFor(this.collection.collection)
     }
 }
 </script>

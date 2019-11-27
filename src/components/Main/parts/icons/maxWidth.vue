@@ -66,7 +66,7 @@ export default {
     border-left: #f2f2f2 2px solid;
     border-right: #f2f2f2 2px solid;
     width: 100%;
-    z-index: 1000;
+    z-index: 10000;
     box-shadow: 0px 17px 23px 0px rgba(0,0,0,0.2);
     overflow: hidden;
 }

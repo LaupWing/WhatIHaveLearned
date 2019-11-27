@@ -100,9 +100,11 @@ export default {
     justify-content: center;
     align-items: center;
     padding-left: 10px;
+    font-size: .9em;
 }
 .settings h3 span{
     margin-left: 5px;
     border-bottom: solid 2px var(--contrast-color);
+    text-transform: capitalize;
 }
 </style>

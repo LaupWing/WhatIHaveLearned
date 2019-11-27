@@ -60,7 +60,7 @@ export default {
         ...mapGetters(['allCollections'])
     },
     methods:{
-        ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition']),
+        ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition', 'setSettingFor']),
         emitCollectionDetails(value){    
             this.setMainContentTransition('leftFadeOut')   
             this.$emit('showCollectionDetails', value)
@@ -99,6 +99,7 @@ export default {
         await this.getCollections()
         await this.checkContent()
         prevenClickOnReadOnly()
+        this.setSettingFor('All Collections Homepage')
     }
 }
 </script>

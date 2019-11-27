@@ -75,9 +75,6 @@ export default {
             return anim
         }
     },
-    created(){
-        this.setSettingFor('All Collections Homepage')
-    }
 }
 </script>
 
