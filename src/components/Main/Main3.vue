@@ -208,7 +208,6 @@ export default {
             }
         },
         getMainContentTransition(newTransition, oldTransition ){
-            console.log(newTransition, oldTransition)
             if(!this.contentChange && this.getMainContentTransition !== null){
                 this.contentChange = true
                 this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)

@@ -11,6 +11,7 @@
         />
         <MaxWidth/>
         <MinWidth/>
+        <h3>These settings are for: <span></span></h3>
         <!-- <button class="edit">Toggle Editmode</button> -->
         <!-- <button class="signout">Signout</button> -->
     </div>
@@ -58,6 +59,7 @@ export default {
     background: transparent;
     border-bottom: solid #f2f2f2 2px;
     display: flex;
+    font-family: var(--main-font);
 }
 .settings button{
     border-radius: 0;
@@ -90,5 +92,13 @@ export default {
 }
 .settings h2{
     font-weight: 550;
+}
+.settings h3{
+    color: #999;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
 }
 </style>
