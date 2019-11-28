@@ -91,6 +91,9 @@
                 </span>
             </div>
         </quill-editor>
+        <div class="message">
+            <h3>Saving...</h3>
+        </div>
         <!-- <button @click="getDelta">Get Delta</button> -->
     </div>
   </main>
@@ -170,6 +173,8 @@ export default {
     },
     data(){
         return{
+            secondsAfterChange:0,
+            autoSaveLimit: 5,
             editBtnLeftVal: 0,
             editBtnTopVal: 30,
             editMode: false,
@@ -293,6 +298,7 @@ export default {
         },
         onEditorChange({ quill, html, text }) {
             this.setMainContent(html)
+            console.log('change')
         },
         toggleEdit(){
             if(this.editMode){
@@ -490,5 +496,12 @@ div#toolbar .ql-formats >* {
 }
 .leftFadeIn{
     animation: forwards .5s fadeOutLeft reverse;
+}
+.message{
+    position: fixed;
+    right: 20px;
+    bottom:10px;
+    color: black;
+    font-size: 1.5em;
 }
 </style>
