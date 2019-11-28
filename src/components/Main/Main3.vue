@@ -91,7 +91,7 @@
                 </span>
             </div>
         </quill-editor>
-        <div class="message">
+        <div v-if="saving" class="message">
             <h3>Saving...</h3>
         </div>
         <!-- <button @click="getDelta">Get Delta</button> -->
@@ -173,6 +173,7 @@ export default {
     },
     data(){
         return{
+            saving: false,
             counter: null,
             secondsAfterChange:0,
             autoSaveLimit: 5,
@@ -298,15 +299,17 @@ export default {
         },
         onEditorChange({ quill, html, text }) {
             this.setMainContent(html)
-            // if(this.counter === null){
-            //     this.counter = setInterval(()=>{
-            //         this.secondsAfterChange = this.secondsAfterChange +1
-            //         console.log(this.secondsAfterChange)
-            //     },1000)
-            // }else{
-            //     clearInterval(this.counter)
-            //     this.counter = null
-            // }
+            if(this.counter === null){
+                this.secondsAfterChange = 0
+                this.counter = setInterval(()=>{
+                    this.secondsAfterChange = this.secondsAfterChange +1
+                    if(this.secondsAfterChange === this.autoSaveLimit){
+                        clearInterval(this.counter)
+                        this.counter = null
+                        this.saving = true
+                    }
+                },1000)
+            }
         },
         toggleEdit(){
             if(this.editMode){
@@ -511,5 +514,6 @@ div#toolbar .ql-formats >* {
     bottom:10px;
     color: black;
     font-size: 1.5em;
+    animation: fade 2s infinite;
 }
 </style>
