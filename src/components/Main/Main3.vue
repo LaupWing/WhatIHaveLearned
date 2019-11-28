@@ -173,6 +173,7 @@ export default {
     },
     data(){
         return{
+            counter: null,
             secondsAfterChange:0,
             autoSaveLimit: 5,
             editBtnLeftVal: 0,
@@ -223,7 +224,6 @@ export default {
         ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition', 'getSettings']),
         wrapperStyling(){
             if(this.getSettings){
-                console.log(this.getSettings)
                 let styleObj = {
                     'marginTop': '50px',
                     'maxWidth': this.getSettings.maxWidth +'px',
@@ -298,7 +298,15 @@ export default {
         },
         onEditorChange({ quill, html, text }) {
             this.setMainContent(html)
-            console.log('change')
+            // if(this.counter === null){
+            //     this.counter = setInterval(()=>{
+            //         this.secondsAfterChange = this.secondsAfterChange +1
+            //         console.log(this.secondsAfterChange)
+            //     },1000)
+            // }else{
+            //     clearInterval(this.counter)
+            //     this.counter = null
+            // }
         },
         toggleEdit(){
             if(this.editMode){

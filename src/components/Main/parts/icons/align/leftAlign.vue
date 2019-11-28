@@ -32,7 +32,7 @@ export default {
         }
     },
     created(){
-        console.log(this.clicked)
+        
     }
 }
 </script>

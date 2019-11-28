@@ -38,9 +38,7 @@ export default {
         let ref = db.collection('userNotes')
             ref.onSnapshot(snapshot=>{
                 snapshot.docChanges().forEach(change=>{
-                    console.log(change)
                     if(!this.user)  return
-                    console.log(change.doc.id, this.user.uid)
                     if(change.type === 'modified' && change.doc.id === this.user.uid){
                     console.log(change)
                     // console.log(this.userNotes)
