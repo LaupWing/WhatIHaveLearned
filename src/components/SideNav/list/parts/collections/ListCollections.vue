@@ -96,6 +96,7 @@ export default {
         },
     },
     async created(){
+        console.log(this.allCollections)
         await this.getCollections()
         await this.checkContent()
         prevenClickOnReadOnly()
