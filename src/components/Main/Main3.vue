@@ -222,7 +222,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition', 'getSettings']),
+        ...mapGetters(['currentUser', 'getMainContent', 'getMainContentTransition', 'getSettings', 'allCollections', 'getSettings', 'getCurrentLocation']),
         wrapperStyling(){
             if(this.getSettings){
                 let styleObj = {
@@ -267,7 +267,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['setMainContent', 'setMainContentTransition']),
+        ...mapActions(['setMainContent', 'setMainContentTransition', 'updateIntroduction', 'updateCollection']),
         test(obj){
             const range = {
                 index: obj.selection.savedRange.index,
@@ -307,8 +307,18 @@ export default {
                         clearInterval(this.counter)
                         this.counter = null
                         this.saving = true
+                        this.updateContent()
+                        this.secondsAfterChange = 0
                     }
                 },1000)
+            }
+        },
+        async updateContent(){
+            if(this.getCurrentLocation.type === 'introduction'){
+                await this.updateIntroduction(this.getMainContent)
+                console.log('updating')
+                this.saving = false
+                return 
             }
         },
         toggleEdit(){

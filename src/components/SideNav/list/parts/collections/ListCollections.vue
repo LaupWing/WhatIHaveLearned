@@ -60,7 +60,7 @@ export default {
         ...mapGetters(['allCollections'])
     },
     methods:{
-        ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition', 'setSettingFor']),
+        ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition', 'setSettingFor', 'setCurrentLocation']),
         emitCollectionDetails(value){    
             this.setMainContentTransition('leftFadeOut')   
             this.$emit('showCollectionDetails', value)
@@ -92,11 +92,15 @@ export default {
             }
         },
         checkContent(){
+            console.log(this.allCollections)
             this.allCollections.introduction ? this.setMainContent(this.allCollections.introduction) : this.setMainContent(this.defaultDisplay)
+            this.setCurrentLocation({
+                type:'introduction'
+            })
         },
     },
     async created(){
-        console.log(this.allCollections)
+        
         await this.getCollections()
         await this.checkContent()
         prevenClickOnReadOnly()

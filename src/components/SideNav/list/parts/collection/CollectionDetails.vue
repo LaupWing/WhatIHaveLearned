@@ -1,7 +1,7 @@
 <template>
     <div id="Collection-Details">
         <li class="back" @click="backToCollection">Back to collection</li>
-        <h2 class="title" @click="test">{{collection.collection}}</h2>
+        <h2 class="title">{{collection.collection}}</h2>
         <transition :name="animation">
             <Overview
                 :sections="collection.sections"
@@ -50,7 +50,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['setMainContent', 'setMainContentTransition', 'setSettingFor']),
+        ...mapActions(['setMainContent', 'setMainContentTransition', 'setSettingFor', 'setCurrentLocation']),
         checkTypeIcon(){
             if(this.collection.icon.type === 'img'){
                 return `<img src="${this.collection.icon.src}" width="100" style="display: block; margin: auto;">`
@@ -61,15 +61,16 @@ export default {
         backToCollection(){
             this.setMainContentTransition('rightFadeOut')
             this.$emit('backToCollection')
-        },
-        test(){
-            console.log('setTransition')
         }
     },
     created(){
         if(!this.collection.introduction){
             this.setMainContent(this.defaultDisplay)
         }
+        this.setCurrentLocation({
+                type:'collection',
+                collection: this.collection.collection
+        })
         this.setSettingFor(this.collection.collection)
     }
 }

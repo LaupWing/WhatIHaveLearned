@@ -6,7 +6,8 @@ const state = {
     collections: [],
     user: null,
     mainContent: null,
-    mainContentTransition: null
+    mainContentTransition: null,
+    current: null
 }
 
 const getters = {
@@ -14,6 +15,7 @@ const getters = {
     currentUser: state => state.user,
     getMainContent: state => state.mainContent,
     getMainContentTransition: state => state.mainContentTransition,
+    getCurrentLocation: state => state.current
 }
 
 const actions = {
@@ -48,6 +50,15 @@ const actions = {
                     .then(()=>dispatch('getCollections'))
             })
     },
+    async updateCollection({commit}, collection){
+        
+    },
+    async updateIntroduction({commit}, introduction){
+        await db.collection('userNotes').doc(state.user.uid).update({
+            introduction
+        })
+        commit('setCollections', {...state.collections, introduction})
+    },
     async addSectionToCollection({dispatch}, {newSection, collection}){
         const tempArray = state.collections.collections
             .map(c=>{
@@ -67,6 +78,9 @@ const actions = {
             })
         dispatch('getCollections')
     },
+    setCurrentLocation({commit},location){
+        commit('setCurrentLocation', location)
+    },
     getUser({commit}){
         const user = firebase.auth().currentUser
         commit('setUser', user)
@@ -83,7 +97,8 @@ const mutations = {
     setCollections: (state, collections)=>(state.collections = collections),
     setUser: (state, user)=>(state.user = user),
     setMainContent: (state, content) =>(state.mainContent= content),
-    setMainContentTransition: (state, value) =>(state.mainContentTransition= value)
+    setMainContentTransition: (state, value) =>(state.mainContentTransition= value),
+    setCurrentLocation: (state,location) =>(state.current = location)
 }
 
 export default{
