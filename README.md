@@ -1,29 +1,5 @@
-# website
+# What I Have learned 
+A website where you can document your newly learned knowledge. 
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Why did i make this?
+I like learning things every day, especially in the field of programming. But it it hard to remember newly found knowledge. So i made a website to store your knowledge in specific categories that you have made!
