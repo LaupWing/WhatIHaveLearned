@@ -11,7 +11,6 @@ const state = {
 
 const getters = {
     getSettings: state => state,
-
 }
 
 const actions = {
@@ -26,7 +25,26 @@ const actions = {
     },
     setSettingFor({commit}, section){
         commit('settingIsFor', section)
-    }
+    },
+    async updateLayout({commit}, {layout,location}){
+        const updates = Object.keys(layout)
+        const stateClone = {...state}
+        delete stateClone.settingFor
+        delete stateClone.editMode
+
+        updates.forEach(update=>{
+            stateClone[update] = updates[update]    
+        })
+        
+        if(location === 'introduction'){
+            db
+                .collection('userNotes')
+                .doc(firebase.auth().currentUser.uid)
+                .update({
+                    layout: stateClone
+                })
+        }
+    },
 }
 
 const mutations = {
