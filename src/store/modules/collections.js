@@ -59,6 +59,9 @@ const actions = {
         })
         commit('setCollections', {...state.collections, introduction})
     },
+    async updateLayout({commit}, {layout, section}){
+        
+    },
     async addSectionToCollection({dispatch}, {newSection, collection}){
         const tempArray = state.collections.collections
             .map(c=>{

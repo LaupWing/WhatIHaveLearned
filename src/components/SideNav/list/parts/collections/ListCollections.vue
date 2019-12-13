@@ -57,10 +57,20 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['allCollections'])
+        ...mapGetters(['allCollections', 'getSettings'])
     },
     methods:{
-        ...mapActions(['updateCollections', 'setMainContent', 'getCollections', 'setMainContentTransition', 'setSettingFor', 'setCurrentLocation']),
+        ...mapActions(
+            [
+                'updateCollections', 
+                'setMainContent', 
+                'getCollections', 
+                'setMainContentTransition', 
+                'setSettingFor', 
+                'setCurrentLocation',
+                'saveAlignment',
+                'valueMaxMinWidth'
+            ]),
         emitCollectionDetails(value){    
             this.setMainContentTransition('leftFadeOut')   
             this.$emit('showCollectionDetails', value)
@@ -92,11 +102,20 @@ export default {
             }
         },
         checkContent(){
-            console.log(this.allCollections)
             this.allCollections.introduction ? this.setMainContent(this.allCollections.introduction) : this.setMainContent(this.defaultDisplay)
             this.setCurrentLocation({
                 type:'introduction'
             })
+            this.saveAlignment(this.allCollections.layout.align)
+            this.valueMaxMinWidth({
+                type: 'maxWidth',
+                value: this.allCollections.layout.maxWidth
+            })
+            this.valueMaxMinWidth({
+                type: 'minWidth',
+                value: this.allCollections.layout.minWidth
+            })
+            console.log(this.getSettings)
         },
     },
     async created(){
