@@ -100,7 +100,6 @@ export default {
         },
     },
     async created(){
-        
         await this.getCollections()
         await this.checkContent()
         prevenClickOnReadOnly()
