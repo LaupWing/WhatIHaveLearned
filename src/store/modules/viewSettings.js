@@ -16,15 +16,12 @@ const getters = {
 
 const actions = {
     saveAlignment({commit}, alignment){
-        console.log(alignment)
-        console.log('HUUh')
         commit('setAlignment', alignment)
     },
     toggleEdit({commit}){
         commit('setEdit', !state.editMode)
     },
     valueMaxMinWidth({commit}, obj){
-        console.log(obj)
         commit('setMaxMinWidth', obj)
     },
     setSettingFor({commit}, section){
