@@ -68,8 +68,7 @@ export default {
                 'setMainContentTransition', 
                 'setSettingFor', 
                 'setCurrentLocation',
-                'saveAlignment',
-                'valueMaxMinWidth'
+                'updateLayoutNotInDB'
             ]),
         emitCollectionDetails(value){    
             this.setMainContentTransition('leftFadeOut')   
@@ -106,14 +105,10 @@ export default {
             this.setCurrentLocation({
                 type:'introduction'
             })
-            this.saveAlignment(this.allCollections.layout.align)
-            this.valueMaxMinWidth({
-                type: 'maxWidth',
-                value: this.allCollections.layout.maxWidth
-            })
-            this.valueMaxMinWidth({
-                type: 'minWidth',
-                value: this.allCollections.layout.minWidth
+            this.updateLayoutNotInDB({
+                maxWidth: this.allCollections.layout.maxWidth,
+                minWidth: this.allCollections.layout.minWidth,
+                align: this.allCollections.layout.align,
             })
         },
     },

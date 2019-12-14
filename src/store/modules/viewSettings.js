@@ -14,14 +14,8 @@ const getters = {
 }
 
 const actions = {
-    saveAlignment({commit}, alignment){
-        commit('setAlignment', alignment)
-    },
     toggleEdit({commit}){
         commit('setEdit', !state.editMode)
-    },
-    valueMaxMinWidth({commit}, obj){
-        commit('setMaxMinWidth', obj)
     },
     setSettingFor({commit}, section){
         commit('settingIsFor', section)
@@ -68,9 +62,7 @@ const actions = {
 }
 
 const mutations = {
-    setAlignment: (state, alignment) =>(state.align = alignment),
     setEdit: (state, edit) => (state.editMode = edit),
-    setMaxMinWidth: (state, obj) => (state[obj.type] = obj.value),
     settingIsFor: (state, section) => (state.settingFor = section),
     setSettings: (state, obj) => (state[obj.type] = obj.value)
 }
