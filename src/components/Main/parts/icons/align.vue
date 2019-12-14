@@ -35,7 +35,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['saveAlignment', 'updateLayout']),
+        ...mapActions(['updateLayout']),
         async changedLayout(value){
             await this.updateLayout({
                 layout:{

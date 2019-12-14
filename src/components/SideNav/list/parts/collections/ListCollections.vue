@@ -106,7 +106,6 @@ export default {
             this.setCurrentLocation({
                 type:'introduction'
             })
-            console.log(this.getCurrentLocation)
             this.saveAlignment(this.allCollections.layout.align)
             this.valueMaxMinWidth({
                 type: 'maxWidth',
@@ -116,7 +115,6 @@ export default {
                 type: 'minWidth',
                 value: this.allCollections.layout.minWidth
             })
-            console.log(this.getSettings)
         },
     },
     async created(){

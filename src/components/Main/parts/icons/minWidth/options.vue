@@ -26,7 +26,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['valueMaxMinWidth', 'updateLayout', 'allCollections']),
+        ...mapActions(['updateLayout', 'allCollections']),
         checkActiveOption(val){
             if(val === this.getSettings.minWidth)   return 'active'
         },
