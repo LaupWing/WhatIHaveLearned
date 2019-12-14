@@ -18,7 +18,7 @@ export default {
     name: 'options',
     props:['activePopup'],
     computed:{
-        ...mapGetters(['getSettings', 'getCurrentLocation']),
+        ...mapGetters(['getSettings', 'getCurrentLocation', 'allCollections']),
     },
     data(){
         return{
@@ -30,19 +30,13 @@ export default {
         checkActiveOption(val){
             if(val === this.getSettings.maxWidth)   return 'active'
         },
-        setMaxWidth(value){
-            this.valueMaxMinWidth({
-                type: 'maxWidth',
-                value
-            })
-        },
         async changedLayout(value){
             await this.updateLayout({
                 layout:{
                     maxWidth: value
                 },
                 location: this.getCurrentLocation,
-                data: null
+                data: this.allCollections
             })
             this.$emit('toggle')
         }

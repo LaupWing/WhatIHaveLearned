@@ -31,7 +31,9 @@ const actions = {
         const stateClone = {...state}
         delete stateClone.settingFor
         delete stateClone.editMode
-
+        console.log(layout, location)
+        console.log(updates)
+        console.log(stateClone)
         updates.forEach(update=>{
             stateClone[update] = layout[update]    
         })

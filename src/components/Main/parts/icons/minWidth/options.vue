@@ -5,7 +5,7 @@
             :key="index" 
             class="option"
             :class="checkActiveOption(val)"    
-            @click="setMinWidth(val)"
+            @click="changedLayout(val)"
         >
             {{val}}<span>px</span>
         </li>
@@ -18,7 +18,7 @@ export default {
     name: 'options',
     props:['activePopup'],
     computed:{
-        ...mapGetters(['getSettings']),
+        ...mapGetters(['getSettings', 'getCurrentLocation']),
     },
     data(){
         return{
@@ -26,16 +26,19 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['valueMaxMinWidth']),
+        ...mapActions(['valueMaxMinWidth', 'updateLayout', 'allCollections']),
         checkActiveOption(val){
             if(val === this.getSettings.minWidth)   return 'active'
         },
-        setMinWidth(value){
-            this.$emit('toggle')
-            this.valueMaxMinWidth({
-                type: 'minWidth',
-                value
+        async changedLayout(value){
+            await this.updateLayout({
+                layout:{
+                    minWidth: value
+                },
+                location: this.getCurrentLocation,
+                data: this.allCollections
             })
+            this.$emit('toggle')
         }
     }
 }

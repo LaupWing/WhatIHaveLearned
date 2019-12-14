@@ -2,14 +2,14 @@
     <div id="align">
         <LeftAlign
             :clicked="getSettings.align"
-            v-on:click.native="saveAlignment('left')"/>
+            v-on:click.native="changedLayout('left')"/>
         <CenterAlign 
             :clicked="getSettings.align"
-            v-on:click.native="saveAlignment('center')"
+            v-on:click.native="changedLayout('center')"
         />
         <RightAlign 
             :clicked="getSettings.align"
-            v-on:click.native="saveAlignment('right')"
+            v-on:click.native="changedLayout('right')"
         />
     </div>
 </template>
@@ -27,7 +27,7 @@ export default {
         LeftAlign
     },
     computed:{
-    ...mapGetters(['getSettings'])
+    ...mapGetters(['getSettings', 'getCurrentLocation', 'allCollections'])
     },
     data(){
         return{
@@ -35,7 +35,17 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['saveAlignment'])
+        ...mapActions(['saveAlignment', 'updateLayout']),
+        async changedLayout(value){
+            await this.updateLayout({
+                layout:{
+                    align: value
+                },
+                location: this.getCurrentLocation,
+                data: this.allCollections
+            })
+            this.$emit('toggle')
+        }
     }
     
 }
