@@ -31,19 +31,20 @@ export default {
             if(val === this.getSettings.maxWidth)   return 'active'
         },
         setMaxWidth(value){
-            this.$emit('toggle')
             this.valueMaxMinWidth({
                 type: 'maxWidth',
                 value
             })
         },
-        changedLayout(value){
-            this.updateLayout({
+        async changedLayout(value){
+            await this.updateLayout({
                 layout:{
-                    maxWidth: 900
+                    maxWidth: value
                 },
-                location: this.getCurrentLocation
+                location: this.getCurrentLocation,
+                data: null
             })
+            this.$emit('toggle')
         }
     }
 }

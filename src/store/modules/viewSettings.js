@@ -26,9 +26,8 @@ const actions = {
     setSettingFor({commit}, section){
         commit('settingIsFor', section)
     },
-    async updateLayout({commit}, {layout,location}){
+    async updateLayout({commit}, {layout,location, data}){
         const updates = Object.keys(layout)
-        console.log(location, layout)
         const stateClone = {...state}
         delete stateClone.settingFor
         delete stateClone.editMode
