@@ -1,5 +1,6 @@
 <template>
     <div class="settings">
+        <h3>These settings are for:  <span>{{getSettings.settingFor}}</span></h3>
         <EditBtn 
             @click="setSetting('edit')"
             :active="active"
@@ -11,7 +12,6 @@
         />
         <MaxWidth/>
         <MinWidth/>
-        <h3>These settings are for:  <span>{{getSettings.settingFor}}</span></h3>
         <!-- <button class="edit">Toggle Editmode</button> -->
         <!-- <button class="signout">Signout</button> -->
     </div>
@@ -59,6 +59,7 @@ export default {
     border-bottom: solid #f2f2f2 2px;
     display: flex;
     font-family: var(--main-font);
+    position: relative;
 }
 .settings button{
     border-radius: 0;
@@ -92,6 +93,7 @@ export default {
 .settings h2{
     font-weight: 550;
 }
+
 .settings h3{
     color: #999;
     font-weight: 500;
@@ -99,11 +101,21 @@ export default {
     justify-content: center;
     align-items: center;
     padding-left: 10px;
-    font-size: .9em;
+    font-size: .8em;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform: translate(0,100%);
 }
 .settings h3 span{
     margin-left: 5px;
     border-bottom: solid 2px var(--contrast-color);
     text-transform: capitalize;
+}
+.settings #MaxWidth.icon-collection:hover,
+.settings #MinWidth.icon-collection:hover{
+    background: var(--contrast-color);
+    color: var(--main-color);
+    cursor: pointer;
 }
 </style>
