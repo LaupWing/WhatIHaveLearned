@@ -1,6 +1,6 @@
 <template>
     <div 
-        id="BackgroundColor" 
+        id="Background" 
         :class="['icon-container', active ? 'active': '']"
         @mouseover="handleHover(true)"
         @mouseout="handleHover(false)"
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    name: 'BackgroundColor',
+    name: 'Background',
     data(){
         return{
             active: false
@@ -53,7 +53,7 @@ export default {
 }
 
 
-.icon-container#BackgroundColor svg{
+.icon-container#Background svg{
     width: 35px;
 }
 
