@@ -68,8 +68,8 @@ export default {
             this.setMainContent(this.defaultDisplay)
         }
         this.setCurrentLocation({
-                type:'collection',
-                collection: this.collection.collection
+            type:'collection',
+            collection: this.collection.collection
         })
         this.setSettingFor(this.collection.collection)
     }

@@ -26,12 +26,12 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['updateLayout', 'allCollections']),
+        ...mapActions(['updateLayoutAndInDB', 'allCollections']),
         checkActiveOption(val){
             if(val === this.getSettings.minWidth)   return 'active'
         },
         async changedLayout(value){
-            await this.updateLayout({
+            await this.updateLayoutAndInDB({
                 layout:{
                     minWidth: value
                 },

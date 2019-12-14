@@ -26,7 +26,7 @@ const actions = {
     setSettingFor({commit}, section){
         commit('settingIsFor', section)
     },
-    async updateLayout({commit}, {layout,location, data}){
+    async updateLayoutAndInDB({commit}, {layout,location, data}){
         const updates = Object.keys(layout)
         const stateClone = {...state}
         delete stateClone.settingFor
@@ -50,6 +50,21 @@ const actions = {
             })
         })
     },
+    updateLayoutNotInDB({commit}, layout){
+        const updates = Object.keys(layout)
+        const stateClone = {...state}
+        delete stateClone.settingFor
+        delete stateClone.editMode
+        updates.forEach(update=>{
+            stateClone[update] = layout[update]    
+        })
+        updates.forEach(update=>{
+            commit('setSettings', {
+                type: update,
+                value: layout[update] 
+            })
+        })
+    }
 }
 
 const mutations = {

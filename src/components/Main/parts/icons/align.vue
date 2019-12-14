@@ -35,9 +35,9 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['updateLayout']),
+        ...mapActions(['updateLayoutAndInDB']),
         async changedLayout(value){
-            await this.updateLayout({
+            await this.updateLayoutAndInDB({
                 layout:{
                     align: value
                 },

@@ -26,12 +26,12 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['updateLayout']),
+        ...mapActions(['updateLayoutAndInDB']),
         checkActiveOption(val){
             if(val === this.getSettings.maxWidth)   return 'active'
         },
         async changedLayout(value){
-            await this.updateLayout({
+            await this.updateLayoutAndInDB({
                 layout:{
                     maxWidth: value
                 },
