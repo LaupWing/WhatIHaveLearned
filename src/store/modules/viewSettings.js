@@ -37,13 +37,19 @@ const actions = {
         })
         
         if(location === 'introduction'){
-            db
-                .collection('userNotes')
-                .doc(firebase.auth().currentUser.uid)
-                .update({
-                    layout: stateClone
-                })
+            await db
+                    .collection('userNotes')
+                    .doc(firebase.auth().currentUser.uid)
+                    .update({
+                        layout: stateClone
+                    })
         }
+        updates.forEach(update=>{
+            commit('setSettings', {
+                type: update,
+                value: stateClone[update] 
+            })
+        })
     },
 }
 
@@ -52,6 +58,7 @@ const mutations = {
     setEdit: (state, edit) => (state.editMode = edit),
     setMaxMinWidth: (state, obj) => (state[obj.type] = obj.value),
     settingIsFor: (state, section) => (state.settingFor = section),
+    setSettings: (state, obj) => (state[obj.type] = obj.value)
 }
 
 export default{
