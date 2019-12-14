@@ -29,6 +29,12 @@ const actions = {
         updates.forEach(update=>{
             stateClone[update] = layout[update]    
         })
+        updates.forEach(update=>{
+            commit('setSettings', {
+                type: update,
+                value: layout[update] 
+            })
+        })
         if(location.type === 'introduction'){
             await db
                     .collection('userNotes')
@@ -37,12 +43,20 @@ const actions = {
                         layout: stateClone
                     })
         }
-        updates.forEach(update=>{
-            commit('setSettings', {
-                type: update,
-                value: layout[update] 
+        else if (location.type === 'collection'){
+            const newCollections = data.collections.map(col=>{
+                if(col === location.collection){
+                    col.layout = stateClone
+                }
+                return col
             })
-        })
+            await db
+                .collection('userNotes')
+                .doc(firebase.auth().currentUser.uid)
+                .update({
+                    collections: newCollections
+                })
+        }
     },
     updateLayoutNotInDB({commit}, layout){
         const updates = Object.keys(layout)

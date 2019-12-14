@@ -75,7 +75,7 @@ export default {
         }
         this.setCurrentLocation({
             type:'collection',
-            collection: this.collection.collection
+            collection: this.collection
         })
         this.updateLayoutNotInDB(this.collection.layout)
         this.setSettingFor(this.collection.collection)

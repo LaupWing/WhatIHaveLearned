@@ -73,7 +73,7 @@ export default {
                 layout:{
                     maxWidth: 800,
                     minWidth: 500,
-                    align: 'left'
+                    align: 'center'
                 }
             })
         },
