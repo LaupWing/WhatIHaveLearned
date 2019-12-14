@@ -5,7 +5,7 @@
             :key="index" 
             class="option"
             :class="checkActiveOption(val)"    
-            @click="setMaxWidth(val)"
+            @click="changedLayout(val)"
         >
             {{val}}<span>px</span>
         </li>
@@ -18,7 +18,7 @@ export default {
     name: 'options',
     props:['activePopup'],
     computed:{
-        ...mapGetters(['getSettings']),
+        ...mapGetters(['getSettings', 'getCurrentLocation']),
     },
     data(){
         return{
@@ -26,7 +26,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['valueMaxMinWidth']),
+        ...mapActions(['valueMaxMinWidth','updateLayout']),
         checkActiveOption(val){
             if(val === this.getSettings.maxWidth)   return 'active'
         },
@@ -35,6 +35,14 @@ export default {
             this.valueMaxMinWidth({
                 type: 'maxWidth',
                 value
+            })
+        },
+        changedLayout(value){
+            this.updateLayout({
+                layout:{
+                    maxWidth: 900
+                },
+                location: this.getCurrentLocation
             })
         }
     }

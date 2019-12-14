@@ -57,7 +57,7 @@ export default {
         }
     },
     computed:{
-        ...mapGetters(['allCollections', 'getSettings'])
+        ...mapGetters(['allCollections', 'getSettings', 'getCurrentLocation'])
     },
     methods:{
         ...mapActions(
@@ -106,6 +106,7 @@ export default {
             this.setCurrentLocation({
                 type:'introduction'
             })
+            console.log(this.getCurrentLocation)
             this.saveAlignment(this.allCollections.layout.align)
             this.valueMaxMinWidth({
                 type: 'maxWidth',

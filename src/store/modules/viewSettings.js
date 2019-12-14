@@ -28,15 +28,15 @@ const actions = {
     },
     async updateLayout({commit}, {layout,location}){
         const updates = Object.keys(layout)
+        console.log(location, layout)
         const stateClone = {...state}
         delete stateClone.settingFor
         delete stateClone.editMode
 
         updates.forEach(update=>{
-            stateClone[update] = updates[update]    
+            stateClone[update] = layout[update]    
         })
-        
-        if(location === 'introduction'){
+        if(location.type === 'introduction'){
             await db
                     .collection('userNotes')
                     .doc(firebase.auth().currentUser.uid)
@@ -47,7 +47,7 @@ const actions = {
         updates.forEach(update=>{
             commit('setSettings', {
                 type: update,
-                value: stateClone[update] 
+                value: layout[update] 
             })
         })
     },
