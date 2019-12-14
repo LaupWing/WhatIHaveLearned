@@ -12,6 +12,7 @@
         />
         <MaxWidth/>
         <MinWidth/>
+        <BackgroundColor class="icon-collection"/>
         <!-- <button class="edit">Toggle Editmode</button> -->
         <!-- <button class="signout">Signout</button> -->
     </div>
@@ -22,6 +23,7 @@ import EditBtn from './icons/edit'
 import Align from './icons/align'
 import MinWidth from './icons/minWidth'
 import MaxWidth from './icons/maxWidth'
+import BackgroundColor from './icons/background'
 import {mapGetters} from 'vuex'
 
 export default {
@@ -30,7 +32,8 @@ export default {
         EditBtn,
         Align,
         MinWidth,
-        MaxWidth
+        MaxWidth,
+        BackgroundColor
     },
     computed:{
         ...mapGetters(['getSettings'])
@@ -103,6 +106,7 @@ export default {
     padding-left: 10px;
     font-size: .8em;
     position: absolute;
+    opacity: .8;
     left: 0;
     bottom: 0;
     transform: translate(0,100%);

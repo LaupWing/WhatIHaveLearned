@@ -38,7 +38,6 @@ export default {
         ...mapActions(['toggleEdit']),
         handleHover(state){
             this.active = state
-            
         }
     }
 }
