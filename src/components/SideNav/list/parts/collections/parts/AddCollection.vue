@@ -69,7 +69,12 @@ export default {
             this.$emit('create', {
                 collection: this.collection,
                 icon: this.icon,
-                sections:[]
+                sections:[],
+                layout:{
+                    maxWidth: 800,
+                    minWidth: 500,
+                    align: 'left'
+                }
             })
         },
         cancel(){

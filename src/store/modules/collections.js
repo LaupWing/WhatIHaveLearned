@@ -79,7 +79,6 @@ const actions = {
         dispatch('getCollections')
     },
     setCurrentLocation({commit},location){
-        console.log(location)
         commit('setCurrentLocation', location)
     },
     getUser({commit}){
