@@ -50,7 +50,13 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['setMainContent', 'setMainContentTransition', 'setSettingFor', 'setCurrentLocation']),
+        ...mapActions([
+            'setMainContent', 
+            'setMainContentTransition', 
+            'setSettingFor', 
+            'setCurrentLocation',
+            'updateLayoutNotInDB'
+        ]),
         checkTypeIcon(){
             if(this.collection.icon.type === 'img'){
                 return `<img src="${this.collection.icon.src}" width="100" style="display: block; margin: auto;">`
@@ -71,6 +77,7 @@ export default {
             type:'collection',
             collection: this.collection.collection
         })
+        this.updateLayoutNotInDB(this.collection.layout)
         this.setSettingFor(this.collection.collection)
     }
 }

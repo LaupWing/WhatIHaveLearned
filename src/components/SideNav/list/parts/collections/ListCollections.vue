@@ -105,11 +105,7 @@ export default {
             this.setCurrentLocation({
                 type:'introduction'
             })
-            this.updateLayoutNotInDB({
-                maxWidth: this.allCollections.layout.maxWidth,
-                minWidth: this.allCollections.layout.minWidth,
-                align: this.allCollections.layout.align,
-            })
+            this.updateLayoutNotInDB(this.allCollections.layout)
         },
     },
     async created(){
