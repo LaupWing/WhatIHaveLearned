@@ -391,6 +391,7 @@ div#toolbar .ql-formats >* {
     max-width: var(--max-width);
     transition: 1s;
     overflow-x: hidden;
+    margin: 0 20px;
 }
 .editor-wrapper .ql-container.ql-snow.ql-disabled{
     background: transparent;
