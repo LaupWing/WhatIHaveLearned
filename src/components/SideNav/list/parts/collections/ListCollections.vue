@@ -86,14 +86,14 @@ export default {
         },
         newItemAdded(){
             if(this.newCollection === null) return
-            setTimeout(()=>{
-                this.goToNewCollection = this.newCollection
-                setTimeout(()=>{
-                    this.emitCollectionDetails(this.goToNewCollection)
-                    this.goToNewCollection = null
-                    this.newCollection = null
-                },500)
-            },1000)
+            // setTimeout(()=>{
+            //     this.goToNewCollection = this.newCollection
+            //     setTimeout(()=>{
+            //         this.emitCollectionDetails(this.goToNewCollection)
+            //         this.goToNewCollection = null
+            //         this.newCollection = null
+            //     },500)
+            // },1000)
         },
         animEnded(){
             if(this.newCollection){

@@ -40,6 +40,9 @@ export default {
     watch:{
         allCollections(oldVal, newVal){
             console.log(oldVal, newVal)
+        },
+        collection(oldVal, newVal){
+            console.log(oldVal, newVal)
         }
     },
     components:{
