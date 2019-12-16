@@ -50,6 +50,10 @@ export default {
         createSection(){
             if(this.newSection !== null || this.newSection !== ''){
                 this.addSection = !this.addSection
+                this.collection.sections.push({
+                    section: this.newSection,
+                    chapters:[]
+                })
             }
         },
         animEnded(){

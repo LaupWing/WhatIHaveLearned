@@ -75,7 +75,7 @@ export default {
             return anim
         },
         test(){
-            console.log(this.allCollection, '--------------------listcontainer')
+            console.log(this.allCollections, '--------------------listcontainer')
         }
     },
 }

@@ -61,7 +61,7 @@ const actions = {
         })
         commit('setCollections', {...state.collections, introduction})
     },
-    async addSectionToCollection({dispatch}, {newSection, collection}){
+    async addSectionToCollection({commit}, {newSection, collection}){
         console.log(state.collections)
         const tempArray = state.collections.collections
             .map(c=>{
@@ -74,13 +74,14 @@ const actions = {
                 return c
             })
         console.log('adding')
+        commit('setCollections', tempArray)
         await db
             .collection('userNotes')
             .doc(state.user.uid)
             .update({
                 collections: tempArray
             })
-        dispatch('getCollections')
+        // dispatch('getCollections')
     },
     setCurrentLocation({commit},location){
         commit('setCurrentLocation', location)
@@ -98,7 +99,10 @@ const actions = {
 }
 
 const mutations = {
-    setCollections: (state, collections)=>(state.collections = collections),
+    setCollections: (state, collections)=>{
+        console.log(state, collections) 
+        state.collections = collections
+    },
     setUser: (state, user)=>(state.user = user),
     setMainContent: (state, content) =>(state.mainContent= content),
     setMainContentTransition: (state, value) =>(state.mainContentTransition= value),
