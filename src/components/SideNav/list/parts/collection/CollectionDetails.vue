@@ -12,6 +12,7 @@
             />
             <Section
                 v-else
+                v-on:backTosection="section = null"
                 :section="section"
             />
         </transition>
