@@ -20,11 +20,13 @@ const getters = {
 
 const actions = {
     async getCollections({commit}){
+        console.log('getting collection')
         const data = await db.collection('userNotes').doc(state.user.uid).get()
         let collections 
         if(data.exists){
             collections = data.data()
             collections.collections = collections.collections.sort(sortByName('collection'))
+            console.log(collections)
         }else{
             collections = []
         }
@@ -60,6 +62,7 @@ const actions = {
         commit('setCollections', {...state.collections, introduction})
     },
     async addSectionToCollection({dispatch}, {newSection, collection}){
+        console.log(state.collections)
         const tempArray = state.collections.collections
             .map(c=>{
                 if(c.collection === collection){
@@ -70,6 +73,7 @@ const actions = {
                 }   
                 return c
             })
+        console.log('adding')
         await db
             .collection('userNotes')
             .doc(state.user.uid)

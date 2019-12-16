@@ -1,5 +1,5 @@
 <template>
-    <div class="overview">
+    <div class="overview" @click="test">
         <transition
             name="slideTopDown" 
             mode="out-in" 
@@ -58,7 +58,7 @@ export default {
                     collection: this.collection.collection,
                     newSection: this.newSection
                 })
-                console.log('adding')
+                console.log('adding', this.collection)
             }
         },
         checkNewlyAdded(section){
@@ -70,6 +70,7 @@ export default {
         newItemAdded(){
             setTimeout(()=>{
                 this.goToNewSection = this.newSection
+                console.log(this.goToNewSection)
                 setTimeout(()=>{
                     this.$emit('showSectionDetails', this.goToNewSection)
                     this.goToNewSection = null
@@ -77,6 +78,9 @@ export default {
                 },500)
             },1000)
         },
+        test(){
+            console.log(this.collection, '----------overview')
+        }
     }
 
 }

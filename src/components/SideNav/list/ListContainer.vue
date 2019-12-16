@@ -1,5 +1,5 @@
 <template>
-    <ul id="List-Container">
+    <ul id="List-Container" @click="test">
         <p class="no-collection" v-if="!allCollections">
             Begin your everlasting knowledge journey by adding your first collection!
         </p>
@@ -73,6 +73,9 @@ export default {
         },
         setAnim(anim){
             return anim
+        },
+        test(){
+            console.log(this.allCollection, '--------------------listcontainer')
         }
     },
 }
