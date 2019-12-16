@@ -30,10 +30,18 @@
 
 <script>
 import Plus from '@/components/Icons/Plus'
-import {mapActions} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 
 export default {
     name: 'Overview',
+    computed:{
+        ...mapGetters(['allCollections']),
+    },
+    watch:{
+        allCollections(oldVal, newVal){
+            console.log(oldVal, newVal)
+        }
+    },
     components:{
         Plus
     },
@@ -50,10 +58,10 @@ export default {
         createSection(){
             if(this.newSection !== null || this.newSection !== ''){
                 this.addSection = !this.addSection
-                this.collection.sections.push({
-                    section: this.newSection,
-                    chapters:[]
-                })
+                // this.collection.sections.push({
+                //     section: this.newSection,
+                //     chapters:[]
+                // })
             }
         },
         animEnded(){
@@ -83,7 +91,7 @@ export default {
             },1000)
         },
         test(){
-            console.log(this.collection, '----------overview')
+            console.log(this.collection, this.allCollections, '----------overview')
         }
     }
 
