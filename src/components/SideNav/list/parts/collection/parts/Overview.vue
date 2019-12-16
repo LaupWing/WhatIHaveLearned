@@ -58,6 +58,7 @@ export default {
                     collection: this.collection.collection,
                     newSection: this.newSection
                 })
+                console.log('adding')
             }
         },
         checkNewlyAdded(section){
