@@ -5,7 +5,7 @@ A website where you can document your newly learned knowledge.
 I like learning things every day, especially in the field of programming. But it it hard to remember newly found knowledge. So i made a website to store your knowledge in specific categories that you have made!
 
 ## A Description of my code
-![component tree](https://github.com//LaupWing/WhatIHaveLearned/blob/master/README_ASSETS/Diagram.png)
+![component tree](https://raw.githubusercontent.com/LaupWing/WhatIHaveLearned/master/README_ASSETS/Diagram.png)
 ## Todo 
 - [ ] Refactor icon svg icons hover
 - [ ] Finish the sections
