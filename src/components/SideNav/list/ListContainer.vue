@@ -6,12 +6,12 @@
         <div class="collections-wrapper">
             <transition :name="animation">
                 <!-- Show List of the collections -->
-                <ListCollections 
+                <Collections 
                     v-if="!showCollectionDetails"
                     v-on:showCollectionDetails="showCollectionDetails = $event"
                 />
                 <!-- Show The collection details -->
-                <CollectionDetails 
+                <Collection 
                     key="2"
                     :collection="showCollectionDetails"
                     v-on:backToCollection="showCollectionDetails = null"
@@ -23,15 +23,15 @@
 
 <script>
 import sortByName from '@/helpers/sortName.js'
-import CollectionDetails from './parts/collection/CollectionDetails'
-import ListCollections from './parts/collections/ListCollections'
+import Collection from './parts/collection/Collection'
+import Collections from './parts/collections/Collections'
 import {mapGetters, mapActions} from 'vuex'
 
 export default {
     name: 'ListContainer',
     components:{
-        CollectionDetails,
-        ListCollections
+        Collection,
+        Collections
     },
     data(){
         return{

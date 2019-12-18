@@ -43,7 +43,7 @@ import AddCollection from './parts/AddCollection'
 import {mapGetters, mapActions} from 'vuex'
 import prevenClickOnReadOnly from '@/helpers/editorHelpers'
 export default {
-    name: 'List-Container',
+    name: 'Collections',
     components:{
         Plus,
         AddCollection

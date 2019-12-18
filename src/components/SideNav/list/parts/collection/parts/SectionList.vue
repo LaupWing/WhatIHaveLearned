@@ -33,7 +33,7 @@ import Plus from '@/components/Icons/Plus'
 import {mapActions, mapGetters} from 'vuex'
 import capatalize from '@/helpers/string'
 export default {
-    name: 'Overview',
+    name: 'CollectionList',
     computed:{
         
     },

@@ -3,7 +3,7 @@
         <li class="back" @click="backToCollection">Back to collection</li>
         <h2 class="title">{{collection.collection}}</h2>
         <transition :name="animation">
-            <Overview
+            <SectionList
                 :sections="collection.sections"
                 :collection="collection"
                 v-on:backToCollection="backToCollection"
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import Overview from './parts/Overview'
+import SectionList from './parts/SectionList'
 import Plus from '@/components/Icons/Plus'
 import {mapGetters, mapActions} from 'vuex'
 import capatalize from '@/helpers/string'
@@ -32,7 +32,7 @@ export default {
     components:{
         Plus,
         Section,
-        Overview
+        SectionList
     },
     computed:{
         animation(){
@@ -71,19 +71,11 @@ export default {
             this.$emit('backToCollection')
         },
         showSection(section){
-            console.log('show section----------------')
-            console.log(section)
             this.setMainContentTransition('leftFadeOut')
             this.section = section
         }
     },
     created(){
-        // if(!this.collection.introduction){
-        //     this.setMainContent(this.defaultDisplay)
-        // }
-        // else{
-        //     this.setMainContent(this.collection.introduction)
-        // }
         this.setCurrentLocation({
             type:'collection',
             collection: this.collection
