@@ -19,7 +19,7 @@ export default {
     },
     data(){
         return{
-            defaultDisplay: `<p class="ql-align-center">${this.checkTypeIcon()}</p><p class="ql-align-center"></p><h1 class="ql-align-center"><span style="font-size: 48px;">${capatalize(this.collection.collection)}>${this.section.section}</span></h1><p><br>`
+            defaultDisplay: `<p class="ql-align-center">${this.checkTypeIcon()}</p><h1 class="ql-align-center"><span style="font-size: 48px;">${capatalize(this.collection.collection)}:</span><em style="font-size: 48px; color: rgb(187, 187, 187);">${this.section.section}</em></h1>`
         }
     },
     methods:{
@@ -29,8 +29,6 @@ export default {
         },
         checkContent(){
             if(!this.section.introduction){
-                console.log('setting up the section via the default')
-                console.log(this.defaultDisplay)
                 this.setMainContent(this.defaultDisplay)
             }else{
                 console.log('setting it up via db')
@@ -41,7 +39,6 @@ export default {
                 collection: this.collection,
                 section: this.section
             })
-            console.log()
         },
         checkTypeIcon(){
             if(this.collection.icon.type === 'img'){

@@ -7,7 +7,7 @@
                 :sections="collection.sections"
                 :collection="collection"
                 v-on:backToCollection="backToCollection"
-                v-on:showSectionDetails="section = $event"
+                v-on:showSectionDetails="showSection"
                 v-if="!section"
             />
             <Section
@@ -69,6 +69,12 @@ export default {
         backToCollection(){
             this.setMainContentTransition('rightFadeOut')
             this.$emit('backToCollection')
+        },
+        showSection(section){
+            console.log('show section----------------')
+            console.log(section)
+            this.setMainContentTransition('leftFadeOut')
+            this.section = section
         }
     },
     created(){

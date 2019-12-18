@@ -210,12 +210,16 @@ export default {
     },
     watch:{
         getMainContent(newContent, oldContent){
-            console.log(newContent, oldContent)
+            // console.log('new-----------------------------')
+            // console.log(newContent)
+            // console.log('old-----------------------------')
+            // console.log(oldContent)
             if(oldContent===null){
                 this.content = this.getMainContent
             }
         },
         getMainContentTransition(newTransition, oldTransition ){
+            console.log(newTransition, oldTransition)
             if(!this.contentChange && this.getMainContentTransition !== null){
                 this.contentChange = true
                 this.$el.querySelector('.editor-wrapper').classList.add(this.getMainContentTransition)
@@ -268,7 +272,13 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['setMainContent', 'setMainContentTransition', 'updateIntroduction', 'updateCollection']),
+        ...mapActions([
+            'setMainContent', 
+            'setMainContentTransition', 
+            'updateIntroduction', 
+            'updateCollection',
+            'updateSection'
+        ]),
         test(obj){
             const range = {
                 index: obj.selection.savedRange.index,
@@ -315,14 +325,16 @@ export default {
             }
         },
         async updateContent(){
-            console.log(this.getCurrentLocation)
             if(this.getCurrentLocation.type === 'introduction'){
                 await this.updateIntroduction(this.getMainContent)
                 this.saving = false
                 return 
             }else if(this.getCurrentLocation.type === 'collection'){
-                console.log('Saving')
                 await this.updateCollection()
+                this.saving = false
+            }
+            else if(this.getCurrentLocation.type === 'section'){
+                await this.updateSection()
                 this.saving = false
             }
         },

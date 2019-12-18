@@ -52,6 +52,20 @@ const actions = {
                     .then(()=>dispatch('getCollections'))
             })
     },
+    async updateSection({commit}){
+        const updatedSection = state.collections.collections.map(collection=>{
+            if(collection===state.current.collection){
+                collection.sections = collection.sections.map(section=>{
+                    if(section === state.current.section){
+                        section.introduction = state.mainContent
+                    }
+                    return section
+                })
+            }
+            return collection
+        })
+        console.log(updatedSection)
+    },
     async updateCollection({commit}){
         const updatedCollections = state.collections.collections.map(collection=>{
             if(collection===state.current.collection){
@@ -74,7 +88,6 @@ const actions = {
         commit('setCollections', {...state.collections, introduction})
     },
     async addSectionToCollection({dispatch}, {newSection, collection}){
-        console.log(state.collections)
         const tempArray = state.collections.collections
             .map(c=>{
                 if(c.collection === collection){
@@ -85,8 +98,6 @@ const actions = {
                 }   
                 return c
             })
-        console.log('adding')
-        // console.log(state, tempArray)
         await db
             .collection('userNotes')
             .doc(state.user.uid)
@@ -103,10 +114,11 @@ const actions = {
         commit('setUser', user)
     },
     setMainContent({commit},content){
-        console.log(content)
+        // console.log(content)
         commit('setMainContent', content)
     },
     setMainContentTransition({commit},content){
+        console.log(content)
         commit('setMainContentTransition', content)
     }
 }
