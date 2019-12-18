@@ -30,7 +30,7 @@ Below you see my component tree. In the description below the image itself is an
 - [ ] Data handling functions should only be in the vuex file
 - [ ] Change the hover functional of the icon buttons in the settings
 - [ ] Delete the checkTypeIcon function
-- [ ] Change directory names and decide which components activate the main content
+- [x] Change directory names and decide which components activate the main content
 
 # Buggs To fix
 - [x] Saving bug
