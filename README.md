@@ -24,3 +24,9 @@ Below you see my component tree. In the description below the image itself is an
 - [ ] Refactor icon svg icons hover
 - [ ] Finish the sections
 - [ ] Refactor the sections and collection parts
+- [ ] Refactor the way data changes the content
+    - Does it need to be after its saved
+    - Does it need to be before its saved
+
+# Buggs To fix
+- [ ] Saving bug

@@ -314,11 +314,15 @@ export default {
             }
         },
         async updateContent(){
+            console.log(this.getCurrentLocation)
             if(this.getCurrentLocation.type === 'introduction'){
                 await this.updateIntroduction(this.getMainContent)
-                console.log('updating')
                 this.saving = false
                 return 
+            }else if(this.getCurrentLocation.type === 'collection'){
+                console.log(this.getMainContent)
+                await this.updateCollection(this.getMainContent)
+                this.saving = false
             }
         },
         toggleEdit(){
