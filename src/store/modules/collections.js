@@ -103,6 +103,7 @@ const actions = {
         commit('setUser', user)
     },
     setMainContent({commit},content){
+        console.log(content)
         commit('setMainContent', content)
     },
     setMainContentTransition({commit},content){

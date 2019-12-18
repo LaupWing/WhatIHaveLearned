@@ -22,13 +22,14 @@ Below you see my component tree. In the description below the image itself is an
             *   **Section**: Sectiondetails
 ## Todo 
 - [ ] Refactor icon svg icons hover
-- [ ] Finish the sections
+- [x] Finish the sections
 - [ ] Refactor the sections and collection parts
 - [ ] Refactor the way data changes the content
     - Does it need to be after its saved
     - Does it need to be before its saved
 - [ ] Data handling functions should only be in the vuex file
 - [ ] Change the hover functional of the icon buttons in the settings
+- [ ] Delete the checkTypeIcon function
 
 # Buggs To fix
 - [x] Saving bug

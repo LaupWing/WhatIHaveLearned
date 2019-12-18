@@ -210,6 +210,7 @@ export default {
     },
     watch:{
         getMainContent(newContent, oldContent){
+            console.log(newContent, oldContent)
             if(oldContent===null){
                 this.content = this.getMainContent
             }
@@ -314,6 +315,7 @@ export default {
             }
         },
         async updateContent(){
+            console.log(this.getCurrentLocation)
             if(this.getCurrentLocation.type === 'introduction'){
                 await this.updateIntroduction(this.getMainContent)
                 this.saving = false

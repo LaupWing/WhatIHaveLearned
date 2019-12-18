@@ -8,19 +8,51 @@
 
 <script>
 import Icons from '../../../../../Icons/Plus'
+import capatalize from '@/helpers/string'
+import {mapGetters, mapActions} from 'vuex'
+
 export default {
     name: 'Section',
-    props:['section', 'Collection'],
+    props:['section', 'collection'],
     components:{
         Icons
     },
-    methods:{
-        backToOverview(){
-            this.$emit('backTosection')
+    data(){
+        return{
+            defaultDisplay: `<p class="ql-align-center">${this.checkTypeIcon()}</p><p class="ql-align-center"></p><h1 class="ql-align-center"><span style="font-size: 48px;">${capatalize(this.collection.collection)}>${this.section.section}</span></h1><p><br>`
         }
     },
+    methods:{
+        ...mapActions(['setCurrentLocation','setMainContent']),
+        backToOverview(){
+            this.$emit('backTosection')
+        },
+        checkContent(){
+            if(!this.section.introduction){
+                console.log('setting up the section via the default')
+                console.log(this.defaultDisplay)
+                this.setMainContent(this.defaultDisplay)
+            }else{
+                console.log('setting it up via db')
+                this.setMainContent(this.section.introduction)
+            }
+            this.setCurrentLocation({
+                type: 'section',
+                collection: this.collection,
+                section: this.section
+            })
+            console.log()
+        },
+        checkTypeIcon(){
+            if(this.collection.icon.type === 'img'){
+                return `<img src="${this.collection.icon.src}" width="100" style="display: block; margin: auto;">`
+            }else if(this.collection.icon.type === 'svg'){
+                return this.collection.icon.src
+            }
+        },
+    },
     created(){
-        console.log(this.section)
+        this.checkContent()
     }
 }
 </script>
