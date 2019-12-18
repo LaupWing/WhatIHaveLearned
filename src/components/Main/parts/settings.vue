@@ -12,6 +12,7 @@
         />
         <MaxWidth/>
         <MinWidth/>
+        <Save class="icon-collection"/>
         <Background class="icon-collection"/>
         <BackgroundColor class="icon-collection"/>
         <!-- <button class="edit">Toggle Editmode</button> -->
@@ -24,6 +25,7 @@ import EditBtn from './icons/edit'
 import Align from './icons/align'
 import MinWidth from './icons/minWidth'
 import MaxWidth from './icons/maxWidth'
+import Save from './icons/save'
 import Background from './icons/background'
 import BackgroundColor from './icons/backgroundColor'
 import {mapGetters} from 'vuex'
@@ -36,7 +38,8 @@ export default {
         MinWidth,
         MaxWidth,
         Background,
-        BackgroundColor
+        BackgroundColor,
+        Save
     },
     computed:{
         ...mapGetters(['getSettings'])

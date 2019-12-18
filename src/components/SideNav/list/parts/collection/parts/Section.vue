@@ -45,9 +45,10 @@ ul#List-Container .section .back_to_sectionOverview{
 }
 .section h4{
     padding: 10px;
+    text-transform: capitalize;
     font-size: 1.5em;
     font-weight: normal;
     color: var(--contrast-color);
-    border-bottom: var(--contrast-color) 1px solid;
+    border-bottom: var(--contrast-color) .5px solid;
 }
 </style>
