@@ -1,5 +1,5 @@
 <template>
-    <div class="overview" @click="test">
+    <div class="overview">
         <transition
             name="slideTopDown" 
             mode="out-in" 
@@ -35,15 +35,7 @@ import {mapActions, mapGetters} from 'vuex'
 export default {
     name: 'Overview',
     computed:{
-        ...mapGetters(['allCollections']),
-    },
-    watch:{
-        allCollections(oldVal, newVal){
-            console.log(oldVal, newVal)
-        },
-        collection(oldVal, newVal){
-            console.log(oldVal, newVal)
-        }
+        
     },
     components:{
         Plus
@@ -92,9 +84,6 @@ export default {
                     this.newSection = null
                 },500)
             },1000)
-        },
-        test(){
-            console.log(this.collection, this.allCollections, '----------overview')
         }
     }
 
