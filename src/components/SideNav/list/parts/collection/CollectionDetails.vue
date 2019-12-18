@@ -14,6 +14,7 @@
                 v-else
                 v-on:backTosection="section = null"
                 :section="section"
+                :collection="collection"
             />
         </transition>
     </div>

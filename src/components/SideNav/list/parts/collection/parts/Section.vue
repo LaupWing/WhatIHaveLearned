@@ -2,13 +2,18 @@
     <div class="section">
         <li @click="backToOverview" class="back_to_sectionOverview">Back</li>
         <h4>{{section.section}}</h4>
+        <li class="add">Add a chapter <Icons/></li>
     </div>
 </template>
 
 <script>
+import Icons from '../../../../../Icons/Plus'
 export default {
     name: 'Section',
-    props:['section'],
+    props:['section', 'Collection'],
+    components:{
+        Icons
+    },
     methods:{
         backToOverview(){
             this.$emit('backTosection')

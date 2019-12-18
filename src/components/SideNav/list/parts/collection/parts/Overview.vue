@@ -45,7 +45,8 @@ export default {
         return{
             addSection: false,
             newSection: null,
-            goToNewSection: null
+            goToNewSection: null,
+            defaultDisplay: null
         }
     },
     methods:{
@@ -75,16 +76,19 @@ export default {
             return false
         },
         newItemAdded(){
-            setTimeout(()=>{
-                this.goToNewSection = this.newSection
-                console.log(this.goToNewSection)
-                setTimeout(()=>{
-                    this.$emit('showSectionDetails', this.goToNewSection)
-                    this.goToNewSection = null
-                    this.newSection = null
-                },500)
-            },1000)
+        //     setTimeout(()=>{
+        //         this.goToNewSection = this.newSection
+        //         console.log(this.goToNewSection)
+        //         setTimeout(()=>{
+        //             this.$emit('showSectionDetails', this.goToNewSection)
+        //             this.goToNewSection = null
+        //             this.newSection = null
+        //         },500)
+        //     },1000)
         }
+    },
+    created(){
+        console.log(this.collection)
     }
 
 }
