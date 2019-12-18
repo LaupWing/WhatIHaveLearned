@@ -23,15 +23,15 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['setCurrentLocation','setMainContent']),
+        ...mapActions(['setCurrentLocation','setMainContent', 'setMainContentTransition']),
         backToOverview(){
+            this.setMainContentTransition('rightFadeOut')
             this.$emit('backTosection')
         },
         checkContent(){
             if(!this.section.introduction){
                 this.setMainContent(this.defaultDisplay)
             }else{
-                console.log('setting it up via db')
                 this.setMainContent(this.section.introduction)
             }
             this.setCurrentLocation({

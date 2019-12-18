@@ -31,7 +31,7 @@
 <script>
 import Plus from '@/components/Icons/Plus'
 import {mapActions, mapGetters} from 'vuex'
-
+import capatalize from '@/helpers/string'
 export default {
     name: 'Overview',
     computed:{
@@ -46,11 +46,13 @@ export default {
             addSection: false,
             newSection: null,
             goToNewSection: null,
-            defaultDisplay: null
+            defaultDisplay: `
+                <p class="ql-align-center">${this.checkTypeIcon()}</p><p class="ql-align-center"></p><h1 class="ql-align-center"><span style="font-size: 48px;">${capatalize(this.collection.collection)}</span></h1><p><br></p>
+            `,
         }
     },
     methods:{
-        ...mapActions(['addSectionToCollection']),
+        ...mapActions(['addSectionToCollection', 'setMainContent']),
         createSection(){
             if(this.newSection !== null || this.newSection !== ''){
                 this.addSection = !this.addSection
@@ -75,6 +77,13 @@ export default {
             }
             return false
         },
+        checkTypeIcon(){
+            if(this.collection.icon.type === 'img'){
+                return `<img src="${this.collection.icon.src}" width="100" style="display: block; margin: auto;">`
+            }else if(this.collection.icon.type === 'svg'){
+                return this.collection.icon.src
+            }
+        },
         newItemAdded(){
         //     setTimeout(()=>{
         //         this.goToNewSection = this.newSection
@@ -88,7 +97,18 @@ export default {
         }
     },
     created(){
-        console.log(this.collection)
+        if(!this.collection.introduction){
+            this.setMainContent(this.defaultDisplay)
+        }
+        else{
+            this.setMainContent(this.collection.introduction)
+        }
+        // this.setCurrentLocation({
+        //     type:'collection',
+        //     collection: this.collection
+        // })
+        // this.updateLayoutNotInDB(this.collection.layout)
+        // this.setSettingFor(this.collection.collection)
     }
 
 }
