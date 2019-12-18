@@ -28,5 +28,7 @@ Below you see my component tree. In the description below the image itself is an
     - Does it need to be after its saved
     - Does it need to be before its saved
 - [ ] Data handling functions should only be in the vuex file
+
 # Buggs To fix
-- [ ] Saving bug
+- [x] Saving bug
+- [ ] Saving works but is a bit slow

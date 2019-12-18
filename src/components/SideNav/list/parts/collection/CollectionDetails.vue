@@ -75,6 +75,9 @@ export default {
         if(!this.collection.introduction){
             this.setMainContent(this.defaultDisplay)
         }
+        else{
+            this.setMainContent(this.collection.introduction)
+        }
         this.setCurrentLocation({
             type:'collection',
             collection: this.collection

@@ -52,22 +52,19 @@ const actions = {
                     .then(()=>dispatch('getCollections'))
             })
     },
-    async updateCollection({commit}, content){
+    async updateCollection({commit}){
         const updatedCollections = state.collections.collections.map(collection=>{
             if(collection===state.current.collection){
                 collection.introduction = state.mainContent
             }
             return collection
         })
-        console.log('--------------vuex Updatecollection--------------')
-        console.log(content, updatedCollections)
-        console.log(state.mainContent)
-        // await db
-        //     .collection('userNotes')
-        //     .doc(state.user.uid)
-        //     .update({
-        //         collections: updatedCollections
-        //     })
+        await db
+            .collection('userNotes')
+            .doc(state.user.uid)
+            .update({
+                collections: updatedCollections
+            })
             
     },  
     async updateIntroduction({commit}, introduction){

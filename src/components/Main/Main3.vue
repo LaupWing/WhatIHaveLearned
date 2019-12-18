@@ -319,7 +319,8 @@ export default {
                 this.saving = false
                 return 
             }else if(this.getCurrentLocation.type === 'collection'){
-                await this.updateCollection(this.getMainContent)
+                console.log('Saving')
+                await this.updateCollection()
                 this.saving = false
             }
         },
